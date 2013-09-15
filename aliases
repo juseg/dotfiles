@@ -1,0 +1,100 @@
+# Bash aliases
+# ============
+
+# Color aliases
+# -------------
+
+# color for ls
+alias ls='ls --color=auto'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+
+# color for grep
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Various aliases
+# ---------------
+
+# cd aliases
+alias ..='cd ..'
+alias cd..='cd ..' 
+
+# du aliases
+alias da='du -shc [.-z]* *'
+alias ds='du -shc [.-z]* * | sort -h'
+
+# ls aliases
+alias ll='ls -hl'
+alias la='ls -A'
+alias lal='ls -Ahl'
+alias lt='ls -hlt'
+alias lat='ls -Ahlt'
+alias l='ls -CF'
+
+# more aliases
+alias pdfjoin='gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=joined.pdf -dBATCH'
+
+# Generic rsync aliases
+# ---------------------
+
+alias async='rsync -vazhP'
+# 'Arhive' sync: archive mode with handy options
+# * extract from rsync help
+#    -v, --verbose               increase verbosity
+#    -a, --archive               archive mode; same as -rlptgoD (no -H)
+#    -z, --compress              compress file data during the transfer
+#    -h, --human-readable        output numbers in a human-readable format
+#        --partial               keep partially transferred files
+#        --progress              show progress during transfer
+#    -P                          same as --partial --progress
+# * implied by the archive mode:
+#    -r, --recursive             recurse into directories
+#    -l, --links                 copy symlinks as symlinks
+#    -p, --perms                 preserve permissions
+#    -t, --times                 preserve times
+#    -g, --group                 preserve group
+#    -o, --owner                 preserve owner (super-user only)
+#        --devices               preserve device files (super-user only)
+#        --specials              preserve special files
+#    -D                          same as --devices --specials
+
+alias ksync='async -kK'
+# 'Link' sync: the same but following links both ways
+#    -k, --copy-dirlinks         transform symlink to dir into referent dir
+#    -K, --keep-dirlinks         treat symlinked dir on receiver as dir
+
+
+alias dsync='ksync --delete --force'
+# 'Delete' sync: copy everything, delete everything
+# * extract from rsync help
+#        --delete                delete extraneous files from destination dirs
+#        --force                 force deletion of directories even if not empty
+
+alias usync='ksync -u'
+# 'Update' sync: update files, but do not delete, and use ssh
+# * extract from rsync help
+#    -u, --update                skip files that are newer on the receiver
+
+# Options good to keep in mind:
+#    -b, --backup                make backups (see --suffix & --backup-dir)
+#        --backup-dir=DIR        make backups into hierarchy based in DIR
+#        --suffix=SUFFIX         backup suffix (default ~ w/o --backup-dir)
+#    -L, --copy-links            transform symlink into referent file/dir
+
+# Specific rsync aliases
+# ----------------------
+
+# pism sync aliases
+alias psync-i-='dsync -e ssh ~/work/code/pism/{bin,input,config,exclude.txt,run.sh}'
+alias psync-is='psync-i- scooter:pism/'
+alias psync-it='psync-i- triolith:pism/'
+alias psync-o-='usync -e ssh --exclude-from=$PISM_DIR/exclude.txt'
+alias psync-ot='psync-o- triolith:pism/output ~/pism'
+alias psync-p='psync-o- scooter:pism/plot ~/work/code/pism'
+
+# web sync aliases
+alias wsync-blog='lftp ftp://u41837145:BEaM6iUH@ftp.comhem.se -e "mirror -e -R ~/www/blog/blog/html . ; quit"'
+alias wsync-pro='dsync -e "ssh" ~/www/pro/blog/html/ shell:public_html'
+
