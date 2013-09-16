@@ -1,0 +1,18 @@
+[user]
+	name = Julien Seguinot
+	email = julien.seguinot@natgeo.su.se
+[credential]
+	helper = cache
+[color]
+	ui = true
+[difftool.latex]
+  cmd = git-latexdiff "$LOCAL" "$REMOTE"
+[difftool]
+  prompt = false
+[alias]
+  ldiff = difftool -t latex
+	wdiff = diff --color-words
+[core]
+	editor = vim
+[push]
+	default = matching
