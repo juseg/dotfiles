@@ -34,6 +34,7 @@ alias lat='ls -Ahlt'
 alias l='ls -CF'
 
 # more aliases
+alias reduce='mogrify -resize 1920x1920 -quality 85'
 alias pdfjoin='gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=joined.pdf -dBATCH'
 
 # Generic rsync aliases
@@ -86,15 +87,17 @@ alias usync='ksync -u'
 # Specific rsync aliases
 # ----------------------
 
-# pism sync aliases
-alias psync-i-='dsync -e ssh ~/work/code/pism/{bin,input,config,exclude.txt,run.sh}'
-alias psync-is='psync-i- scooter:pism/'
-alias psync-it='psync-i- triolith:pism/'
-alias psync-o-='usync -e ssh --exclude-from=$PISM_DIR/exclude.txt'
-alias psync-ot='psync-o- triolith:pism/output ~/pism'
-alias psync-p='psync-o- scooter:pism/plot ~/work/code/pism'
+# config sync aliases
+alias csync-s='usync -e ssh .aliases .vim .vimrc .ssh/config scooter:'
+alias csync-t='usync -e ssh .aliases .vim .vimrc .ssh/config triolith:'
+alias csync-all='csync-s; csync-t'
 
-# web sync aliases
-alias wsync-blog='lftp ftp://u41837145:BEaM6iUH@ftp.comhem.se -e "mirror -e -R ~/www/blog/blog/html . ; quit"'
-alias wsync-pro='dsync -e "ssh" ~/www/pro/blog/html/ shell:public_html'
+# pism sync aliases
+alias psync-i5='dsync -e ssh ~/pism05/{bin,input,config,exclude.txt,run.sh} triolith:pism/'
+alias psync-i6='dsync -e ssh ~/pism06/{bin,input,config,exclude.txt,run.sh} triolith:pism/'
+alias psync-o5='usync -e ssh --exclude-from=$PISM_DIR/exclude.txt triolith:pism05/output ~/pism'
+alias psync-o6='usync -e ssh --exclude-from=$PISM_DIR/exclude.txt triolith:pism06/output ~/pism'
+
+# web sync alias
+alias wsync='dsync -e "ssh" ~/work/www/blog/html/ shell:public_html'
 
