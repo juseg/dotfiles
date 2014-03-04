@@ -95,8 +95,8 @@ alias csync-all='csync-s; csync-t'
 # pism sync aliases
 alias psync-i5='dsync -e ssh ~/pism05/{bin,input,config,exclude.txt,run.sh} triolith:pism05/'
 alias psync-i6='dsync -e ssh ~/pism06/{bin,input,config,exclude.txt,run.sh} triolith:pism06/'
-alias psync-o5='usync -e ssh --exclude-from=$PISM_DIR/exclude.txt triolith:pism05/output ~/pism05'
-alias psync-o6='usync -e ssh --exclude-from=$PISM_DIR/exclude.txt triolith:pism06/output ~/pism06'
+alias psync-o5='usync -e ssh --exclude-from=/home/pism05/exclude.txt triolith:pism05/output ~/pism05'
+alias psync-o6='usync -e ssh --exclude-from=/home/pism06/exclude.txt triolith:pism06/output ~/pism06'
 
 # web sync alias
 alias wsync='dsync -e "ssh" ~/work/www/blog/html/ shell:public_html'
