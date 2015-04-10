@@ -1,0 +1,44 @@
+# Defaults
+Host *
+    ForwardX11Trusted yes
+    ForwardX11Timeout 24h
+
+# SU
+Host shell
+	User jsegu
+	Hostname shell.su.se
+
+Host s scooter
+	User julien
+	Hostname scooter.natgeo.su.se
+
+# LIU
+Host t triolith
+	User x_julse
+	Hostname triolith.nsc.liu.se
+
+Host t2 triolith2
+	User x_julse
+	Hostname triolith2.nsc.liu.se
+
+# ETH
+Host o ogive
+    User juliens
+    Hostname polynya.ethz.ch
+
+Host b brutus
+    User juliens
+    Hostname brutus.ethz.ch
+
+Host l login
+    User juliens
+    Hostname login.ee.ethz.ch
+
+# CSCS
+Host e ela
+    User jsegu
+    Hostname ela.cscs.ch
+
+Host d daint
+    User jsegu
+    Hostname daint.cscs.ch
