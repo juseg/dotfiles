@@ -36,20 +36,27 @@ alias l='ls -CF'
 # more aliases
 alias reduce='mogrify -resize 1920x1920 -quality 85'
 alias pdfjoin='gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=joined.pdf -dBATCH'
+alias nccrop='ncks -O -d longitude,0.5,359.5 -d latitude,-89.5,89.5'
+alias whybusy='ps -lfp $(fuser -c /media/backup/)'
 
-# Generic rsync aliases
-# ---------------------
+# PISM sync aliases
+# -----------------
 
-alias async='rsync -vazhP'
-# 'Arhive' sync: archive mode with handy options
+alias psync-input='rsync -vakKzhP --delete -e ssh ~/pism/{scripts,input,config,exclude.txt,run.sh} triolith:pism/'
+alias psync-output='rsync -vakKzhP -e ssh --exclude-from=$HOME/pism/exclude.txt triolith:pism/output ~/pism'
+
 # * extract from rsync help
 #    -v, --verbose               increase verbosity
 #    -a, --archive               archive mode; same as -rlptgoD (no -H)
+#    -k, --copy-dirlinks         transform symlink to dir into referent dir
+#    -K, --keep-dirlinks         treat symlinked dir on receiver as dir
 #    -z, --compress              compress file data during the transfer
 #    -h, --human-readable        output numbers in a human-readable format
 #        --partial               keep partially transferred files
 #        --progress              show progress during transfer
 #    -P                          same as --partial --progress
+#        --delete                delete extraneous files from destination dirs
+#        --force                 force deletion of directories even if not empty
 # * implied by the archive mode:
 #    -r, --recursive             recurse into directories
 #    -l, --links                 copy symlinks as symlinks
@@ -60,42 +67,3 @@ alias async='rsync -vazhP'
 #        --devices               preserve device files (super-user only)
 #        --specials              preserve special files
 #    -D                          same as --devices --specials
-
-alias ksync='async -kK'
-# 'Link' sync: the same but following links both ways
-#    -k, --copy-dirlinks         transform symlink to dir into referent dir
-#    -K, --keep-dirlinks         treat symlinked dir on receiver as dir
-
-
-alias dsync='ksync --delete --force'
-# 'Delete' sync: copy everything, delete everything
-# * extract from rsync help
-#        --delete                delete extraneous files from destination dirs
-#        --force                 force deletion of directories even if not empty
-
-alias usync='ksync -u'
-# 'Update' sync: update files, but do not delete, and use ssh
-# * extract from rsync help
-#    -u, --update                skip files that are newer on the receiver
-
-# Options good to keep in mind:
-#    -b, --backup                make backups (see --suffix & --backup-dir)
-#        --backup-dir=DIR        make backups into hierarchy based in DIR
-#        --suffix=SUFFIX         backup suffix (default ~ w/o --backup-dir)
-#    -L, --copy-links            transform symlink into referent file/dir
-
-# Specific rsync aliases
-# ----------------------
-
-# config sync aliases
-alias csync-s='usync -e ssh .aliases .vim .vimrc .ssh/config scooter:'
-alias csync-t='usync -e ssh .aliases .vim .vimrc .ssh/config triolith:'
-alias csync-all='csync-s; csync-t'
-
-# pism sync aliases
-alias psync-i='dsync -e ssh ~/pism/{bin,input,config,exclude.txt,run.sh} triolith:pism/'
-alias psync-o='usync -e ssh --exclude-from=$HOME/pism/exclude.txt triolith:pism/output ~/pism'
-
-# web sync alias
-alias wsync='dsync -e "ssh" ~/work/www/blog/html/ shell:public_html'
-
