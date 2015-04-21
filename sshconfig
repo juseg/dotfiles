@@ -24,7 +24,7 @@ Host t2 triolith2
 # ETH
 Host o ogive
     User juliens
-    Hostname polynya.ethz.ch
+    Hostname ogive.ethz.ch
 
 Host b brutus
     User juliens
