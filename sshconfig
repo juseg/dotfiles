@@ -2,6 +2,7 @@
 Host *
     ForwardX11Trusted yes
     ForwardX11Timeout 24h
+    ForwardAgent yes
 
 # SU
 Host shell
@@ -42,3 +43,4 @@ Host e ela
 Host d daint
     User jsegu
     Hostname daint.cscs.ch
+    ProxyCommand ssh -Y ela netcat %h %p -w 10
