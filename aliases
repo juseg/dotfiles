@@ -38,32 +38,3 @@ alias reduce='mogrify -resize 1920x1920 -quality 85'
 alias pdfjoin='gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=joined.pdf -dBATCH'
 alias nccrop='ncks -O -d longitude,0.5,359.5 -d latitude,-89.5,89.5'
 alias whybusy='ps -lfp $(fuser -c /media/backup/)'
-
-# PISM sync aliases
-# -----------------
-
-alias psync-input='rsync -vakKzhP --delete -e ssh ~/pism/{scripts,input,config,exclude.txt,run.sh} triolith:pism/'
-alias psync-output='rsync -vakKzhP -e ssh --exclude-from=$HOME/pism/exclude.txt triolith:pism/output ~/pism'
-
-# * extract from rsync help
-#    -v, --verbose               increase verbosity
-#    -a, --archive               archive mode; same as -rlptgoD (no -H)
-#    -k, --copy-dirlinks         transform symlink to dir into referent dir
-#    -K, --keep-dirlinks         treat symlinked dir on receiver as dir
-#    -z, --compress              compress file data during the transfer
-#    -h, --human-readable        output numbers in a human-readable format
-#        --partial               keep partially transferred files
-#        --progress              show progress during transfer
-#    -P                          same as --partial --progress
-#        --delete                delete extraneous files from destination dirs
-#        --force                 force deletion of directories even if not empty
-# * implied by the archive mode:
-#    -r, --recursive             recurse into directories
-#    -l, --links                 copy symlinks as symlinks
-#    -p, --perms                 preserve permissions
-#    -t, --times                 preserve times
-#    -g, --group                 preserve group
-#    -o, --owner                 preserve owner (super-user only)
-#        --devices               preserve device files (super-user only)
-#        --specials              preserve special files
-#    -D                          same as --devices --specials
