@@ -1,8 +1,7 @@
-# Defaults
-Host *
-    ForwardX11Trusted yes
-    ForwardX11Timeout 24h
+# Known domains defaults
+Host *.su.se *.liu.se *.ethz.ch *.cscs.ch
     ForwardAgent yes
+    ForwardX11 yes
 
 # SU
 Host shell
@@ -44,3 +43,7 @@ Host d dora
     User jsegu
     Hostname dora.cscs.ch
     ProxyCommand ssh -Y ela netcat %h %p -w 10
+
+# Do not forward X to git hosts
+Host git.framasoft.org github.com
+    ForwardX11 no
