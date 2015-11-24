@@ -40,7 +40,7 @@ Host e ela
     User jsegu
     Hostname ela.cscs.ch
 
-Host d daint
+Host d dora
     User jsegu
-    Hostname daint.cscs.ch
+    Hostname dora.cscs.ch
     ProxyCommand ssh -Y ela netcat %h %p -w 10
