@@ -1,9 +1,10 @@
 " syntax highlighting
 syntax on           " syntax highlighting
-color desert      " color scheme
+color desert        " color scheme
 set background=dark " better contrast on black
 set cul             " highlight current line
-hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=NONE
+hi CursorLine cterm=NONE ctermfg=NONE ctermbg=darkgrey
+hi LineNr cterm=bold ctermfg=grey ctermbg=darkgrey
 
 " newlines
 set number          " enable line numbering
