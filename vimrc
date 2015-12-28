@@ -1,6 +1,7 @@
 " syntax highlighting
 syntax on           " syntax highlighting
-color desert        " color scheme
+color desert      " color scheme
+set background=dark " better contrast on black
 set cul             " highlight current line
 hi CursorLine cterm=NONE ctermbg=darkgrey ctermfg=NONE
 
@@ -15,9 +16,10 @@ set smartcase       " uppercase-only-sensitive search
 
 " indentation
 set smartindent     " auto indentation
-set tabstop=4       " length of tabs
+set tabstop=8       " length of tabs in display
 set expandtab       " tabs as spaces
 set shiftwidth=4    " used by < and >
+set softtabstop=4   " length of tabs in insert mode
 
 " tab completion
 set wildmenu        " activate menus
