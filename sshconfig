@@ -44,6 +44,11 @@ Host d dora
     Hostname dora.cscs.ch
     ProxyCommand ssh -Y ela netcat %h %p -w 10
 
+# HU
+Host lowtem
+    User greenland2014
+    Hostname wwwice.lowtem.hokudai.ac.jp
+
 # Do not forward X to git hosts
 Host git.framasoft.org github.com
     ForwardX11 no
