@@ -4,22 +4,9 @@ Host *.su.se *.liu.se *.ethz.ch *.cscs.ch
     ForwardX11 yes
 
 # SU
-Host shell
-	User jsegu
-	Hostname shell.su.se
-
 Host s scooter
 	User julien
 	Hostname scooter.natgeo.su.se
-
-# LIU
-Host t triolith
-	User x_julse
-	Hostname triolith.nsc.liu.se
-
-Host t2 triolith2
-	User x_julse
-	Hostname triolith2.nsc.liu.se
 
 # ETH
 Host o ogive
