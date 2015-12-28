@@ -1,41 +1,45 @@
-# Known domains defaults
-Host *.su.se *.liu.se *.ethz.ch *.cscs.ch
+# SU
+Host s scooter
+    User julien
+    Hostname scooter.natgeo.su.se
     ForwardAgent yes
     ForwardX11 yes
 
-# SU
-Host s scooter
-	User julien
-	Hostname scooter.natgeo.su.se
-
 # ETH
 Host o ogive
-    User juliens
     Hostname ogive.ethz.ch
 
 Host b brutus
-    User juliens
     Hostname brutus.ethz.ch
 
 Host l login
-    User juliens
     Hostname login.ee.ethz.ch
+
+Host o ogive b brutus l login *.ethz.ch
+    User juliens
+    ForwardAgent yes
+    ForwardX11 yes
 
 # CSCS
 Host e ela
-    User jsegu
     Hostname ela.cscs.ch
 
 Host d dora
-    User jsegu
     Hostname dora.cscs.ch
     ProxyCommand ssh -Y ela netcat %h %p -w 10
+
+Host e ela d dora *.cscs.ch
+    User jsegu
+    ForwardAgent yes
+    ForwardX11 yes
 
 # HU
 Host lowtem
     User greenland2014
     Hostname wwwice.lowtem.hokudai.ac.jp
 
-# Do not forward X to git hosts
+# Git hosts
 Host git.framasoft.org github.com
+    User jsegu
     ForwardX11 no
+    ForwardAgent no
