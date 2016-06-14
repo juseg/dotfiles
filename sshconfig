@@ -28,7 +28,11 @@ Host d dora
     Hostname dora.cscs.ch
     ProxyCommand ssh -Y ela netcat %h %p -w 10
 
-Host e ela d dora *.cscs.ch
+Host daint
+    Hostname daint.cscs.ch
+    ProxyCommand ssh -Y ela netcat %h %p -w 10
+
+Host e ela d dora daint *.cscs.ch
     User jsegu
     ForwardAgent yes
     ForwardX11 yes
