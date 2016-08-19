@@ -33,6 +33,10 @@ do
             ;;
 
         # query options
+        -i|--intersect)
+            intersect="$2"
+            shift
+            ;;
         -t|--tiles)
             tiles="$2"
             shift
@@ -78,6 +82,9 @@ basedir=${basedir:="/scratch_net/ogive/juliens/geodata/satellite/sentinel-2a"}
 user=${user:="julien.seguinot"}
 pass=${pass:="Cordillera"}
 
+# intersect lat,lon used in query, comma-separated
+intersect=${intersect:="77.7,-68.5"}
+
 # tiles to download and patch, comma-separated
 tiles=${tiles:="T19XDG,T19XEG"}
 
@@ -108,11 +115,12 @@ if [ "$offline" != "yes" ]
 then
 
     # search bowdoin area for products and save to searchresults.xml
-    query='platformname:Sentinel-2%20AND%20footprint:"intersects(77.7,-68.5)"'
-    query+="%20AND%20cloudcoverpercentage:[0%20TO%20${cloudcover}]"
+    query="platformname:Sentinel-2 AND "
+    query+="footprint:\"intersects(${intersect})\" AND "
+    query+="cloudcoverpercentage:[0 TO ${cloudcover}]"
     url="https://scihub.copernicus.eu/dhus/search?q=${query}&rows=1000"
     wget --no-check-certificate --user=${user} --password=${pass} \
-         --output-document searchresults.xml $url
+         --output-document searchresults.xml "$url"
 
     # parse search results using xmlstarlet and loop on products
     xml sel -t -m "//_:entry" -v "_:title" -o " " \
