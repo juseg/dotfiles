@@ -145,7 +145,7 @@ then
 
         # find and loop on granule xml files and IRGB bands for requested tiles
         xml sel -t -m "//fileLocation" -v "@href" -n $manifestpath |
-        egrep "(${tiles/,/|})(.xml|_B0(2|3|4|8).jp2)" | while read line
+        egrep "(${tiles//,/|})(.xml|_B0(2|3|4|8).jp2)" | while read line
         do
 
             # get file path and remote url
@@ -176,7 +176,7 @@ fi
 mkdir -p scenes
 
 # for each tile
-for tile in ${tiles/,/ }
+for tile in ${tiles//,/ }
 do
 
     # loop on available data packages
@@ -235,7 +235,7 @@ n=$(echo "$extent" | cut -d ',' -f 4)
 worldfile="${ewres}\n0\n-0\n-${nsres}\n${w}\n${n}"
 
 # find sensing dates with data on requested tiles
-scenes=$(ls scenes | egrep "(${tiles/,/|})")
+scenes=$(ls scenes | egrep "(${tiles//,/|})")
 sensdates=$(echo "$scenes" | cut -c 5-23 | uniq)
 
 # loop on sensing dates
@@ -249,8 +249,8 @@ do
     [ -s $ofile_rgb.txt ] && [ -s $ofile_irg.txt ] && continue
 
     # find how many scenes correspond to requested tiles over region
-    scenes_rgb=$(find scenes | egrep "S2A_${sensdate}_(${tiles/,/|})_RGB.vrt")
-    scenes_irg=$(find scenes | egrep "S2A_${sensdate}_(${tiles/,/|})_IRG.vrt")
+    scenes_rgb=$(find scenes | egrep "S2A_${sensdate}_(${tiles//,/|})_RGB.vrt")
+    scenes_irg=$(find scenes | egrep "S2A_${sensdate}_(${tiles//,/|})_IRG.vrt")
     n=$(echo $scenes_rgb | wc -w)
 
     # assemble mosaic VRT in temporary files
