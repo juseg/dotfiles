@@ -17,6 +17,8 @@
 while [[ $# -gt 0 ]]
 do
     case "$1" in
+
+        # general options
         -d|--basedir)
             basedir="$2"
             shift
@@ -29,10 +31,18 @@ do
             pass="$2"
             shift
             ;;
+
+        # query options
         -t|--tiles)
             tiles="$2"
             shift
             ;;
+        -c|--cloudcover)
+            cloudcover="$2"
+            shift
+            ;;
+
+        # compose options
         -n|--name)
             region="$2"
             shift
@@ -45,13 +55,18 @@ do
             resolution="$2"
             shift
             ;;
+
+        # flags
         -o|--offline)
             offline="yes"
             ;;
+
+        # unknown option
         *)
             echo "Unknown option $1. Exiting."
             exit 0
             ;;
+
     esac
     shift
 done
@@ -65,6 +80,9 @@ pass=${pass:="Cordillera"}
 
 # tiles to download and patch, comma-separated
 tiles=${tiles:="T19XDG,T19XEG"}
+
+# maximum cloud cover fraction
+cloudcover=${cloudcover:="100"}
 
 # region name for composite images
 region=${region:="qaanaaq"}
@@ -91,6 +109,7 @@ then
 
     # search bowdoin area for products and save to searchresults.xml
     query='platformname:Sentinel-2%20AND%20footprint:"intersects(77.7,-68.5)"'
+    query+="%20AND%20cloudcoverpercentage:[0%20TO%20${cloudcover}]"
     url="https://scihub.copernicus.eu/dhus/search?q=${query}&rows=1000"
     wget --no-check-certificate --user=${user} --password=${pass} \
          --output-document searchresults.xml $url
