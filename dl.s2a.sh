@@ -94,8 +94,8 @@ cloudcover=${cloudcover:="100"}
 # region name for composite images
 region=${region:="qaanaaq"}
 
-# wsen extent in UTM local zone coordinates
-extent=${extent:="465000 8595000 525000 8655000"}  # Siorapaluk 461450
+# wsen extent in UTM local zone coordinates, comma-separated
+extent=${extent:="465000,8595000,525000,8655000"}  # Siorapaluk 461450
 
 # spatial resolution in meters
 resolution=${resolution:="10"}
@@ -230,8 +230,8 @@ mkdir -p composite/$region/{rgb,irg}
 # parse extent for world file
 ewres="$resolution"
 nsres="$resolution"
-w=$(echo "$extent" | cut -d ' ' -f 1)
-n=$(echo "$extent" | cut -d ' ' -f 4)
+w=$(echo "$extent" | cut -d ',' -f 1)
+n=$(echo "$extent" | cut -d ',' -f 4)
 worldfile="${ewres}\n0\n-0\n-${nsres}\n${w}\n${n}"
 
 # find sensing dates with data on requested tiles
@@ -261,7 +261,7 @@ do
     if [ ! -s $ofile_rgb.tif ]
     then
         echo "Exporting $ofile_rgb.tif ..."
-        gdalwarp -overwrite -te $extent -tr $resolution $resolution \
+        gdalwarp -overwrite -te ${extent//,/ } -tr $resolution $resolution \
             -co "PHOTOMETRIC=rgb" -r bilinear -q mosaic_rgb.vrt $ofile_rgb.tif
     fi
 
@@ -306,7 +306,7 @@ do
     if [ ! -s $ofile_irg.tif ]
     then
         echo "Exporting $ofile_irg.tif ..."
-        gdalwarp -overwrite -te $extent -tr $resolution $resolution \
+        gdalwarp -overwrite -te ${extent//,/ } -tr $resolution $resolution \
             -co "PHOTOMETRIC=rgb" -r bilinear -q mosaic_irg.vrt $ofile_irg.tif
     fi
 
