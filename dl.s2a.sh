@@ -59,6 +59,10 @@ do
             resolution="$2"
             shift
             ;;
+        -x|--nullvalues)
+            nullvalues="$2"
+            shift
+            ;;
 
         # flags
         -o|--offline)
@@ -99,6 +103,9 @@ extent=${extent:="465000,8595000,525000,8655000"}  # Siorapaluk 461450
 
 # spatial resolution in meters
 resolution=${resolution:="10"}
+
+# maximum percentage of null values
+nullvalues=${nullvalues:="50"}
 
 # offline mode
 offline=${offline:="no"}
@@ -272,8 +279,8 @@ do
     message="Found ${nulls}% null values."
     echo $message
 
-    # if more than 50% null, report in txt and remove tifs
-    if [ "${nulls%.*}" -ge "50" ]
+    # if more nulls than allowed, report in txt and remove tifs
+    if [ "${nulls%.*}" -ge "${nullvalues}" ]
     then
         echo "Removing $ofile_rgb.tif ..."
         echo "$message" > $ofile_rgb.txt
