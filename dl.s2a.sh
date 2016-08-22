@@ -119,7 +119,7 @@ then
     query+="footprint:\"intersects(${intersect})\" AND "
     query+="cloudcoverpercentage:[0 TO ${cloudcover}]"
     url="https://scihub.copernicus.eu/dhus/search?q=${query}&rows=1000"
-    wget --no-check-certificate --user=${user} --password=${pass} \
+    wget --quiet --no-check-certificate --user=${user} --password=${pass} \
          --output-document searchresults.xml "$url"
 
     # parse search results using xmlstarlet and loop on products
@@ -138,7 +138,7 @@ then
         if [ ! -s $manifestpath ]
         then
             mkdir -p $(dirname $manifestpath)
-            wget --no-check-certificate --continue \
+            wget --quiet --no-check-certificate --continue \
                  --user=${user} --password=${pass} \
                  --output-document manifests/$name $url
         fi
@@ -157,10 +157,11 @@ then
             # download files if missing
             if [ ! -s $destpath ]
             then
+                echo "Downloading file $(basename ${destpath})..."
                 mkdir -p $(dirname $destpath)
-                wget --no-check-certificate --continue \
+                wget --quiet --no-check-certificate --continue \
                      --user=${user} --password=${pass} \
-                     --output-document $destpath $url --verbose
+                     --output-document $destpath $url
             fi
 
         done
