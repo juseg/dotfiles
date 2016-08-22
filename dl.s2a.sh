@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Download Sentinel-2A data and export RGB and IRG images
 # =======================================================
@@ -327,3 +327,5 @@ done
 [ -f mosaic_rgb.vrt ] && rm mosaic_rgb.vrt
 [ -f mosaic_irg.vrt ] && rm mosaic_irg.vrt
 
+# happy end
+exit 0
