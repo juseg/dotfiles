@@ -86,7 +86,7 @@ pass=${pass:="Cordillera"}
 intersect=${intersect:="77.7,-68.5"}
 
 # tiles to download and patch, comma-separated
-tiles=${tiles:="T19XDG,T19XEG"}
+tiles=${tiles:="19XDG,19XEG"}
 
 # maximum cloud cover fraction
 cloudcover=${cloudcover:="100"}
@@ -145,7 +145,7 @@ then
 
         # find and loop on granule xml files and IRGB bands for requested tiles
         xml sel -t -m "//fileLocation" -v "@href" -n $manifestpath |
-        egrep "(${tiles//,/|})(.xml|_B0(2|3|4|8).jp2)" | while read line
+        egrep "T(${tiles//,/|})(.xml|_B0(2|3|4|8).jp2)" | while read line
         do
 
             # get file path and remote url
@@ -180,7 +180,7 @@ for tile in ${tiles//,/ }
 do
 
     # loop on available data packages
-    for datadir in granules/*$tile*
+    find granules -maxdepth 1 -path "*T${tile}*" | while read datadir
     do
 
         # find granule name
@@ -201,7 +201,7 @@ do
         i="$datadir/IMG_DATA/${granule}_B08.jp2"
 
         # build RGB VRT
-        ofile_rgb="scenes/S2A_${sensdate}_${tile}_RGB.vrt"
+        ofile_rgb="scenes/S2A_${sensdate}_T${tile}_RGB.vrt"
         if [ ! -s $ofile_rgb ]
         then
             echo "Building scene $(basename $ofile_rgb) ..."
@@ -209,7 +209,7 @@ do
         fi
 
         # build IRG VRT
-        ofile_irg="scenes/S2A_${sensdate}_${tile}_IRG.vrt"
+        ofile_irg="scenes/S2A_${sensdate}_T${tile}_IRG.vrt"
         if [ ! -s $ofile_irg ]
         then
             echo "Building scene $(basename $ofile_irg) ..."
@@ -235,7 +235,7 @@ n=$(echo "$extent" | cut -d ',' -f 4)
 worldfile="${ewres}\n0\n-0\n-${nsres}\n${w}\n${n}"
 
 # find sensing dates with data on requested tiles
-scenes=$(ls scenes | egrep "(${tiles//,/|})")
+scenes=$(ls scenes | egrep "T(${tiles//,/|})")
 sensdates=$(echo "$scenes" | cut -c 5-23 | uniq)
 
 # loop on sensing dates
@@ -249,8 +249,8 @@ do
     [ -s $ofile_rgb.txt ] && [ -s $ofile_irg.txt ] && continue
 
     # find how many scenes correspond to requested tiles over region
-    scenes_rgb=$(find scenes | egrep "S2A_${sensdate}_(${tiles//,/|})_RGB.vrt")
-    scenes_irg=$(find scenes | egrep "S2A_${sensdate}_(${tiles//,/|})_IRG.vrt")
+    scenes_rgb=$(find scenes | egrep "S2A_${sensdate}_T(${tiles//,/|})_RGB.vrt")
+    scenes_irg=$(find scenes | egrep "S2A_${sensdate}_T(${tiles//,/|})_IRG.vrt")
     n=$(echo $scenes_rgb | wc -w)
 
     # assemble mosaic VRT in temporary files
