@@ -80,7 +80,7 @@ do
 done
 
 # base directory
-basedir=${basedir:="/scratch_net/ogive/juliens/geodata/satellite/sentinel-2a"}
+basedir=${basedir:="/scratch_net/ogive_second/juliens/geodata/satellite/sentinel-2a"}
 
 # authentification
 user=${user:="julien.seguinot"}
@@ -121,7 +121,7 @@ cd $basedir
 if [ "$offline" != "yes" ]
 then
 
-    # search bowdoin area for products and save to searchresults.xml
+    # search for products and save to searchresults.xml
     query="platformname:Sentinel-2 AND "
     query+="footprint:\"intersects(${intersect})\" AND "
     query+="cloudcoverpercentage:[0 TO ${cloudcover}]"
@@ -142,7 +142,7 @@ then
         # download manifest file if missing
         manifestpath="manifests/$name"
         url="${urlbase}/Nodes('${name}')/Nodes('manifest.safe')/\$value"
-        if [ ! -s $manifestpath ]
+        if [ ! -s "$manifestpath" ]
         then
             mkdir -p $(dirname $manifestpath)
             wget --quiet --no-check-certificate --continue \
@@ -243,7 +243,7 @@ n=$(echo "$extent" | cut -d ',' -f 4)
 worldfile="${ewres}\n0\n-0\n-${nsres}\n${w}\n${n}"
 
 # find sensing dates with data on requested tiles
-scenes=$(ls scenes | egrep "T(${tiles//,/|})")
+scenes=$(ls scenes | egrep "T(${tiles//,/|})" || echo "")
 sensdates=$(echo "$scenes" | cut -c 5-23 | uniq)
 
 # loop on sensing dates
@@ -336,3 +336,4 @@ done
 
 # happy end
 exit 0
+
