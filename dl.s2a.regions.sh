@@ -13,11 +13,66 @@ dl.s2a.sh --name "greenland/qaanaaq" \
           --intersect "77.7,-68.5" --tiles "19XDG,19XEG" \
           --extent "465000,8595000,525000,8655000" --resolution "10" $args
 
+# Qeqertaq / Tracy 4000x6000
+dl.s2a.sh --name "greenland/qeqertat" \
+          --intersect "77.5,-66.7" --tiles "19XEG" \
+          --extent "535000,8595000,595000,8635000" --resolution "10" $args
 
 # Inglefield 4000x4000 (intersect on Bowdoin Glacier)
 dl.s2a.sh --name "greenland/inglefield" \
           --intersect "77.7,-68.5" --tiles "19XDF,19XEF,19XDG,19XEG" \
           --extent "400000,8500000,600000,8700000" --resolution "50" $args
+
+# Hans Tausen Ice Cap 8000x8000 + 5000x8000
+dl.s2a.sh --name "greenland/hanstausen-utm23" \
+          --intersect "82.6,-38.2" --tiles "23XNN,23XNM" --cloudcover "30" \
+          --extent "529800,9130000,609800,9210000" --resolution "10" $args
+dl.s2a.sh --name "greenland/hanstausen-utm24" \
+          --intersect "82.6,-38.2" --tiles "24XWT,24XWS" --cloudcover "30" \
+          --extent "500000,9120000,550000,9200000" --resolution "10" $args
+
+# Europe
+# ------
+
+# Ecrins 3000x3000
+dl.s2a.sh --name "europe/ecrins" \
+          --intersect "44.9,6.3" --tiles "31TGK" \
+          --extent "745000,4965000,775000,4995000" --resolution "10" $args
+
+# Mt Blanc 3000x3000
+dl.s2a.sh --name "europe/mtblanc" \
+          --intersect "45.9,7.0" --tiles "32TLR" \
+          --extent "325000,5070000,355000,5100000" --resolution "10" $args
+
+# Plaine Morte 1000x1000
+dl.s2a.sh --name "europe/plainemorte" \
+          --intersect "46.4,7.5" --tiles "32TLS" \
+          --extent "380000,5135000,390000,5145000" --resolution "10" $args
+
+# Bern / Aletsch 6000x4000
+dl.s2a.sh --name "europe/bern" \
+          --intersect "46.5,8.1" --tiles "32TMS" \
+          --extent "400000,5135000,460000,5175000" --resolution "10" $args
+
+# Clariden 1000x1000
+dl.s2a.sh --name "europe/clariden" \
+          --intersect "46.8,8.9" --tiles "32TMS" \
+          --extent "485000,5180000,495000,5190000" --resolution "10" $args
+
+# Bernina 4000x3000
+dl.s2a.sh --name "europe/bernina" \
+          --intersect "46.4,9.9" --tiles "32TNS" \
+          --extent "540000,5120000,580000,5150000" --resolution "10" $args
+
+# Pennine / Gorner 6000x4000
+dl.s2a.sh --name "europe/pennine" \
+          --intersect "46.0,7.8" --tiles "32TLS,32TMS,32TLR,32TMR" \
+          --extent "360000,5080000,420000,5125000" --resolution "10" $args
+
+# Alps overview 4000x4000
+dl.s2a.sh --name "europe/alps" \
+          --intersect "46.0,7.8" --tiles "32TLS,32TMS,32TLR,32TMR" \
+          --extent "300000,5000000,500000,5200000" --resolution "50" $args
 
 # Asia
 # ----
