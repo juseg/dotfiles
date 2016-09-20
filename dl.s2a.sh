@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 # Download Sentinel-2A data and export RGB and IRG images
 # =======================================================
@@ -271,6 +271,12 @@ do
         echo "Exporting $ofile_rgb.tif ..."
         gdalwarp -overwrite -te ${extent//,/ } -tr $resolution $resolution \
             -co "PHOTOMETRIC=rgb" -r bilinear -q mosaic_rgb.vrt $ofile_rgb.tif
+        if [ "$?" -ne "0" ]
+        then
+            echo "Error, removing $ofile_rgb.tif ..."
+            rm $ofile_rgb.tif
+            continue
+        fi
     fi
 
     # count percentage of null pixels
@@ -316,6 +322,12 @@ do
         echo "Exporting $ofile_irg.tif ..."
         gdalwarp -overwrite -te ${extent//,/ } -tr $resolution $resolution \
             -co "PHOTOMETRIC=rgb" -r bilinear -q mosaic_irg.vrt $ofile_irg.tif
+        if [ "$?" -ne "0" ]
+        then
+            echo "Error, removing $ofile_irg.tif ..."
+            rm $ofile_irg.tif
+            continue
+        fi
     fi
 
     # convert to human-readable jpeg
