@@ -203,6 +203,14 @@ do
         sensdate=${sensdate%<*}
         sensdate=$(date -u -d$sensdate +%Y%m%d_%H%M%S_%3N)
 
+        # on error, assume xml file is broken and remove it
+        if [ "$?" -ne "0" ]
+        then
+            echo "Error, removing $datadir/*.xml ..."
+            rm $datadir/*.xml
+            continue
+        fi
+
         # prepare IRGB band filenames
         b="$datadir/IMG_DATA/${granule}_B02.jp2"
         g="$datadir/IMG_DATA/${granule}_B03.jp2"
@@ -215,6 +223,12 @@ do
         then
             echo "Building scene $(basename $ofile_rgb) ..."
             gdalbuildvrt -separate -srcnodata 0 -q $ofile_rgb $r $g $b
+            if [ "$?" -ne "0" ]
+            then
+                echo "Error, removing $ofile_rgb ..."
+                rm $ofile_rgb
+                continue
+            fi
         fi
 
         # build IRG VRT
@@ -223,6 +237,12 @@ do
         then
             echo "Building scene $(basename $ofile_irg) ..."
             gdalbuildvrt -separate -srcnodata 0 -q $ofile_irg $i $r $g
+            if [ "$?" -ne "0" ]
+            then
+                echo "Error, removing $ofile_irg ..."
+                rm $ofile_irg
+                continue
+            fi
         fi
 
     done
