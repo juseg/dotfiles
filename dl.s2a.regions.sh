@@ -74,6 +74,11 @@ dl.s2a.sh --name "europe/glarus" \
 # Asia
 # ----
 
+# Aru Co 2000x2000
+dl.s2a.sh --name "asia/aruco" \
+          --intersect "34.0,82.3" --tiles "44SPC" \
+          --extent "605000,3755000,625000,3775000" --resolution "10" $args
+
 # Haizishan 4000x2000
 dl.s2a.sh --name "asia/haizishan" \
           --intersect "29.3,100.0" --tiles "47RNN,47RPN" --cloudcover "30" \
