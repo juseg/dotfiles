@@ -130,6 +130,7 @@ then
          --output-document searchresults.xml "$url"
 
     # parse search results using xmlstarlet and loop on products
+    [ -s searchresults.xml ] &&
     xml sel -t -m "//_:entry" -v "_:title" -o " " \
             -m "_:link" -i 'not(@rel)' -v "@href" -n searchresults.xml |
     while read name urlbase
