@@ -79,10 +79,10 @@ dl.s2a.sh --name "asia/aruco" \
           --intersect "34.0,82.3" --tiles "44SPC" \
           --extent "605000,3755000,625000,3775000" --resolution "10" $args
 
-# Haizishan 4000x2000
+# Haizishan 8000x10000
 dl.s2a.sh --name "asia/haizishan" \
-          --intersect "29.3,100.0" --tiles "47RNN,47RPN" --cloudcover "30" \
-          --extent "500000,3200000,700000,3300000" --resolution "50" $args
+          --intersect "29.3,100.2" --tiles "47RNN,47RPN" --cloudcover "30" \
+          --extent "585000,3200000,665000,3300000" --resolution "10" $args
 
 # Hanoi 3000x3000
 dl.s2a.sh --name "asia/hanoi" \
