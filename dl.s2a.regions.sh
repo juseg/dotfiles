@@ -54,10 +54,6 @@ dl.s2a.sh --name "europe/bern" \
           --intersect "46.5,8.1" --tiles "32TMS" \
           --extent "400000,5135000,460000,5175000" --resolution "10" $args
 
-# Clariden 1000x1000
-dl.s2a.sh --name "europe/clariden" \
-          --intersect "46.8,8.9" --tiles "32TMS" \
-          --extent "485000,5180000,495000,5190000" --resolution "10" $args
 
 # Bernina 4000x3000
 dl.s2a.sh --name "europe/bernina" \
@@ -69,10 +65,11 @@ dl.s2a.sh --name "europe/pennine" \
           --intersect "46.0,7.8" --tiles "32TLS,32TMS,32TLR,32TMR" \
           --extent "360000,5080000,420000,5125000" --resolution "10" $args
 
-# Alps overview 4000x4000
-dl.s2a.sh --name "europe/alps" \
-          --intersect "46.0,7.8" --tiles "32TLS,32TMS,32TLR,32TMR" \
-          --extent "300000,5000000,500000,5200000" --resolution "50" $args
+# Glarus 6000x6000 (intersect on Clariden)
+dl.s2a.sh --name "europe/glarus" \
+          --intersect "46.8,8.9" --tiles "32TMT,32TMS,32TNT,32TNS" \
+          --extent "475000,5170000,535000,5230000" --resolution "10" $args
+
 
 # Asia
 # ----
