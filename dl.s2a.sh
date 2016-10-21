@@ -283,15 +283,15 @@ do
     n=$(echo $scenes_rgb | wc -w)
 
     # assemble mosaic VRT in temporary files
-    gdalbuildvrt -q mosaic_rgb.vrt $scenes_rgb
-    gdalbuildvrt -q mosaic_irg.vrt $scenes_irg
+    gdalargs="-q -te ${extent//,/ } -tr $resolution $resolution"
+    gdalbuildvrt $gdalargs tmp_$$_rgb.vrt $scenes_rgb
+    gdalbuildvrt $gdalargs tmp_$$_irg.vrt $scenes_irg
 
     # export RGB composite over selected region
     if [ ! -s $ofile_rgb.tif ]
     then
         echo "Exporting $ofile_rgb.tif ..."
-        gdalwarp -overwrite -te ${extent//,/ } -tr $resolution $resolution \
-            -co "PHOTOMETRIC=rgb" -r bilinear -q mosaic_rgb.vrt $ofile_rgb.tif
+        gdal_translate -co "PHOTOMETRIC=rgb" -q tmp_$$_rgb.vrt $ofile_rgb.tif
         if [ "$?" -ne "0" ]
         then
             echo "Error, removing $ofile_rgb.tif ..."
@@ -341,8 +341,7 @@ do
     if [ ! -s $ofile_irg.tif ]
     then
         echo "Exporting $ofile_irg.tif ..."
-        gdalwarp -overwrite -te ${extent//,/ } -tr $resolution $resolution \
-            -co "PHOTOMETRIC=rgb" -r bilinear -q mosaic_irg.vrt $ofile_irg.tif
+        gdal_translate -co "PHOTOMETRIC=rgb" -q tmp_$$_irg.vrt $ofile_irg.tif
         if [ "$?" -ne "0" ]
         then
             echo "Error, removing $ofile_irg.tif ..."
@@ -364,8 +363,8 @@ do
 done
 
 # remove temporary mosaic VRTs
-[ -f mosaic_rgb.vrt ] && rm mosaic_rgb.vrt
-[ -f mosaic_irg.vrt ] && rm mosaic_irg.vrt
+[ -f tmp_$$_rgb.vrt ] && rm tmp_$$_rgb.vrt
+[ -f tmp_$$_irg.vrt ] && rm tmp_$$_irg.vrt
 
 # happy end
 exit 0
