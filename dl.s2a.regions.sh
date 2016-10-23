@@ -54,6 +54,15 @@ dl.s2a.sh --name "europe/bern" \
           --intersect "46.5,8.1" --tiles "32TMS" \
           --extent "400000,5135000,460000,5175000" --resolution "10" $args
 
+# Uri 3000x5000
+dl.s2a.sh --name "europe/uri" \
+          --intersect "46.8,8.4" --tiles "32TMT,32TMS" \
+          --extent "445000,5155000,475000,5205000" --resolution "10" $args
+
+# Appenzell 4000x3000
+dl.s2a.sh --name "europe/appenzell" \
+          --intersect "47.2,9.3" --tiles "32TNT" \
+          --extent "500000,5210000,540000,5240000" --resolution "10" $args
 
 # Bernina 4000x3000
 dl.s2a.sh --name "europe/bernina" \
