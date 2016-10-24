@@ -79,6 +79,20 @@ dl.s2a.sh --name "europe/glarus" \
           --intersect "46.8,8.9" --tiles "32TMT,32TMS,32TNT,32TNS" \
           --extent "475000,5170000,535000,5230000" --resolution "10" $args
 
+# Oetztal 4000x3000 (move 5 km to the north into 32TPT)
+dl.s2a.sh --name "europe/otztal" \
+          --intersect "46.8,10.9" --tiles "32TPT,32TPS" \
+          --extent "625000,5175000,665000,5205000" --resolution "10" $args
+
+# Ortler 3000x3000
+dl.s2a.sh --name "europe/ortler" \
+          --intersect "46.5,10.6" --tiles "32TPS" \
+          --extent "605000,5130000,635000,5160000" --resolution "10" $args
+
+# Adamello 3000x2000
+dl.s2a.sh --name "europe/adamello" \
+          --intersect "46.2,10.6" --tiles "32TPS" \
+          --extent "605000,5105000,635000,5125000" --resolution "10" $args
 
 # Asia
 # ----
