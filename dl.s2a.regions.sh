@@ -40,57 +40,57 @@ dl.s2a.sh --name "europe/ecrins" \
           --extent "745000,4965000,775000,4995000" --resolution "10" $args
 
 # Mt Blanc 3000x3000
-dl.s2a.sh --name "europe/mtblanc" \
+dl.s2a.sh --name "europe/mtblanc" --offline \
           --intersect "45.9,7.0" --tiles "32TLR" \
           --extent "325000,5070000,355000,5100000" --resolution "10" $args
 
 # Plaine Morte 1000x1000
-dl.s2a.sh --name "europe/plainemorte" \
+dl.s2a.sh --name "europe/plainemorte" --offline \
           --intersect "46.4,7.5" --tiles "32TLS" \
           --extent "380000,5135000,390000,5145000" --resolution "10" $args
 
 # Bern / Aletsch 6000x4000
-dl.s2a.sh --name "europe/bern" \
+dl.s2a.sh --name "europe/bern" --offline \
           --intersect "46.5,8.1" --tiles "32TMS" \
           --extent "400000,5135000,460000,5175000" --resolution "10" $args
 
 # Uri 3000x5000
-dl.s2a.sh --name "europe/uri" \
+dl.s2a.sh --name "europe/uri" --offline \
           --intersect "46.8,8.4" --tiles "32TMT,32TMS" \
           --extent "445000,5155000,475000,5205000" --resolution "10" $args
 
 # Appenzell 4000x3000
-dl.s2a.sh --name "europe/appenzell" \
+dl.s2a.sh --name "europe/appenzell" --offline \
           --intersect "47.2,9.3" --tiles "32TNT" \
           --extent "500000,5210000,540000,5240000" --resolution "10" $args
 
 # Bernina 4000x3000
-dl.s2a.sh --name "europe/bernina" \
+dl.s2a.sh --name "europe/bernina" --offline \
           --intersect "46.4,9.9" --tiles "32TNS" \
           --extent "540000,5120000,580000,5150000" --resolution "10" $args
 
 # Pennine / Gorner 6000x4000
-dl.s2a.sh --name "europe/pennine" \
+dl.s2a.sh --name "europe/pennine" --offline \
           --intersect "46.0,7.8" --tiles "32TLS,32TMS,32TLR,32TMR" \
           --extent "360000,5080000,420000,5125000" --resolution "10" $args
 
 # Glarus 6000x6000 (intersect on Clariden)
-dl.s2a.sh --name "europe/glarus" \
+dl.s2a.sh --name "europe/glarus" --offline \
           --intersect "46.8,8.9" --tiles "32TMT,32TMS,32TNT,32TNS" \
           --extent "475000,5170000,535000,5230000" --resolution "10" $args
 
 # Oetztal 4000x3000 (move 5 km to the north into 32TPT)
-dl.s2a.sh --name "europe/otztal" \
+dl.s2a.sh --name "europe/otztal" --offline \
           --intersect "46.8,10.9" --tiles "32TPT,32TPS" \
           --extent "625000,5175000,665000,5205000" --resolution "10" $args
 
 # Ortler 3000x3000
-dl.s2a.sh --name "europe/ortler" \
+dl.s2a.sh --name "europe/ortler" --offline \
           --intersect "46.5,10.6" --tiles "32TPS" \
           --extent "605000,5130000,635000,5160000" --resolution "10" $args
 
 # Adamello 3000x2000
-dl.s2a.sh --name "europe/adamello" \
+dl.s2a.sh --name "europe/adamello" --offline \
           --intersect "46.2,10.6" --tiles "32TPS" \
           --extent "605000,5105000,635000,5125000" --resolution "10" $args
 
