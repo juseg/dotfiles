@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rsync -vazhP dora:/project/s573/jsegu/pism/output ~/pism \
+rsync -vazhP ela:/project/s573/jsegu/pism/output ~/pism \
     --exclude=*~ \
     --exclude=*backup.nc \
     --exclude=slurm* \

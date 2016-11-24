@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rsync -vazhP --delete ~/pism/input dora:pism/
+rsync -vazhP --delete ~/pism/input ela:pism/
 
 # * extract from rsync help
 #    -v, --verbose               increase verbosity
