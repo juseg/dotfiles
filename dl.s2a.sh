@@ -129,8 +129,14 @@ then
     wget --quiet --no-check-certificate --user=${user} --password=${pass} \
          --output-document searchresults.xml "$url"
 
+    # continue offline on download error or invalid file
+    if [ $? -ne 0 ] || ! xml -q val searchresults.xml
+    then
+        echo "Failed query, continuing offline."
+        break
+    fi
+
     # parse search results using xmlstarlet and loop on products
-    [ -s searchresults.xml ] &&
     xml sel -t -m "//_:entry" -v "_:title" -o " " \
             -m "_:link" -i 'not(@rel)' -v "@href" -n searchresults.xml |
     while read name urlbase
