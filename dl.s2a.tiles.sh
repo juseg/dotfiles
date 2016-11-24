@@ -77,8 +77,8 @@ dl.s2a.sh $args --tiles 32TPR --name tiles/t32tpr-bergame \
 # --tiles 32TQR --intersect 45.55860936,12.20328196
 
 mkdir -p $prevdir/alps/{rgb,irg}
-find $tiledir/t32*/rgb/*.jpg | cut -d '_' -f 2-4 | sort | uniq |
-    while read date
+find $tiledir/t32*/rgb -name "*.jpg" -printf "%f\n" | cut -d '_' -f 2-4 |
+    sort | uniq | while read date
     do
         for col in rgb irg
         do
@@ -86,9 +86,66 @@ find $tiledir/t32*/rgb/*.jpg | cut -d '_' -f 2-4 | sort | uniq |
             ofile="$prevdir/alps/$scene"
             if [ ! -s $ofile.jpg ]
             then
-                echo "Mosaicing $ofile.tif ..."
+                echo "Mosaicing alps/$scene.tif ..."
                 gdalbuildvrt -quiet -te 300000 5000000 600000 5300000 \
                     $ofile.vrt $tiledir/t32*/$scene.tif
+                gdal_translate -quiet -co photometric=rgb $ofile.vrt $ofile.tif
+                convert -gamma 5.05,5.10,4.85 -sigmoidal-contrast 15,50% \
+                        -modulate 100,150 -quality 85 -quiet \
+                        $ofile.tif $ofile.jpg
+                rm $ofile.vrt $ofile.tif
+            fi
+        done
+    done
+
+
+# Inglefield
+# ----------
+
+## Tiling
+# 19XDG, 19XEG
+# 19XDF, 19XEF
+
+## Python code to compute intersects
+# import numpy as np
+# import cartopy.crs as ccrs
+# utm = ccrs.UTM(19)
+# ll = ccrs.PlateCarree()
+# x = np.arange(450e3, 551e3, 100e3)
+# y = np.arange(8650e3, 8549e3, -100e3)
+# yy, xx = np.meshgrid(y, x)
+# pts = ll.transform_points(utm, xx, yy)
+# for c in pts:
+#   for l in c:
+#       print '--intersect "%02.8f,%02.8f"' % (l[1], l[0])
+
+dl.s2a.sh $args --tiles 19XDG --name tiles/t19xdg-siorapaluk \
+                --intersect "77.91682084,-71.14010792" \
+                --extent 400000,8600000,500000,8700000
+dl.s2a.sh $args --tiles 19XDF --name tiles/t19xdf-natsilivik \
+                --intersect "77.02131528,-70.99470679" \
+                --extent 400000,8500000,500000,8600000
+
+dl.s2a.sh $args --tiles 19XEG --name tiles/t19xeg-qeqertat \
+                --intersect "77.91682084,-66.85989208" \
+                --extent 500000,8600000,600000,8700000
+dl.s2a.sh $args --tiles 19XEF --name tiles/t19xef-qaqqarsuaq \
+                --intersect "77.02131528,-67.00529321" \
+                --extent 500000,8500000,600000,8600000
+
+mkdir -p $prevdir/inglefield/{rgb,irg}
+find $tiledir/t19*/rgb -name "*.jpg" -printf "%f\n" | cut -d '_' -f 2-4 |
+    sort | uniq | while read date
+    do
+        for col in rgb irg
+        do
+            scene="$col/S2A_${date}_${col^^}"
+            ofile="$prevdir/inglefield/$scene"
+            if [ ! -s $ofile.jpg ]
+            then
+                echo "Mosaicing inglefield/$scene.tif ..."
+                gdalbuildvrt -quiet -te 400000 8500000 600000 8700000 \
+                    $ofile.vrt $tiledir/t19*/$scene.tif
                 gdal_translate -quiet -co photometric=rgb $ofile.vrt $ofile.tif
                 convert -gamma 5.05,5.10,4.85 -sigmoidal-contrast 15,50% \
                         -modulate 100,150 -quality 85 -quiet \

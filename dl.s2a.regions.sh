@@ -9,19 +9,14 @@ args="$*"
 # ---------
 
 # Qaanaaq 6000x6000 (intersect on Bowdoin Glacier)
-dl.s2a.sh --name "greenland/qaanaaq" \
+dl.s2a.sh --name "greenland/qaanaaq" --offline \
           --intersect "77.7,-68.5" --tiles "19XDG,19XEG" \
           --extent "465000,8595000,525000,8655000" --resolution "10" $args
 
 # Qeqertaq / Tracy 4000x6000
-dl.s2a.sh --name "greenland/qeqertat" \
+dl.s2a.sh --name "greenland/qeqertat" --offline \
           --intersect "77.5,-66.7" --tiles "19XEG" \
           --extent "535000,8595000,595000,8635000" --resolution "10" $args
-
-# Inglefield 4000x4000 (intersect on Bowdoin Glacier)
-dl.s2a.sh --name "greenland/inglefield" \
-          --intersect "77.7,-68.5" --tiles "19XDF,19XEF,19XDG,19XEG" \
-          --extent "400000,8500000,600000,8700000" --resolution "50" $args
 
 # Hans Tausen Ice Cap 8000x8000 + 5000x8000
 dl.s2a.sh --name "greenland/hanstausen-utm23" \
