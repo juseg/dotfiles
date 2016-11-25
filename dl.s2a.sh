@@ -129,58 +129,59 @@ then
     wget --quiet --no-check-certificate --user=${user} --password=${pass} \
          --output-document searchresults.xml "$url"
 
-    # continue offline on download error or invalid file
-    if [ $? -ne 0 ] || ! xml -q val searchresults.xml
+    # if valid xml search results then parse them and loop on products
+    if xml -q val searchresults.xml
     then
-        echo "Failed query, continuing offline."
-        break
-    fi
-
-    # parse search results using xmlstarlet and loop on products
-    xml sel -t -m "//_:entry" -v "_:title" -o " " \
-            -m "_:link" -i 'not(@rel)' -v "@href" -n searchresults.xml |
-    while read name urlbase
-    do
-
-        # break url to include invidual nodes
-        name=${name}.SAFE
-        urlbase=${urlbase%/\$value}
-
-        # download manifest file if missing
-        manifestpath="manifests/$name"
-        url="${urlbase}/Nodes('${name}')/Nodes('manifest.safe')/\$value"
-        if [ ! -s "$manifestpath" ]
-        then
-            mkdir -p $(dirname $manifestpath)
-            wget --quiet --no-check-certificate --continue \
-                 --user=${user} --password=${pass} \
-                 --output-document manifests/$name $url
-        fi
-
-        # find and loop on granule xml files and IRGB bands for requested tiles
-        xml sel -t -m "//fileLocation" -v "@href" -n $manifestpath |
-        egrep "T(${tiles//,/|})(.xml|_B0(2|3|4|8).jp2)" | while read line
+        xml sel -t -m "//_:entry" -v "_:title" -o " " \
+                -m "_:link" -i 'not(@rel)' -v "@href" -n searchresults.xml |
+        while read name urlbase
         do
 
-            # get file path and remote url
-            filepath=${line##./}
-            destpath=${line/GRANULE/granules}
-            nodepath="Nodes('$(sed -e "s_/_')/Nodes('_g" <<< "${name}/${filepath}")')"
-            url="${urlbase}/${nodepath}/\$value"
+            # break url to include invidual nodes
+            name=${name}.SAFE
+            urlbase=${urlbase%/\$value}
 
-            # download files if missing
-            if [ ! -s $destpath ]
+            # download manifest file if missing
+            manifestpath="manifests/$name"
+            url="${urlbase}/Nodes('${name}')/Nodes('manifest.safe')/\$value"
+            if [ ! -s "$manifestpath" ]
             then
-                echo "Downloading file $(basename ${destpath})..."
-                mkdir -p $(dirname $destpath)
+                mkdir -p $(dirname $manifestpath)
                 wget --quiet --no-check-certificate --continue \
                      --user=${user} --password=${pass} \
-                     --output-document $destpath $url
+                     --output-document manifests/$name $url
             fi
+
+            # find and loop on granule xml files and bands for requested tiles
+            xml sel -t -m "//fileLocation" -v "@href" -n $manifestpath |
+            egrep "T(${tiles//,/|})(.xml|_B0(2|3|4|8).jp2)" | while read line
+            do
+
+                # get file path and remote url
+                filepath=${line##./}
+                destpath=${line/GRANULE/granules}
+                nodepath=$(sed -e "s_/_')/Nodes('_g" <<< "${name}/${filepath}")
+                nodepath="Nodes('${nodepath}')"
+                url="${urlbase}/${nodepath}/\$value"
+
+                # download files if missing
+                if [ ! -s $destpath ]
+                then
+                    echo "Downloading file $(basename ${destpath})..."
+                    mkdir -p $(dirname $destpath)
+                    wget --quiet --no-check-certificate --continue \
+                         --user=${user} --password=${pass} \
+                         --output-document $destpath $url
+                fi
+
+            done
 
         done
 
-    done
+    # warn about invalid xml query results
+    else
+        echo "Failed query, continuing offline."
+    fi
 
 fi
 
