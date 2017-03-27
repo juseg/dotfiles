@@ -6,8 +6,6 @@
 # B03 560nm G
 # B04 665nm R
 # B08 842nm IR
-# Bowdoin tile 19XEG
-# Qaanaaq tile 19XDG
 
 
 # Parse command-line arguments
@@ -79,27 +77,35 @@ do
     shift
 done
 
-# base directory
-basedir=${basedir:="/scratch_net/ogive_second/juliens/geodata/satellite/sentinel-2a"}
+# check for compulsory arguments
+if [ -z "$user" ]
+then
+    echo "Please provide Copernicus user name (--user)."
+    exit 2
+fi
+if [ -z "$pass" ]
+then
+    echo "Please provide Copernicus password (--pass)."
+    exit 2
+fi
 
-# authentification
-user=${user:="julien.seguinot"}
-pass=${pass:="Cordillera"}
+# base directory
+basedir=${basedir:="."}
 
 # intersect lat,lon used in query, comma-separated
-intersect=${intersect:="77.7,-68.5"}
+intersect=${intersect:="46.5,8.1"}
 
 # tiles to download and patch, comma-separated
-tiles=${tiles:="19XDG,19XEG"}
+tiles=${tiles:="32TMS"}
 
 # maximum cloud cover fraction
 cloudcover=${cloudcover:="100"}
 
 # region name for composite images
-region=${region:="qaanaaq"}
+region=${region:="aletsch"}
 
 # wsen extent in UTM local zone coordinates, comma-separated
-extent=${extent:="465000,8595000,525000,8655000"}  # Siorapaluk 461450
+extent=${extent:="410000,5135000,450000,5165000"}
 
 # spatial resolution in meters
 resolution=${resolution:="10"}
