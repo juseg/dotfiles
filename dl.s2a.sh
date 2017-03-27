@@ -125,7 +125,7 @@ then
     query="platformname:Sentinel-2 AND "
     query+="footprint:\"intersects(${intersect})\" AND "
     query+="cloudcoverpercentage:[0 TO ${cloudcover}]"
-    url="https://scihub.copernicus.eu/dhus/search?q=${query}&rows=100"
+    url="https://scihub.copernicus.eu/dhus/search?q=${query}&rows=10"
     wget --quiet --no-check-certificate --user=${user} --password=${pass} \
          --output-document searchresults.xml "$url"
 
