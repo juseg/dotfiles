@@ -32,8 +32,9 @@ $sf --name greenland/hanstausen-utm24 \
     --intersect 82.6,-38.2 --tiles 24XWT,24XWS --cloudcover 30 \
     --extent 500000,9120000,550000,9200000 --resolution 10
 
-# Europe
-# ------
+
+# Alps
+# ----
 
 # Ecrins 3000x3000
 $sf --name europe/ecrins \
@@ -94,6 +95,15 @@ $sf --name europe/ortler --offline \
 $sf --name europe/adamello --offline \
     --intersect 46.2,10.6 --tiles 32TPS \
     --extent 605000,5105000,635000,5125000 --resolution 10
+
+
+# Rest of Europe
+# --------------
+
+# Tatra 5000x3000
+$sf --name europe/tatra --cloudcover 30 \
+    --intersect 49.1,20.1 --tiles 34UDV \
+    --extent 400000,5435000,450000,5465000 --resolution 10
 
 
 # Asia
