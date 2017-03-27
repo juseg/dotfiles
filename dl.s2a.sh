@@ -154,7 +154,8 @@ then
 
             # find and loop on granule xml files and bands for requested tiles
             xml sel -t -m "//fileLocation" -v "@href" -n $manifestpath |
-            egrep "T(${tiles//,/|})(.xml|_B0(2|3|4|8).jp2)" | while read line
+            egrep "T(${tiles//,/|})" | egrep "(.xml|_B0(2|3|4|8).jp2)" |
+            grep -v "QI_DATA" | while read line
             do
 
                 # get file path and remote url
@@ -218,18 +219,13 @@ do
             continue
         fi
 
-        # prepare IRGB band filenames
-        b="$datadir/IMG_DATA/${granule}_B02.jp2"
-        g="$datadir/IMG_DATA/${granule}_B03.jp2"
-        r="$datadir/IMG_DATA/${granule}_B04.jp2"
-        i="$datadir/IMG_DATA/${granule}_B08.jp2"
-
         # build RGB VRT
         ofile_rgb="scenes/S2A_${sensdate}_T${tile}_RGB.vrt"
         if [ ! -s $ofile_rgb ]
         then
             echo "Building scene $(basename $ofile_rgb) ..."
-            gdalbuildvrt -separate -srcnodata 0 -q $ofile_rgb $r $g $b
+            gdalbuildvrt -separate -srcnodata 0 -q $ofile_rgb \
+                $datadir/IMG_DATA/*_B0{4,3,2}.jp2
             if [ "$?" -ne "0" ]
             then
                 echo "Error, removing $ofile_rgb ..."
@@ -243,7 +239,8 @@ do
         if [ ! -s $ofile_irg ]
         then
             echo "Building scene $(basename $ofile_irg) ..."
-            gdalbuildvrt -separate -srcnodata 0 -q $ofile_irg $i $r $g
+            gdalbuildvrt -separate -srcnodata 0 -q $ofile_irg \
+                $datadir/IMG_DATA/*_B0{8,4,3}.jp2
             if [ "$?" -ne "0" ]
             then
                 echo "Error, removing $ofile_irg ..."
