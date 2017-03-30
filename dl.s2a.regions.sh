@@ -14,6 +14,12 @@ sf="$HOME/code/sentinelflow/sentinelflow.sh\
 # Greenland
 # ---------
 
+# Inglefield 2000x2000
+$sf --name greenland/inglefield \
+    --intersect -70.0,77.0,-67.5,78.0 --maxrows 100 \
+    --tiles $(echo 19X{D,E}{F,G} | tr ' ' ',') --nullvalues 100 \
+    --extent 400000,8500000,600000,8700000 --resolution 100
+
 # Qaanaaq 6000x6000 (intersect on Bowdoin Glacier)
 $sf --name greenland/qaanaaq --offline \
     --intersect 77.7,-68.5 --tiles 19XDG,19XEG \
@@ -25,6 +31,7 @@ $sf --name greenland/qeqertat --offline \
     --extent 535000,8595000,595000,8635000 --resolution 10
 
 # Hans Tausen Ice Cap 8000x8000 + 5000x8000
+# FIXME: rectangle intersect?
 $sf --name greenland/hanstausen-utm23 \
     --intersect 82.6,-38.2 --tiles 23XNN,23XNM --cloudcover 30 \
     --extent 529800,9130000,609800,9210000 --resolution 10
@@ -40,6 +47,12 @@ $sf --name greenland/hanstausen-utm24 \
 $sf --name europe/ecrins \
     --intersect 44.9,6.3 --tiles 31TGK \
     --extent 745000,4965000,775000,4995000 --resolution 10
+
+# Alps 4000x3000
+$sf --name europe/alps \
+    --intersect 7.5,45.5,11.5,47.5 --maxrows 100 \
+    --tiles $(echo 32T{L,M,N,P}{R,S,T} | tr ' ' ',') --nullvalues 100 \
+    --extent 300000,5000000,700000,5300000 --resolution 100
 
 # Mt Blanc 3000x3000
 $sf --name europe/mtblanc --offline \
@@ -115,6 +128,7 @@ $sf --name asia/aruco \
     --extent 605000,3755000,625000,3775000 --resolution 10
 
 # Haizishan 8000x10000
+# FIXME: rectangle intersect?
 $sf --name asia/haizishan \
     --intersect 29.3,100.2 --tiles 47RNN,47RPN --cloudcover 30 \
     --extent 585000,3200000,665000,3300000 --resolution 10
@@ -125,6 +139,7 @@ $sf --name asia/hanoi \
     --extent 570000,2310000,600000,2340000 --resolution 10
 
 # Vitim 4000x2000
+# FIXME: rectangle intersect?
 $sf --name asia/vitim \
     --intersect 57.4,116.5 --tiles 50VMJ,50VNJ --cloudcover 30 \
     --extent 400000,6300000,600000,6400000 --resolution 50
