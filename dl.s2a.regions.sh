@@ -89,6 +89,11 @@ $sf --name europe/pennine --offline \
     --intersect 46.0,7.8 --tiles 32TLS,32TMS,32TLR,32TMR \
     --extent 360000,5080000,420000,5125000 --resolution 10
 
+## Valais 12000x9000
+#$sf --name europe/valais --offline \
+#    --intersect 46.0,7.8 --tiles 32TLS,32TMS,32TLR,32TMR \
+#    --extent 350000,5080000,470000,5170000 --resolution 100
+
 # Glarus 6000x6000 (intersect on Clariden)
 $sf --name europe/glarus --offline \
     --intersect 46.8,8.9 --tiles 32TMT,32TMS,32TNT,32TNS \
@@ -149,7 +154,25 @@ $sf --name asia/vitim \
 # -------
 
 # Tuya 3000x3000
+# FIXME: rectangle intersect?
 $sf --name america/tuya \
     --intersect 59.1,-130.6 --tiles 09VUF,09VVF --cloudcover 30 \
     --extent 395000,6530000,425000,6560000 --resolution 10
 
+
+# Update webpage
+# --------------
+
+# sync jpegs to webpage
+for reg in europe/{alps,bern,pennine} greenland/{qaanaaq,qeqertat}
+do
+    rsync -qahP composite/$reg ~/public_html/sentinel/ --exclude=*.{tif,txt}
+done
+
+# relink latest images
+for subdir in ~/public_html/sentinel/*/{rgb,irg}
+do
+    latest=$(ls $subdir | tail -n 1)
+    ln -sf ${latest%.???}.jpg $subdir/latest.jpg
+    ln -sf ${latest%.???}.jpg $subdir/latest.jpw
+done
