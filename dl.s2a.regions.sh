@@ -17,7 +17,7 @@ sf="$HOME/code/sentinelflow/sentinelflow.sh\
 # Inglefield 2000x2000
 $sf --name greenland/inglefield \
     --intersect -70.0,77.0,-67.5,78.0 --maxrows 100 \
-    --tiles $(echo 19X{D,E}{F,G} | tr ' ' ',') --nullvalues 100 \
+    --tiles $(echo 19X{D,E}{F,G} | tr ' ' ',') \
     --extent 400000,8500000,600000,8700000 --resolution 100
 
 # Qaanaaq 6000x6000 (intersect on Bowdoin Glacier)
@@ -29,6 +29,11 @@ $sf --name greenland/qaanaaq --offline \
 $sf --name greenland/qeqertat --offline \
     --intersect 77.5,-66.7 --tiles 19XEG \
     --extent 535000,8595000,595000,8635000 --resolution 10
+
+# Leidy
+$sf --name greenland/leidy --offline \
+    --intersect 77.3,-66.2 --tiles 19XEF \
+    --extent 565000,8565000,595000,8585000 --resolution 10
 
 # Hans Tausen Ice Cap 8000x8000 + 5000x8000
 # FIXME: rectangle intersect?
@@ -49,9 +54,9 @@ $sf --name europe/ecrins \
     --extent 745000,4965000,775000,4995000 --resolution 10
 
 # Alps 4000x3000
-$sf --name europe/alps \
+$sf --name europe/alps --fetchonly \
     --intersect 7.5,45.5,11.5,47.5 --maxrows 100 \
-    --tiles $(echo 32T{L,M,N,P}{R,S,T} | tr ' ' ',') --nullvalues 100 \
+    --tiles $(echo 32T{L,M,N,P}{R,S,T} | tr ' ' ',') \
     --extent 300000,5000000,700000,5300000 --resolution 100
 
 # Mt Blanc 3000x3000
@@ -164,7 +169,8 @@ $sf --name america/tuya \
 # --------------
 
 # sync jpegs to webpage
-for reg in europe/{alps,bern,pennine} greenland/{qaanaaq,qeqertat}
+for reg in europe/{bern,pennine} \
+           greenland/{inglefield,leidy,qaanaaq,qeqertat}
 do
     rsync -qahP composite/$reg ~/public_html/sentinel/ --exclude=*.{tif,txt}
 done
