@@ -35,6 +35,11 @@ $sf --name greenland/leidy --offline \
     --intersect 77.3,-66.2 --tiles 19XEF \
     --extent 565000,8565000,595000,8585000 --resolution 10
 
+# Eqip Sermia
+$sf --name greenland/eqip \
+    --intersect 69.8,-50.2 --tiles 22WEC \
+    --extent 500000,7720000,590000,7760000 --resolution 10
+
 # Hans Tausen Ice Cap 8000x8000 + 5000x8000
 # FIXME: rectangle intersect?
 $sf --name greenland/hanstausen-utm23 \
@@ -170,7 +175,7 @@ $sf --name america/tuya \
 
 # sync jpegs to webpage
 for reg in europe/{bern,pennine} \
-           greenland/{inglefield,leidy,qaanaaq,qeqertat}
+           greenland/{eqip,inglefield,leidy,qaanaaq,qeqertat}
 do
     rsync -qahP composite/$reg ~/public_html/sentinel/ --exclude=*.{tif,txt}
 done
