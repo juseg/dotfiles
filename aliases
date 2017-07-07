@@ -37,31 +37,7 @@ alias lt='ls -hlt'
 alias lat='ls -Ahlt'
 alias l='ls -CF'
 
-# Printing aliases
-# ----------------
-# bw: black and white
-# weiss: non-recycled paper
-# ds: double sided (=duplex?)
-# kds: short edge double sided
 
-# black and white
-alias bwprint.ps='vpp -dest=hiad58 -dev=PTS -form=a4.duplex.bw'
-alias bwprint.text='vpp -dest=hiad58 -dev=printer -form=a4.duplex.bw'
-alias bwprint.pdf='( pdftops -origpagesizes - - | bwprint.ps ) < '
-alias bwprint='bwprint.pdf'
-
-# color
-alias cprint.ps='vpp -dest=hiac59 -dev=x7220 -form=a4.duplex'
-alias cprint.ps.a3='vpp -dest=hiac59 -dev=x7220 -form=a3'
-
-# booklet (also check psbook)
-function bwprint.book {
-    pdfbook $1
-    pdf90 ${1%.pdf}-book.pdf
-    bwprint.pdf ${1%.pdf}-book-rotated90.pdf
-    rm ${1%.pdf}-book-rotated90.pdf
-    rm ${1%.pdf}-book.pdf
-}
 
 # more aliases
 alias reduce='mogrify -resize 1920x1920 -quality 85'
