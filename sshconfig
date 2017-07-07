@@ -6,29 +6,32 @@ Host s scooter
     ForwardX11 yes
 
 # ETH
-Host o ogive
-    Hostname ogive.ethz.ch
-
-Host b brutus
-    Hostname brutus.ethz.ch
+Host i iceberg
+    Hostname iceberg.ethz.ch
 
 Host l login
     Hostname login.ee.ethz.ch
 
-Host o ogive b brutus l login *.ethz.ch
+Host v3 vierzack03
+    Hostname vierzack03.ethz.ch
+
+Host v4 vierzack04
+    Hostname vierzack04.ethz.ch
+
+Host v5 vierzack05
+    Hostname vierzack05.ethz.ch
+
+Host i iceberg m moraine b brutus l login v3 vierzack03 v4 vierzack04 v5 vierzack05 *.ethz.ch
     User juliens
     ForwardAgent yes
     ForwardX11 yes
+    ForwardX11Trusted yes
 
 # CSCS
 Host e ela
     Hostname ela.cscs.ch
 
-Host d dora
-    Hostname dora.cscs.ch
-    ProxyCommand ssh -Y ela netcat %h %p -w 10
-
-Host daint
+Host d daint
     Hostname daint.cscs.ch
     ProxyCommand ssh -Y ela netcat %h %p -w 10
 
@@ -37,13 +40,22 @@ Host e ela d dora daint *.cscs.ch
     ForwardAgent yes
     ForwardX11 yes
 
+# HLRN
+Host hlrn
+    User hbkirina
+    Hostname hlogin.hlrn.de
+    ForwardAgent yes
+    ForwardX11 yes
+
 # HU
-Host lowtem
+Host h hokudai
     User greenland2014
     Hostname wwwice.lowtem.hokudai.ac.jp
+    ForwardX11 no
+    ForwardAgent no
 
 # Git hosts
-Host git.framasoft.org github.com
+Host framagit.org github.com
     User jsegu
     ForwardX11 no
     ForwardAgent no
