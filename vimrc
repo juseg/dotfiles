@@ -4,9 +4,6 @@ color desert        " color scheme
 set background=dark " better contrast on black
 set cul             " highlight current line
 set colorcolumn=80  " highlight column 80
-hi CursorLine cterm=NONE ctermfg=NONE ctermbg=darkgrey
-hi LineNr cterm=bold ctermfg=grey ctermbg=darkgrey
-hi ColorColumn ctermbg=darkgrey
 
 " newlines
 set number          " enable line numbering
