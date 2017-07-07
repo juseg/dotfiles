@@ -80,5 +80,7 @@ alias pep8tough='pep8 --ignore='
 # more aliases
 alias reduce='mogrify -resize 1920x1920 -quality 85'
 alias nccrop='ncks -O -d longitude,0.5,359.5 -d latitude,-89.5,89.5'
+alias pdfcompress='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=false -dNOPAUSE -dQUIET -dBATCH -sOutputFile=compressed.pdf'
+alias pdfdownsamp='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=true -dColorImageResolution=127 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=downsamp.pdf'
+alias whoruns='ps aux | cut -d " " -f 1 | sed "1 d" | sort | uniq'
 alias whybusy='ps -lfp $(fuser -c /media/backup/)'
-alias pdfcompress='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=compressed.pdf'
