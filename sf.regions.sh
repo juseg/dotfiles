@@ -74,6 +74,11 @@ $sf --name europe/tatra --cloudcover 30 \
     --intersect 49.1,20.1 --tiles 34UDV \
     --extent 400000,5435000,450000,5465000 --resolution 10
 
+# Sarek 60x70 km
+$sf --name europe/sarek --cloudcover 30 \
+    --intersect 67.3,17.5 --tiles 33WWQ,33WXQ \
+    --extent 590000,7425000,650000,7495000 --resolution 10
+
 
 # Asia
 # ----
