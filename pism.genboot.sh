@@ -8,8 +8,10 @@ gflx=$4 # geoflux
 
 # location
 case $topo in
+    etopo1bed+thk) topomap="etopo1bed"; loc="world-ll-wgs84";;
     etopo1bed) topomap="etopo1bed"; loc="world-ll-wgs84";;
     etopo1sub) topomap="etopo1bed"; loc="world-ll-wgs84";;
+    srtm+thk)  topomap="srtm";      loc="world-ll-wgs84";;
     srtmsub)   topomap="srtm";      loc="world-ll-wgs84";;
     srtm)      topomap="srtm";      loc="world-ll-wgs84";;
     wc)        topomap="wc_topo";   loc="world-ll-wgs84";;
@@ -40,18 +42,29 @@ then
 fi
 
 # remove present glaciers
-if [[ "$topo" == *sub ]]
+# TODO: resample thickness map before mapcalc for more precision
+if [[ "$topo" == *thk || "$topo" == *sub ]]
 then
-    thickmaps=$(g.mlist pattern=thick_????? sep=,)
+    thickmaps=$(g.list type=rast pattern=thick_????? sep=,)
     r.series input=$thickmaps output=thicksum method=sum --o
-    r.mapcalc "$topo=$topomap-if(isnull(thicksum),0,thicksum)"
-    topomap=$topo
+    if [[ "$topo" == *sub ]]
+    then
+        r.mapcalc expression="$topo=$topomap-if(isnull(thicksum),0,thicksum)" --o
+        topomap=$topo
+    fi
 fi
 
 # export PISM file
-python2 ~/git/code/r.out.pism/r.out.pism.py --o \
-    topg=$topomap ${gflx:+bheatflx=heatflux_$gflx} \
-    output=$reg-$topo${gflx:++$gflx}-${res/%000/k}m.nc
+if [[ "$topo" == *thk ]]
+then
+    python2 ~/git/code/r.out.pism/r.out.pism.py --o \
+        usurf=$topomap ${gflx:+bheatflx=heatflux_$gflx} thk=thicksum \
+        output=$reg-$topo${gflx:++$gflx}-${res/%000/k}m.nc
+else
+    python2 ~/git/code/r.out.pism/r.out.pism.py --o \
+        topg=$topomap ${gflx:+bheatflx=heatflux_$gflx} \
+        output=$reg-$topo${gflx:++$gflx}-${res/%000/k}m.nc
+fi
 
 # remove Greenland
 #if [ "$reg" == "laurentide" ] ; then
