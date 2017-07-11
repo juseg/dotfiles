@@ -9,7 +9,7 @@ dt=$3   # offset*100
 dt=$((10#$dt))
 
 # call ptsgen
-python2 ~/code/ptsgen/ptsgen.py $rec -120000 0 0 -$((dt/100)).$((dt%100)) \
+python2 ~/git/code/ptsgen/ptsgen.py $rec -120000 0 0 -$((dt/100)).$((dt%100)) \
     --scale-interval -${per:0:2}000 -${per:2:4}000 \
     --output ${rec}${per}cool$(printf '%04d' $dt).nc
 

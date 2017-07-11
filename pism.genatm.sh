@@ -34,14 +34,14 @@ g.region w=$((w-res/2)) e=$((e+res/2)) s=$((s-res/2)) n=$((n+res/2))
 # reproject and extrapolate
 for map in ${topo} ${temp}{01..12} ${prec}{01..12}; do
     r.proj --overwrite location=$loc input=$map method=bilinear
-    [ "$ext" == "nn" ] && ~/code/r.interp/r.interp.py \
+    [ "$ext" == "nn" ] && ~/git/code/r.interp/r.interp.py \
         input=$map output=$map method="nearest" --o
-    [ "$reg" == "arctic" ] && ~/code/r.interp/r.interp.py \
+    [ "$reg" == "arctic" ] && ~/git/code/r.interp/r.interp.py \
         input=$map output=$map method="linear" --o
 done
 
 # export PISM file
-~/code/r.out.pism/r.out.pism.py -ep --o edgetemp=315 usurf=$topo \
+~/git/code/r.out.pism/r.out.pism.py -ep --o edgetemp=315 usurf=$topo \
     air_temp=$(echo ${temp}{01..12} | tr ' ' ',') \
     precipitation=$(echo ${prec}{01..12} | tr ' ' ',') \
     output=$reg-$atm$ext-${res/%000/k}m${noac:+-noac}${nosd:+-nosd}.nc

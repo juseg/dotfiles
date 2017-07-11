@@ -35,8 +35,8 @@ r.proj location=$loc input=$topomap method=bilinear --o
 # arctic maps should be interpolated
 if [ "$reg" == "arctic" ]
 then
-    ~/code/r.interp/r.interp.py input=$topomap output=$topomap method=linear --o
-    [ $gflx ] && ~/code/r.interp/r.interp.py input=$gflxmap output=$gflxmap method=linear --o
+    ~/git/code/r.interp/r.interp.py input=$topomap output=$topomap method=linear --o
+    [ $gflx ] && ~/git/code/r.interp/r.interp.py input=$gflxmap output=$gflxmap method=linear --o
 fi
 
 # remove present glaciers
@@ -49,7 +49,7 @@ then
 fi
 
 # export PISM file
-python2 ~/code/r.out.pism/r.out.pism.py --o \
+python2 ~/git/code/r.out.pism/r.out.pism.py --o \
     topg=$topomap ${gflx:+bheatflx=heatflux_$gflx} \
     output=$reg-$topo${gflx:++$gflx}-${res/%000/k}m.nc
 

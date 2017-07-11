@@ -36,13 +36,13 @@ g.region w=$((w-res/2)) e=$((e+res/2)) s=$((s-res/2)) n=$((n+res/2))
 # reproject and extrapolate
 for map in ${sd}{01..12}; do
     r.proj --overwrite location=$loc input=$map method=bilinear
-    [ "$ext" == "nn" ] && ~/code/r.surf.nearest/r.surf.nearest.py \
+    [ "$ext" == "nn" ] && ~/git/code/r.surf.nearest/r.surf.nearest.py \
         input=$map output=$map --o
-    [ "$reg" == "arctic" ] && ~/code/r.interp/r.interp.py \
+    [ "$reg" == "arctic" ] && ~/git/code/r.interp/r.interp.py \
         input=$map output=$map method="linear" --o
 done
 
 # export PISM file
-~/code/r.out.pism/r.out.pism.py --o \
+~/git/code/r.out.pism/r.out.pism.py --o \
     air_temp_sd=$(echo ${sd}{01..12} | tr ' ' ',') \
     output=$reg-$atm-${res/%000/k}m${noac:+-noac}.nc

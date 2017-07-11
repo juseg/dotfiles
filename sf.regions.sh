@@ -7,7 +7,7 @@
 cd $SCRATCH2/geodata/satellite/sentinel-2a
 
 # path to executable
-sf="$HOME/code/sentinelflow/sentinelflow.sh\
+sf="$HOME/git/code/sentinelflow/sentinelflow.sh\
  --user julien.seguinot --pass Cordillera $*"
 
 
