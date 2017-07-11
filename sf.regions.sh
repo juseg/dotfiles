@@ -14,28 +14,18 @@ sf="$HOME/git/code/sentinelflow/sentinelflow.sh\
 # Greenland
 # ---------
 
-# Inglefield 2000x2000
+# Inglefield Bay 200x150 km
 $sf --name greenland/inglefield \
-    --intersect -70.0,77.0,-67.5,78.0 --maxrows 100 \
-    --tiles $(echo 19X{D,E}{F,G} | tr ' ' ',') \
-    --extent 400000,8500000,600000,8700000 --resolution 100
+    --intersect -70.0,77.0,-67.5,78.0 --maxrows 20 \
+    --tiles 19XDF,19XDG,19XEF,19XEG \
+    --extent 405000,8535000,605000,8685000 --resolution 10
 
-# Qaanaaq 6000x6000 (intersect on Bowdoin Glacier)
+# Qaanaaq 60x60 km (intersect on Bowdoin Glacier)
 $sf --name greenland/qaanaaq --offline \
     --intersect 77.7,-68.5 --tiles 19XDG,19XEG \
     --extent 465000,8595000,525000,8655000 --resolution 10
 
-# Qeqertaq / Tracy 4000x6000
-$sf --name greenland/qeqertat --offline \
-    --intersect 77.5,-66.7 --tiles 19XEG \
-    --extent 535000,8595000,595000,8635000 --resolution 10
-
-# Leidy
-$sf --name greenland/leidy --offline \
-    --intersect 77.3,-66.2 --tiles 19XEF \
-    --extent 565000,8565000,595000,8585000 --resolution 10
-
-# Eqip Sermia
+# Eqip Sermia 90x40 km
 $sf --name greenland/eqip \
     --intersect 69.8,-50.2 --tiles 22WEC \
     --extent 500000,7720000,590000,7760000 --resolution 10
@@ -44,82 +34,42 @@ $sf --name greenland/eqip \
 # Alps
 # ----
 
-# Ecrins 3000x3000
+# Ecrins 30x30 km
 $sf --name europe/ecrins \
     --intersect 44.9,6.3 --tiles 31TGK \
     --extent 745000,4965000,775000,4995000 --resolution 10
 
-# Alps 4000x3000
+# Alps 400x300 km
 $sf --name europe/alps --fetchonly \
     --intersect 7.5,45.5,11.5,47.5 --maxrows 100 \
     --tiles $(echo 32T{L,M,N,P}{R,S,T} | tr ' ' ',') \
     --extent 300000,5000000,700000,5300000 --resolution 100
 
-# Mt Blanc 3000x3000
-$sf --name europe/mtblanc --offline \
-    --intersect 45.9,7.0 --tiles 32TLR \
-    --extent 325000,5070000,355000,5100000 --resolution 10
+# Mt Blanc 40x55 km
+$sf --name europe/mtblanc --offline --tiles 32TLR,32TLS \
+    --extent 315000,5065000,355000,5120000 --resolution 10
 
-# Plaine Morte 1000x1000
-$sf --name europe/plainemorte --offline \
-    --intersect 46.4,7.5 --tiles 32TLS \
-    --extent 380000,5135000,390000,5145000 --resolution 10
+# Valais 135x95 km
+$sf --name europe/valais --offline --tiles 32TLR,32TLS,32TMR,32TMS \
+    --extent 325000,5080000,460000,5175000 --resolution 10
 
-# Bern / Aletsch 6000x4000
-$sf --name europe/bern --offline \
-    --intersect 46.5,8.1 --tiles 32TMS \
-    --extent 400000,5135000,460000,5175000 --resolution 10
+# Glarus 100x85 km
+$sf --name europe/glarus --offline --tiles 32TMS,32TMT,32TNS,32TNT \
+    --extent 445000,5155000,545000,5240000 --resolution 10
 
-# Uri 3000x5000
-$sf --name europe/uri --offline \
-    --intersect 46.8,8.4 --tiles 32TMT,32TMS \
-    --extent 445000,5155000,475000,5205000 --resolution 10
+# Ticino 80x90 km
+$sf --name europe/ticino --offline --tiles 32TMR,32TMS,32TNR,32TNS \
+    --extent 455000,5070000,535000,5160000 --resolution 10
 
-# Appenzell 4000x3000
-$sf --name europe/appenzell --offline \
-    --intersect 47.2,9.3 --tiles 32TNT \
-    --extent 500000,5210000,540000,5240000 --resolution 10
-
-# Bernina 4000x3000
-$sf --name europe/bernina --offline \
-    --intersect 46.4,9.9 --tiles 32TNS \
-    --extent 540000,5120000,580000,5150000 --resolution 10
-
-# Pennine / Gorner 6000x4000
-$sf --name europe/pennine --offline \
-    --intersect 46.0,7.8 --tiles 32TLS,32TMS,32TLR,32TMR \
-    --extent 360000,5080000,420000,5125000 --resolution 10
-
-## Valais 12000x9000
-#$sf --name europe/valais --offline \
-#    --intersect 46.0,7.8 --tiles 32TLS,32TMS,32TLR,32TMR \
-#    --extent 350000,5080000,470000,5170000 --resolution 100
-
-# Glarus 6000x6000 (intersect on Clariden)
-$sf --name europe/glarus --offline \
-    --intersect 46.8,8.9 --tiles 32TMT,32TMS,32TNT,32TNS \
-    --extent 475000,5170000,535000,5230000 --resolution 10
-
-# Oetztal 4000x3000 (move 5 km to the north into 32TPT)
-$sf --name europe/otztal --offline \
-    --intersect 46.8,10.9 --tiles 32TPT,32TPS \
-    --extent 625000,5175000,665000,5205000 --resolution 10
-
-# Ortler 3000x3000
-$sf --name europe/ortler --offline \
-    --intersect 46.5,10.6 --tiles 32TPS \
-    --extent 605000,5130000,635000,5160000 --resolution 10
-
-# Adamello 3000x2000
-$sf --name europe/adamello --offline \
-    --intersect 46.2,10.6 --tiles 32TPS \
-    --extent 605000,5105000,635000,5125000 --resolution 10
+# Grisons 85x100 km
+$sf --name europe/grisons --offline --tiles 32TNS,32TNT,32TPS,32TPT \
+    --extent 530000,5115000,615000,5215000 --resolution 10
 
 
 # Rest of Europe
 # --------------
 
-# Tatra 5000x3000
+# Tatra 50x30 km
 $sf --name europe/tatra --cloudcover 30 \
     --intersect 49.1,20.1 --tiles 34UDV \
     --extent 400000,5435000,450000,5465000 --resolution 10
@@ -128,12 +78,12 @@ $sf --name europe/tatra --cloudcover 30 \
 # Asia
 # ----
 
-# Aru Co 2000x2000
+# Aru Co 20x20 km
 $sf --name asia/aruco \
     --intersect 34.0,82.3 --tiles 44SPC \
     --extent 605000,3755000,625000,3775000 --resolution 10
 
-# Hanoi 3000x3000
+# Hanoi 30x30 km
 $sf --name asia/hanoi \
     --intersect 21.0,105.8 --tiles 48QWJ --cloudcover 30 \
     --extent 570000,2310000,600000,2340000 --resolution 10
@@ -143,16 +93,20 @@ $sf --name asia/hanoi \
 # --------------
 
 # sync jpegs to webpage
-for reg in europe/{bern,pennine} \
-           greenland/{eqip,inglefield,leidy,qaanaaq,qeqertat}
+for reg in europe/{mtblanc,valais,glarus,ticino,grisons}/{irg,rgb} \
+           greenland/{inglefield,qaanaaq,eqip}/{irg,rgb}
 do
-    rsync -qahP composite/$reg ~/public_html/sentinel/ --exclude=*.{tif,txt}
+    recent=$(ls composite/$reg/*.{jpg,jpw} | tail -n 10)
+    regdir=$HOME/public_html/sentinel/$reg
+    rm -rf $regdir
+    mkdir -p $regdir
+    cp $recent -t $regdir
 done
 
 # relink latest images
-for subdir in ~/public_html/sentinel/*/{rgb,irg}
+for subdir in ~/public_html/sentinel/*/*/{rgb,irg}
 do
     latest=$(ls $subdir | tail -n 1)
     ln -sf ${latest%.???}.jpg $subdir/latest.jpg
-    ln -sf ${latest%.???}.jpg $subdir/latest.jpw
+    ln -sf ${latest%.???}.jpw $subdir/latest.jpw
 done
