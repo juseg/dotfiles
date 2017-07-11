@@ -40,15 +40,6 @@ $sf --name greenland/eqip \
     --intersect 69.8,-50.2 --tiles 22WEC \
     --extent 500000,7720000,590000,7760000 --resolution 10
 
-# Hans Tausen Ice Cap 8000x8000 + 5000x8000
-# FIXME: rectangle intersect?
-$sf --name greenland/hanstausen-utm23 \
-    --intersect 82.6,-38.2 --tiles 23XNN,23XNM --cloudcover 30 \
-    --extent 529800,9130000,609800,9210000 --resolution 10
-$sf --name greenland/hanstausen-utm24 \
-    --intersect 82.6,-38.2 --tiles 24XWT,24XWS --cloudcover 30 \
-    --extent 500000,9120000,550000,9200000 --resolution 10
-
 
 # Alps
 # ----
@@ -142,32 +133,10 @@ $sf --name asia/aruco \
     --intersect 34.0,82.3 --tiles 44SPC \
     --extent 605000,3755000,625000,3775000 --resolution 10
 
-# Haizishan 8000x10000
-# FIXME: rectangle intersect?
-$sf --name asia/haizishan \
-    --intersect 29.3,100.2 --tiles 47RNN,47RPN --cloudcover 30 \
-    --extent 585000,3200000,665000,3300000 --resolution 10
-
 # Hanoi 3000x3000
 $sf --name asia/hanoi \
     --intersect 21.0,105.8 --tiles 48QWJ --cloudcover 30 \
     --extent 570000,2310000,600000,2340000 --resolution 10
-
-# Vitim 4000x2000
-# FIXME: rectangle intersect?
-$sf --name asia/vitim \
-    --intersect 57.4,116.5 --tiles 50VMJ,50VNJ --cloudcover 30 \
-    --extent 400000,6300000,600000,6400000 --resolution 50
-
-
-# America
-# -------
-
-# Tuya 3000x3000
-# FIXME: rectangle intersect?
-$sf --name america/tuya \
-    --intersect 59.1,-130.6 --tiles 09VUF,09VVF --cloudcover 30 \
-    --extent 395000,6530000,425000,6560000 --resolution 10
 
 
 # Update webpage
