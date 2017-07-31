@@ -40,7 +40,7 @@ $sf --name europe/ecrins \
     --extent 745000,4965000,775000,4995000 --resolution 10
 
 # Alps 400x300 km
-$sf --name europe/alps --fetchonly \
+$sf --name europe/alps --nullvalues 100 \
     --intersect 7.5,45.5,11.5,47.5 --maxrows 100 \
     --tiles $(echo 32T{L,M,N,P}{R,S,T} | tr ' ' ',') \
     --extent 300000,5000000,700000,5300000 --resolution 100
