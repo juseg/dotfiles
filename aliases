@@ -26,8 +26,8 @@ alias ..='cd ..'
 alias cd..='cd ..' 
 
 # du aliases
-alias da='du -shc .[0-z]* *'
-alias ds='du -shc .[0-z]* * | sort -h'
+alias da='du -had1 . | cut -c -5,8-'
+alias ds='du -had1 . | cut -c -5,8- | sort -h'
 
 # ls aliases
 alias ll='ls -hl'
