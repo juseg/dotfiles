@@ -30,6 +30,11 @@ $sf --name greenland/eqip \
     --intersect 69.8,-50.2 --tiles 22WEC \
     --extent 500000,7720000,590000,7760000 --resolution 10
 
+# Ilulissat 120x50 km
+$sf --name greenland/ilulissat \
+    --intersect 69.1,-50.9 --tiles 22WDB,22WEB \
+    --extent 480000,7650000,600000,7700000 --resolution 10
+
 
 # Alps
 # ----
@@ -99,7 +104,7 @@ $sf --name asia/hanoi \
 
 # sync jpegs to webpage
 for reg in europe/{mtblanc,valais,glarus,ticino,grisons}/{irg,rgb} \
-           greenland/{inglefield,qaanaaq,eqip}/{irg,rgb}
+           greenland/{ilulissat,inglefield,qaanaaq,eqip}/{irg,rgb}
 do
     recent=$(ls composite/$reg/*.{jpg,jpw} | tail -n 10)
     regdir=$HOME/public_html/sentinel/$reg
