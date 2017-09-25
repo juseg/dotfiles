@@ -74,6 +74,12 @@ $sf --name europe/grisons --offline --tiles 32TNS,32TNT,32TPS,32TPT \
 # Rest of Europe
 # --------------
 
+
+# Elbrus 45x45 km
+$sf --name europe/elbrus --cloudcover 10 --maxrows 100 \
+    --intersect 43.3,42.6 --tiles 38TLN,38TLP \
+    --extent 305000,4775000,350000,4820000 --resolution 10
+
 # Tatra 50x30 km
 $sf --name europe/tatra --cloudcover 30 \
     --intersect 49.1,20.1 --tiles 34UDV \
@@ -97,6 +103,15 @@ $sf --name asia/aruco \
 $sf --name asia/hanoi \
     --intersect 21.0,105.8 --tiles 48QWJ --cloudcover 30 \
     --extent 570000,2310000,600000,2340000 --resolution 10
+
+
+# Antarctica
+# ----------
+
+# Nansen 60x50 km
+$sf --name antarctica/nansen \
+    --intersect -72.9,24.2 --tiles 34CEE,34CFE \
+    --extent 580000,1895000,640000,1945000 --sigma 50,65%
 
 
 # Update webpage
