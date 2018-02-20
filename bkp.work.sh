@@ -1,10 +1,14 @@
 # Backup to USB drive
 
 rsync -vahP --delete --chmod=a+rX ~/ /media/juliens/archive/work/ \
+    --exclude=fontconfig \
+    --exclude=public_html \
+    --exclude=SNAPSHOTS \
     --exclude=.cache \
     --exclude=.local/share/zeitgeist \
     --exclude=.local/share/Trash \
     --exclude=.thumbnails \
+    --exclude=.Skype
 
 # Extract from rsync help
 # * options activated
