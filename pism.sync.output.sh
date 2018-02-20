@@ -1,8 +1,9 @@
 #!/bin/bash
 
-rsync -vazhP ela:/project/s573/jsegu/pism/output ~/pism \
+rsync -vazhP ela:/project/sm13/jsegu/pism/output ~/pism \
     --exclude=*~ \
     --exclude=*backup.nc \
+    --exclude=.*.nc.?????? \
     --exclude=slurm* \
     --exclude=SSAFD_kspdivergederror.petsc \
     --exclude=SSAFD_kspdivergederror.petsc.info
