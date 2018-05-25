@@ -8,6 +8,8 @@ gflx=$4 # geoflux
 
 # location
 case $topo in
+    aster)     topomap="aster";     loc="world-ll-wgs84";;
+    aster+thk) topomap="aster";     loc="world-ll-wgs84";;
     etopo1bed+thk) topomap="etopo1bed"; loc="world-ll-wgs84";;
     etopo1bed) topomap="etopo1bed"; loc="world-ll-wgs84";;
     etopo1sub) topomap="etopo1bed"; loc="world-ll-wgs84";;
@@ -33,6 +35,12 @@ g.region w=$((w-res/2)) e=$((e+res/2)) s=$((s-res/2)) n=$((n+res/2))
 r.proj location=$loc input=$topomap method=bilinear --o
 [ $gflx ] && gflxmap=heatflux_$gflx
 [ $gflx ] && r.proj location=$loc input=$gflxmap method=bilinear --o
+
+# patch aster topo etopo1bed
+if [ "$topomap" == "aster" ]
+then
+    r.patch -z input=$topomap,etopo1bed output=$topomap --o
+fi
 
 # arctic maps should be interpolated
 if [ "$reg" == "arctic" ]
