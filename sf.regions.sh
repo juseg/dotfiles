@@ -112,6 +112,16 @@ $sf --name greenland/ilulissat \
     --intersect 69.1,-50.9 --tiles 22WDB,22WEB --maxrows 20 \
     --extent 480000,7650000,600000,7700000 --resolution 10
 
+
+# Japan
+# -----
+
+# Sapporo 120x100 km
+$sf --name japan/sapporo \
+    --intersect 42.8,141.1 --tiles 54TVN,54TWN --maxrows 20 \
+    --extent 440000,4700000,560000,4800000
+
+
 # Update webpage
 # --------------
 
