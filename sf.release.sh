@@ -7,10 +7,10 @@
 cd $S2/composite
 
 # output directory for the web
-webdir=$HOME/public_html/sentinel
+webdir=$HOME/public_html/_sentinel2
 
 # for selected regions
-for subdir in alps/*/* greenland/*/* japan/*/*
+for subdir in alps/* greenland/* japan/*
 do
 
     # sync jpegs to webpage
@@ -19,9 +19,9 @@ do
     mkdir -p $webdir/$subdir
     rsync $recent $webdir/$subdir/
 
-    # relink latest images
-    latest=$(ls $webdir/$subdir | tail -n 1)
-    ln -sf ${latest%.???}.jpg $webdir/$subdir/latest.jpg
-    ln -sf ${latest%.???}.jpw $webdir/$subdir/latest.jpw
+    ## relink latest images
+    #latest=$(ls $webdir/$subdir | tail -n 1)
+    #ln -sf ${latest%.???}.jpg $webdir/$subdir/latest.jpg
+    #ln -sf ${latest%.???}.jpw $webdir/$subdir/latest.jpw
 
 done
