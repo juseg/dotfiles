@@ -14,10 +14,15 @@ for subdir in alps/* greenland/* japan/*
 do
 
     # sync jpegs to webpage
-    recent=$(find $subdir -name '*.jp?' | sort | tail -10)
-    rm -rf $webdir/$subdir
+    recent="$(find $subdir -name '*.jp?' | sort | tail -10)"
     mkdir -p $webdir/$subdir
-    rsync $recent $webdir/$subdir/
+    rsync -t $recent $webdir/$subdir/
+
+    # delete older files
+    for f in $webdir/$subdir/*
+    do
+        echo "$recent" | grep -q ${f##*/} || rm $f
+    done
 
     ## relink latest images
     #latest=$(ls $webdir/$subdir | tail -n 1)
