@@ -1,45 +1,49 @@
+# Copyright (c) 2019, Julien Seguinot <seguinot@vaw.baug.ethz.ch>
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+
 # Bash aliases
 # ============
 
-# Color aliases
+# Unix commands
 # -------------
-
-# color for ls
-alias ls='ls --color=auto'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-
-# color for grep
-alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-
-# color diff using git
-alias diff='git diff --no-index'
-alias wdiff='diff --word-diff'
-
-# Various aliases
-# ---------------
 
 # cd aliases
 alias ..='cd ..'
-alias cd..='cd ..' 
 
 # du aliases
 alias da='du -had1 . | sed -e "s:./::"'
 alias ds='du -had1 . | sed -e "s:./::" | sort -h'
 
 # ls aliases
-alias ll='ls -hl'
-alias la='ls -A'
-alias lal='ls -Ahl'
-alias lt='ls -hlt'
-alias lat='ls -Ahlt'
-alias l='ls -CF'
+alias ls='ls --color=auto --human-readable'
+alias la='ls --almost-all'
+alias ll='ls -l'
+alias lal='la -l'
+alias lt='ll -rt'
+alias lat='la -rt'
+alias l='ls -F'
 
-# more aliases
-alias reduce='mogrify -resize 1920x1920 -quality 85'
-alias pdfcompress='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=false -dNOPAUSE -dQUIET -dBATCH -sOutputFile=compressed.pdf'
-alias pdfdownsamp='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=true -dColorImageResolution=127 -dNOPAUSE -dQUIET -dBATCH -sOutputFile=downsamp.pdf'
+# grep aliases
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# other aliases
 alias whoruns='ps aux | cut -d " " -f 1 | sed "1 d" | sort | uniq'
-alias whybusy='ps -lfp $(fuser -c /media/backup/)'
+alias oftused='cat ~/.bash_history | sort | uniq -c | sort -h'
+
+
+# Installed commands
+# ------------------
+
+# diff color using git
+alias diff='git diff --no-index'
+alias wdiff='diff --word-diff'
+
+# ghostscript aliases
+alias pdfcompress='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=false -dNOPAUSE -dQUIET -dBATCH -sOutputFile=-'
+alias pdfdownsamp='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=true -dNOPAUSE -dQUIET -dBATCH -sOutputFile=-'
+
+# imagemagick aliases
+alias 1920p='convert -resize 1920x1920 -quality 95'
+alias 3840p='convert -resize 3840x3840 -quality 95'

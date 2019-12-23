@@ -10,6 +10,7 @@ homely.files.mkdir('~/.config/git')
 homely.files.mkdir('~/.vim')
 homely.files.mkdir('~/.ssh')
 
+homely.files.symlink('.bash_aliases', '.bash_aliases')
 homely.files.symlink('.config/git/config', '.config/git/config')
 homely.files.symlink('.ssh/config', '.ssh/config')
 homely.files.symlink('.vim/vimrc', '.vim/vimrc')
