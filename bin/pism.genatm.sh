@@ -1,4 +1,8 @@
-#!/bin/bash -e
+#!/bin/bash
+# Copyright (c) 2016--2019, Julien Seguinot <seguinot@vaw.baug.ethz.ch>
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+
+# Prepare atmosphere files for PISM < 1.0
 
 # command line arguments
 reg=$1 # region
@@ -41,7 +45,11 @@ for map in ${topo} ${temp}{01..12} ${prec}{01..12}; do
 done
 
 # export PISM file
+output=$reg.$atm$ext.${res/%000/k}m.nc
 ~/git/code/r.out.pism/r.out.pism.py -ep --o edgetemp=315 usurf=$topo \
     air_temp=$(echo ${temp}{01..12} | tr ' ' ',') \
     precipitation=$(echo ${prec}{01..12} | tr ' ' ',') \
-    output=$reg-$atm$ext-${res/%000/k}m${noac:+-noac}${nosd:+-nosd}.nc
+
+# convert to post-PISM 1.0 format
+ncap2 -A -s "precipitation=float(precipitation*910.0)" $output
+ncatted -O -a units,precipitation,m,c,"kg m-2 year-1" $output

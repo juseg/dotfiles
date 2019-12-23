@@ -1,24 +1,18 @@
-#!/bin/bash -e
+#!/bin/bash
+# Copyright (c) 2016--2019, Julien Seguinot <seguinot@vaw.baug.ethz.ch>
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+
+# Prepare PISM bootstrapping files
 
 # command line arguments
-reg=$1 # region
-topo=$2 # topography data
-res=$3 # resolution
-gflx=$4 # geoflux
+reg=$1  # region
+srf=$2  # surface topography
+res=$3  # resolution
+thk=$4  # ice thickness
+ghf=$5  # geothermal flux
 
-# location
-case $topo in
-    aster)     topomap="aster";     loc="world-ll-wgs84";;
-    aster+thk) topomap="aster";     loc="world-ll-wgs84";;
-    etopo1bed+thk) topomap="etopo1bed"; loc="world-ll-wgs84";;
-    etopo1bed) topomap="etopo1bed"; loc="world-ll-wgs84";;
-    etopo1sub) topomap="etopo1bed"; loc="world-ll-wgs84";;
-    srtm+thk)  topomap="srtm";      loc="world-ll-wgs84";;
-    srtmsub)   topomap="srtm";      loc="world-ll-wgs84";;
-    srtm)      topomap="srtm";      loc="world-ll-wgs84";;
-    wc)        topomap="wc_topo";   loc="world-ll-wgs84";;
-    *)         echo "topo $topo unknown"; exit 2;;
-esac
+# fixed parameters
+loc="world-ll-wgs84"
 
 # set region and resolution
 g.region region=$reg res=$res
@@ -31,50 +25,41 @@ s=${wesn[2]}
 n=${wesn[3]}
 g.region w=$((w-res/2)) e=$((e+res/2)) s=$((s-res/2)) n=$((n+res/2))
 
-# reproject
-r.proj location=$loc input=$topomap method=bilinear --o
-[ $gflx ] && gflxmap=heatflux_$gflx
-[ $gflx ] && r.proj location=$loc input=$gflxmap method=bilinear --o
-
-# patch aster topo etopo1bed
-if [ "$topomap" == "aster" ]
+# reproject topography
+if [ "$srf" == "srtm" ]
 then
-    r.patch -z input=$topomap,etopo1bed output=$topomap --o
+    r.proj --o location=$loc method=bilinear input=${srf}_$reg output=$srf
+else
+    r.proj --o location=$loc method=bilinear input=$srf
 fi
 
-# arctic maps should be interpolated
-if [ "$reg" == "arctic" ]
+# reproject heat flux
+if [ "$ghf" != "" ]
 then
-    ~/git/code/r.interp/r.interp.py input=$topomap output=$topomap method=linear --o
-    [ $gflx ] && ~/git/code/r.interp/r.interp.py input=$gflxmap output=$gflxmap method=linear --o
+    r.proj --o location=$loc method=bilinear input=$ghf
 fi
 
-# remove present glaciers
-# TODO: resample thickness map before mapcalc for more precision
-if [[ "$topo" == *thk || "$topo" == *sub ]]
+# patch etopo1bed bathymetry
+if [ "$srf" != "etopo1bed" ]
 then
-    thickmaps=$(g.list type=rast pattern=thick_????? sep=,)
-    r.series input=$thickmaps output=thicksum method=sum --o
-    if [[ "$topo" == *sub ]]
-    then
-        r.mapcalc expression="$topo=$topomap-if(isnull(thicksum),0,thicksum)" --o
-        topomap=$topo
-    fi
+    r.proj --o location=$loc method=bilinear input=etopo1bed
+    r.patch -z --o input=$srf,etopo1bed output=$srf
+fi
+
+# to interpolate across the 180 meridian
+#~/git/code/r.interp/r.interp.py input=$topo output=$topo method=linear --o
+#~/git/code/r.interp/r.interp.py input=$gflx output=$gflx method=linear --o
+# to remove Greenland
+#r.mapcalc "$topo=if(and(y()>3625000-5./6*x(),y()>1750000),-3000,$topo)"
+
+# in absence of thickness use srf as bedrock topo
+if [ "$thk" == "" ]
+then
+    inputs="bheatflx=$ghf topg=$srf"
+else
+    inputs="bheatflx=$ghf thk=$thk usurf=$srf"
 fi
 
 # export PISM file
-if [[ "$topo" == *thk ]]
-then
-    python2 ~/git/code/r.out.pism/r.out.pism.py --o \
-        usurf=$topomap ${gflx:+bheatflx=heatflux_$gflx} thk=thicksum \
-        output=$reg-$topo${gflx:++$gflx}-${res/%000/k}m.nc
-else
-    python2 ~/git/code/r.out.pism/r.out.pism.py --o \
-        topg=$topomap ${gflx:+bheatflx=heatflux_$gflx} \
-        output=$reg-$topo${gflx:++$gflx}-${res/%000/k}m.nc
-fi
-
-# remove Greenland
-#if [ "$reg" == "laurentide" ] ; then
-#	r.mapcalc "$topo=if(and(y()>3625000-5./6*x(),y()>1750000),-3000,$topo)"
-#fi
+python2 ~/git/code/r.out.pism/r.out.pism.py --o $inputs \
+    output=$reg.$srf${thk:+.$thk}${ghf:+.$ghf}.${res/%000/k}m.nc

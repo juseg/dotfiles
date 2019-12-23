@@ -1,4 +1,8 @@
 #!/bin/bash
+# Copyright (c) 2016--2019, Julien Seguinot <seguinot@vaw.baug.ethz.ch>
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+
+# Prepare PISM offset time series files
 
 # command-line arguments
 rec=$1  # record
@@ -8,8 +12,8 @@ dt=$3   # offset*100
 # force base 10
 dt=$((10#$dt))
 
-# call ptsgen
-python2 ~/git/code/ptsgen/ptsgen.py $rec -120000 0 0 -$((dt/100)).$((dt%100)) \
+# call pism-palseries
+python3 ~/git/code/pism-palseries/pism_palseries.py $rec -120000 0 0 -$((dt/100)).$((dt%100)) \
     --scale-interval -${per:0:2}000 -${per:2:4}000 \
-    --output ${rec}${per}cool$(printf '%04d' $dt).nc
+    --output ${rec}.${per}.$(printf '%04d' $dt).nc
 
