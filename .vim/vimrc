@@ -1,27 +1,84 @@
+" Copyright (c) 2019, Julien Seguinot <seguinot@vaw.baug.ethz.ch>
+" GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+
+" VIM configuration file, largely adapted from the link below
+" https://realpython.com/vim-and-python-a-match-made-in-heaven/
+
+" recommended plugins via Vundle
+" Plugin 'VundleVim/Vundle.vim'         " let Vundle manage Vundle
+" Plugin 'tmhedberg/SimpylFold'         " remove unwanted code folds
+" Plugin 'vim-scripts/indentpython.vim' " better indentation
+" Plugin 'Valloric/YouCompleteMe'       " auto complete using jedi
+" Plugin 'vim-syntastic/syntastic'      " check syntax on each save
+" Plugin 'nvie/vim-flake8'              " PEP 8 checking
+" Plugin 'jnurmine/Zenburn'             " recommended for terminal
+" Plugin 'altercation/vim-colors-solarized'  " recom for gui
+" Plugin 'scrooloose/nerdtree'          " file browsing
+" Plugin 'jistr/vim-nerdtree-tabs'      " file tabs
+" let NERDTreeIgnore=['\.pyc$', '\~$']  "ignore files in NERDTree
+" Plugin 'kien/ctrlp.vim'               " search for files, tags etc
+" Plugin 'tpope/vim-fugitive'           " git integration
+" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" powerline options
+let g:powerline_pycmd="py3"     " avoid python2 error on load
+set laststatus=2                " always display poweline
+
+" split navigations
+nnoremap <C-I> <C-W><C-K>       " move to the split above
+nnoremap <C-K> <C-W><C-J>       " move to the split below
+nnoremap <C-J> <C-W><C-H>       " move to the split to the left
+nnoremap <C-L> <C-W><C-L>       " move to the split to the right
+
+" code folding
+set foldmethod=indent           " fold by indentation
+set foldlevel=99                " fold at all levels
+nnoremap <space> za             " folding with the spacebar
+
+" default indentation
+set autoindent                  " a bit less auto than smartindent
+set expandtab                   " tabs as spaces
+set tabstop=8                   " length of tabs in display
+set softtabstop=4               " length of tabs in insert mode
+set shiftwidth=4                " used by < and >
+
+" python indentation
+au BufNewFile,BufRead *.py
+    \ set textwidth=79          " used for text wrapping
+    \ set colorcolumn=80        " highlight column 80
+    \ set fileformat=unix       " always store in unix format
+    \ set encoding=utf-8        " especially for Python 3
+
+" restructured text indentation
+au BufNewFile,BufRead *.rst
+    \ set softtabstop=3         " length of tabs in insert mode
+    \ set shiftwidth=3          " used by < and >
+
 " syntax highlighting
-syntax on           " syntax highlighting
-color desert        " color scheme
-set background=dark " better contrast on black
-set cul             " highlight current line
-set colorcolumn=80  " highlight column 80
+colorscheme zenburn             " low contrast with fewer colors
+hi SpellBad cterm=underline     " underline misspelled words
+let python_highlight_all=1      " not sure what this is for
+set cursorline                  " highlight current line
+syntax on                       " turn on syntax highlighting
 
 " newlines
-set number          " enable line numbering
-set linebreak       " break line between words
+set linebreak                   " break line between words
+set number                      " enable line numbering
 
 " searching
-set incsearch       " search while typing
-set ignorecase      " case-insensitive search
-set smartcase       " uppercase-only-sensitive search
-
-" indentation
-set smartindent     " auto indentation
-set tabstop=8       " length of tabs in display
-set expandtab       " tabs as spaces
-set shiftwidth=4    " used by < and >
-set softtabstop=4   " length of tabs in insert mode
+set ignorecase                  " case-insensitive search
+set incsearch                   " search while typing
+set smartcase                   " uppercase-only-sensitive search
 
 " tab completion
-set wildmenu        " activate menus
-set wildmode=list:longest,full
+set wildmenu                    " activate menus
 
+" git integration
+set updatetime=100              " reduce update time for gitgutter
+autocmd BufWritePre *.py %s/\s\+$//e  " remove trailing space
+
+" personal key mappings
+nnoremap <buffer> <F9> :exec '!%:p' <cr>    " execute current file
+nnoremap <buffer> <F12> :exec '!make' <cr>  " call make in current dir
+vnoremap <silent> cc :s/^/#/<cr>:noh<cr>    " insert # at line start
+vnoremap <silent> cx :s/^#//<cr>:noh<cr>    " remove # at line start
