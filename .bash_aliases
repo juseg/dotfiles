@@ -52,3 +52,9 @@ alias pdfdownsamp='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleCol
 alias backup='rsync -vahP --delete --exclude={.cache,.googleearth,.local,.Skype,.thumbnails,.Trash*}'
 alias backup.home='backup ~/ /run/media/julien/archive/home'
 alias backup.archive='backup /run/media/julien/archive/ /run/media/julien/backup'
+alias pism.sync='rsync -vahP --exclude={*~,*backup.nc,slurm*,SSAFD*,*failed.nc}'
+alias pism.sync.input='pism.sync --delete ~/pism/input ela:pism/'
+alias pism.sync.output.project='ssh daint pism.sync /scratch/snx3000/jsegu/ /project/s886/jsegu'
+# FIXME fix local disk space issue
+alias pism.sync.output.local='pism.sync ela:/project/s886/jsegu/pism/output ~/pism --exclude={alpflo1*/out*{1..9}0,cisbed4.3km*/out*}.nc'
+alias pism.sync.output='pism.sync.output.project && pism.sync.output.local'
