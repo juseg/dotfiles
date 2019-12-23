@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2016--2019, Julien Seguinot <seguinot@vaw.baug.ethz.ch>
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 
 # Copy Sentinel-2 composites to webpage
 # =====================================
@@ -7,26 +9,21 @@
 cd $S2/composite
 
 # output directory for the web
-webdir=$HOME/public_html/_sentinel2
+webdir=$HOME/public_html/sentinel
 
 # for selected regions
-for subdir in alps/* greenland/* japan/*
+for subdir in alps/*/* greenland/*/* japan/*/*
 do
 
     # sync jpegs to webpage
-    recent="$(find $subdir -name '*.jp?' | sort | tail -10)"
+    recent=$(find $subdir -name '*.jp?' | sort | tail -10)
+    rm -rf $webdir/$subdir
     mkdir -p $webdir/$subdir
-    rsync -t $recent $webdir/$subdir/
+    rsync $recent $webdir/$subdir/
 
-    # delete older files
-    for f in $webdir/$subdir/*
-    do
-        echo "$recent" | grep -q ${f##*/} || rm $f
-    done
-
-    ## relink latest images
-    #latest=$(ls $webdir/$subdir | tail -n 1)
-    #ln -sf ${latest%.???}.jpg $webdir/$subdir/latest.jpg
-    #ln -sf ${latest%.???}.jpw $webdir/$subdir/latest.jpw
+    # relink latest images
+    latest=$(ls $webdir/$subdir | tail -n 1)
+    ln -sf ${latest%.???}.jpg $webdir/$subdir/latest.jpg
+    ln -sf ${latest%.???}.jpw $webdir/$subdir/latest.jpw
 
 done

@@ -1,4 +1,6 @@
 #!/bin/bash
+# Copyright (c) 2016--2019, Julien Seguinot <seguinot@vaw.baug.ethz.ch>
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 
 # Run sentinelflow.sh on multiple regions
 # =======================================
@@ -7,8 +9,7 @@
 cd $S2
 
 # path to executable
-sf="$HOME/git/code/sentinelflow/sentinelflow.sh\
- --user julien.seguinot --pass Cordillera $*"
+sf="$HOME/git/code/sentinelflow/sentinelflow.sh $*"
 
 
 # Alps
@@ -44,48 +45,6 @@ $sf --name alps/ticino --offline --tiles 32TMR,32TMS,32TNR,32TNS \
 # Grisons 85x100 km
 $sf --name alps/grisons --offline --tiles 32TNS,32TNT,32TPS,32TPT \
     --extent 530000,5115000,615000,5215000 --resolution 10
-
-
-# Antarctica
-# ----------
-
-## Nansen 60x50 km
-#$sf --name antarctica/nansen \
-#    --intersect -72.9,24.2 --tiles 34CEE,34CFE \
-#    --extent 580000,1895000,640000,1945000 --sigma 50,65%
-
-
-# Asia
-# -----
-
-## Aru Co 20x20 km
-#$sf --name asia/aruco \
-#    --intersect 34.0,82.3 --tiles 44SPC \
-#    --extent 605000,3755000,625000,3775000 --resolution 10
-
-## Hanoi 30x30 km
-#$sf --name asia/hanoi \
-#    --intersect 21.0,105.8 --tiles 48QWJ --cloudcover 30 \
-#    --extent 570000,2310000,600000,2340000 --resolution 10
-
-
-# Europe
-# ------
-
-## Elbrus 45x45 km
-#$sf --name europe/elbrus --cloudcover 10 --maxrows 100 \
-#    --intersect 43.3,42.6 --tiles 38TLN,38TLP \
-#    --extent 305000,4775000,350000,4820000 --resolution 10
-
-## Tatra 50x30 km
-#$sf --name europe/tatra --cloudcover 30 \
-#    --intersect 49.1,20.1 --tiles 34UDV \
-#    --extent 400000,5435000,450000,5465000 --resolution 10
-
-## Sarek 60x70 km
-#$sf --name europe/sarek --cloudcover 30 \
-#    --intersect 67.3,17.5 --tiles 33WWQ,33WXQ \
-#    --extent 590000,7425000,650000,7495000 --resolution 10
 
 
 # Greenland

@@ -49,6 +49,6 @@ alias pdfcompress='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleCol
 alias pdfdownsamp='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=true -dNOPAUSE -dQUIET -dBATCH -sOutputFile=-'
 
 # rsync aliases
-alias backup='echo rsync -vahP --delete --exclude={.cache,.googleearth,.local,.Skype,.thumbnails,.Trash*}'
+alias backup='rsync -vahP --delete --exclude={.cache,.googleearth,.local,.Skype,.thumbnails,.Trash*}'
 alias backup.home='backup ~/ /run/media/julien/archive/home'
 alias backup.archive='backup /run/media/julien/archive/ /run/media/julien/backup'
