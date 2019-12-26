@@ -24,7 +24,9 @@
 let g:powerline_pycmd="py3"     " avoid python2 error on load
 set laststatus=2                " always display poweline
 
-" split navigations
+" split and navigation
+set splitbelow                  " open splits below
+set splitright                  " open splits to the right
 nnoremap <C-I> <C-W><C-K>       " move to the split above
 nnoremap <C-K> <C-W><C-J>       " move to the split below
 nnoremap <C-J> <C-W><C-H>       " move to the split to the left
@@ -78,7 +80,7 @@ set updatetime=100              " reduce update time for gitgutter
 autocmd BufWritePre *.py %s/\s\+$//e  " remove trailing space
 
 " personal key mappings
-nnoremap <buffer> <F9> :exec '!%:p' <cr>    " execute current file
-nnoremap <buffer> <F12> :exec '!make' <cr>  " call make in current dir
-vnoremap <silent> cc :s/^/#/<cr>:noh<cr>    " insert # at line start
-vnoremap <silent> cx :s/^#//<cr>:noh<cr>    " remove # at line start
+nnoremap <buffer> <F9> :!%:p<cr>|           " execute current file
+nnoremap <buffer> <F12> :!make<cr>|         " call make in current dir
+vnoremap <silent> cc :s/^/#/<cr>:noh<cr>|   " insert # at line start
+vnoremap <silent> cx :s/^#//<cr>:noh<cr>|   " remove # at line start
