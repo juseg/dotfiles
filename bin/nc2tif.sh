@@ -10,5 +10,5 @@ ifile=$1
 # convert all non-coordinate subdatasets
 # (convert a single variable: gdal_translate NETCDF:"$ifile":$var $ifile.$var.tif)
 gdalinfo $ifile | grep NETCDF | cut -d '=' -f 2 | egrep -v '(lat|lon|time_bounds)' |
-    while read sub ; do echo gdal_translate $sub ${ifile#.nc}.${sub##*:}.tif
+    while read sub ; do gdal_translate $sub ${ifile%.nc}.${sub##*:}.tif
 done
