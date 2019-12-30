@@ -44,9 +44,24 @@ alias 3840p='convert -resize 3840x3840 -quality 95'
 alias diff='git diff --no-index'
 alias wdiff='diff --word-diff'
 
+# git aliases
+alias git.code.status='for repo in ~/git/code/*; do echo == $repo; git -C $repo status --short; done'
+alias git.code.pull='for repo in ~/git/code/*; do echo == $repo; git -C $repo pull --rebase; done'
+alias git.code.push='for repo in ~/git/code/*; do echo == $repo; git -C $repo push --tags; done'
+alias git.work.status='for repo in ~/git/work/*; do echo == $repo; git -C $repo status --short; done'
+alias git.work.pull='for repo in ~/git/work/*; do echo == $repo; git -C $repo pull --rebase; done'
+alias git.work.push='for repo in ~/git/code/*; do echo == $repo; git -C $repo push --tags; done'
+
 # ghostscript aliases
 alias pdfcompress='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=false -dNOPAUSE -dQUIET -dBATCH -sOutputFile=-'
 alias pdfdownsamp='gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dDownsampleColorImages=true -dNOPAUSE -dQUIET -dBATCH -sOutputFile=-'
+
+# pylint aliases
+alias pylint='pylint --output-format=colorized'
+alias pylint.dups='pylint --disable=all --enable=duplicate-code --ignore-imports=yes'
+alias pylint.dups.code='pylint.dups $(find ~/git/code -name "*.py")'
+alias pylint.dups.work='pylint.dups $(find ~/git/work -name "*.py")'
+alias pylint.dups.git='pylint.dups $(find ~/git -name "*.py")'
 
 # rsync aliases
 alias backup='rsync -vahP --delete --exclude={.cache,.googleearth,.local,.Skype,.thumbnails,.Trash*}'
