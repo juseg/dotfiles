@@ -1,19 +1,14 @@
+# Copyright (c) 2013--2019, Julien Seguinot <seguinot@vaw.baug.ethz.ch>
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+
+# Git user configuration
+# ======================
+
 [user]
-	name = Julien Seguinot
-	email = seguinot@vaw.baug.ethz.ch
-[credential]
-	helper = cache
-[color]
-	ui = true
-[difftool.latex]
-  cmd = git-latexdiff "$LOCAL" "$REMOTE"
-[difftool]
-  prompt = false
+    name = Julien Seguinot
+    email = seguinot@vaw.baug.ethz.ch
 [alias]
-  ldiff = difftool -t latex
-	wdiff = diff --color-words
+    wdiff = diff --color-words
+    tags = for-each-ref --sort=taggerdate --format '%(tag) %(taggerdate:short) %(subject)' refs/tags
 [core]
-	editor = vim
-[push]
-	default = matching
-	recurseSubmodules = on-demand
+    editor = vim
