@@ -84,3 +84,6 @@ nnoremap <buffer> <F9> :!%:p<cr>|           " execute current file
 nnoremap <buffer> <F12> :!make<cr>|         " call make in current dir
 vnoremap <silent> cc :s/^/#/<cr>:noh<cr>|   " insert # at line start
 vnoremap <silent> cx :s/^#//<cr>:noh<cr>|   " remove # at line start
+
+" highligh nbsp etc in list mode
+set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»
