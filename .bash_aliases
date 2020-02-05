@@ -39,6 +39,7 @@ alias oftused='cat ~/.bash_history | sort | uniq -c | sort -h'
 # imagemagick aliases
 alias 1920p='convert -resize 1920x1920 -quality 95'
 alias 3840p='convert -resize 3840x3840 -quality 95'
+alias sfcredit='convert -gravity center -crop 2:1 +repage -resize 960x480 -fill "#ffffff80" -draw "rectangle 0,448,960,480" -font Bitstream-Vera-Sans -pointsize 16 -gravity southeast -fill black -annotate +6+6 "CC BY-SA 4.0 J. Seguinot (2020). Contains modified Copernicus Sentinel data. Processed with SentinelFlow."'
 
 # diff color using git
 alias diff='git diff --no-index'
