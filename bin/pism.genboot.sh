@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2016--2019, Julien Seguinot <seguinot@vaw.baug.ethz.ch>
+# Copyright (c) 2016--2020, Julien Seguinot <seguinot@vaw.baug.ethz.ch>
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 
 # Prepare PISM bootstrapping files
@@ -61,5 +61,5 @@ else
 fi
 
 # export PISM file
-python2 ~/git/code/r.out.pism/r.out.pism.py --o $inputs \
+~/git/code/r.out.pism/r.out.pism.py --o $inputs \
     output=$reg.$srf${thk:+.$thk}${ghf:+.$ghf}.${res/%000/k}m.nc
