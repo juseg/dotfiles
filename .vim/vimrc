@@ -77,10 +77,11 @@ set wildmenu                    " activate menus
 
 " git integration
 set updatetime=100              " reduce update time for gitgutter
-autocmd BufWritePre *.py %s/\s\+$//e  " remove trailing space
+autocmd BufWritePre * %s/\s\+$//e  " remove trailing space
 
 " personal key mappings
 map <buffer> <F7> :call flake8#Flake8()<cr>
+map <buffer> <F8> :!pylint %<cr>|           " call pylint on current file
 nnoremap <buffer> <F9> :!%:p<cr>|           " execute current file
 nnoremap <buffer> <F12> :!make<cr>|         " call make in current dir
 vnoremap <silent> cc :s/^/#/<cr>:noh<cr>|   " insert # at line start
