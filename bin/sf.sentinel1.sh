@@ -39,15 +39,32 @@ do
 done
 chmod +r measurement/*.tiff
 
-# adjust brightness and contrast and crop to jpg with imagemagick
-im="convert -flop -gamma 9.0 -sigmoidal-contrast 25,50% -quality 95"
-for filename in measurement/*.tiff
+# reprojected with gdal and convert to jpg with imagemagick
+mkdir -p projected/{inglefield,qaanaaq}
+for ifile in measurement/*.tiff
 do
-    basename=$(basename ${filename%.tiff})
-    [ -f developed/inglefield/$basename.jpg ] ||
-        $im -crop 16000x8000+2000+8000 $filename developed/inglefield/$basename.jpg
-    [ -f developed/qaanaaq/$basename.jpg ] ||
-        $im -crop 6000x6000+5000+10000 $filename developed/qaanaaq/$basename.jpg
-    [ -f developed/preview/$basename.jpg ] ||
-        $im -resize 10% $filename developed/preview/$basename.jpg
+
+    # Inglefield region (same as I use for Sentinel-2)
+    ofile="projected/inglefield/$(basename ${ifile%.tiff})"
+    if [ ! -f $ofile.jpg ]
+    then
+        gdalwarp -r cubic -t_srs "+proj=utm +zone=19" \
+                 -te 405000 8535000 605000 8685000 -tr 10 10 \
+                 $ifile $ofile.tif
+        convert -gamma 9.0 -sigmoidal-contrast 25,50% -quality 95 \
+                $ofile.{tif,jpg}
+        # rm $ofile.tif
+    fi
+
+    # Qaanaaq region (same as I use for Sentinel-2)
+    ofile="projected/qaanaaq/$(basename ${ifile%.tiff})"
+    if [ ! -f $ofile.jpg ]
+    then
+        gdalwarp -r cubic -t_srs "+proj=utm +zone=19" \
+                 -te 465000 8595000 525000 8655000 -tr 10 10 \
+                 -overwrite $ifile $ofile.tif
+        convert -gamma 9.0 -sigmoidal-contrast 25,50% -quality 95 \
+                $ofile.{tif,jpg}
+        # rm $ofile.tif
+    fi
 done
