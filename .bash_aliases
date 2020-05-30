@@ -76,3 +76,7 @@ alias pism.sync.output.project='ssh daint pism.sync /scratch/snx3000/jsegu/ /pro
 # FIXME fix local disk space issue
 alias pism.sync.output.local='pism.sync ela:/project/s886/jsegu/pism/output ~/pism --exclude={alpflo1*/out*{1..9}0,cisbed4.3km*/out*}.nc'
 alias pism.sync.output='pism.sync.output.project && pism.sync.output.local'
+
+# sentinel aliases
+alias sf.tileusage='ls $S2/granules | cut -c 5-10 | sort | uniq | while read tile ; do echo $(du -shc $S2/granules/*${tile}* | tail -1) $tile ; done | sort -h'
+alias sf.zoneusage='ls $S2/granules | cut -c 5-7 | sort | uniq | while read tile ; do echo $(du -shc $S2/granules/*${tile}* | tail -1) $tile ; done | sort -h'
