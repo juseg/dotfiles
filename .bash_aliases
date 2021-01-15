@@ -67,14 +67,18 @@ alias code.dups='pylint.dups $(find ~/git/code -name "*.py")'
 alias work.dups='pylint.dups $(find ~/git/work -name "*.py")'
 
 # rsync aliases
+# PISM output files excluded when leaving ETHZ:
+# - alpflo1(.500m)*/out*{1..9}0.nc: 45/51 out files = 459 GB
+# - cisbed4.3km*/out*{1..9}000.nc: 207(-1)/229 out files = 560 GB
 alias backup='rsync -vahP --delete --exclude={.cache,.googleearth,.local,.Skype,.thumbnails,.Trash*}'
 alias backup.home='backup ~/ /run/media/julien/archive/home'
 alias backup.archive='backup /run/media/julien/archive/ /run/media/julien/backup'
 alias pism.sync='rsync -vahP --exclude={*~,*backup.nc,slurm*,SSAFD*,*failed.nc}'
 alias pism.sync.input='pism.sync --delete ~/pism/input ela:pism/'
 alias pism.sync.output.project='ssh daint pism.sync /scratch/snx3000/jsegu/ /project/s886/jsegu'
-# FIXME fix local disk space issue
-alias pism.sync.output.local='pism.sync ela:/project/s886/jsegu/pism/output ~/pism --exclude={alpflo1*/out*{1..9}0,cisbed4.3km*/out*}.nc'
+alias pism.sync.output.local='pism.sync ela:/project/s886/jsegu/pism/output ~/pism \
+    --exclude=output/1.1.3/{alpflo1*/out*{1..9}0,cisbed4.3km*/out*{1..9}000}.nc \
+    --include=output/1.1.3/cisbed4.3km.epica.*/out.0109000.nc'
 alias pism.sync.output='pism.sync.output.project && pism.sync.output.local'
 
 # sentinel aliases
