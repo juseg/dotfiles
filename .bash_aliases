@@ -1,4 +1,4 @@
-# Copyright (c) 2013--2019, Julien Seguinot <seguinot@vaw.baug.ethz.ch>
+# Copyright (c) 2013-2021, Julien Seguinot (juseg.github.io)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 
 # Bash aliases
@@ -31,7 +31,7 @@ alias egrep='egrep --color=auto'
 # other aliases
 alias whoruns='ps aux | cut -d " " -f 1 | sed "1 d" | sort | uniq'
 alias oftused='cat ~/.bash_history | sort | uniq -c | sort -h'
-
+alias rmemail='sed -i "1,5 s/<.*seg.*@.*>/(juseg.github.io)/g"'
 
 # Installed commands
 # ------------------
