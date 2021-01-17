@@ -12,7 +12,8 @@ import matplotlib.pyplot as plt
 
 
 METADATA = {
-    'Titles': {'bowdoin': "Bowdoin Glacier flow and summer melt season"},
+    'Titles': {'bowdoin': "Bowdoin Glacier flow and summer melt season",
+               'vavilov': "Vavilov Glacier surge and ice cap collapse"},
     'Author': "J. Seguinot, 2021",
     'Credit': ("Contains modified Copernicus Sentinel data. "
                "Processed with Sentinelflow."),

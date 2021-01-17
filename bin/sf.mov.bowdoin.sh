@@ -63,8 +63,6 @@ do
     ifile="$srcdir/$frame"
     ofile="$prefix/$frame"
     label="${frame:0:4}.${frame:4:2}.${frame:6:2}"
-    credit="CC BY-SA 4.0 J. Seguinot (2020). \
-Contains modified Copernicus Sentinel data. Processed with SentinelFlow."
     if [ -f $ifile ] && [ ! -f $ofile ]
     then
         convert $ifile -crop 2880x1620+3060+2740 -resize 1920x1080 +repage \
@@ -73,9 +71,6 @@ Contains modified Copernicus Sentinel data. Processed with SentinelFlow."
                 -fill black -annotate +60+60 $label \
                 -draw "rectangle $((1920-260)),$((1080-65)),$((1920-60)),$((1080-60))" \
                 -pointsize 24 -gravity southeast -annotate +60+70 "3 km" $ofile
-#                -fill '#ffffff80' -draw 'rectangle 0,1032,1920,1080' \
-#                -font Bitstream-Vera-Sans -pointsize 24 -gravity southeast \
-#                -fill black -annotate +8+8 "$credit" $ofile
     fi
 done
 
