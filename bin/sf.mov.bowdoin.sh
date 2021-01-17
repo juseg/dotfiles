@@ -15,7 +15,7 @@ cd /run/media/julien/archive/geodat/sentinel2/
 #     --intersect 77.7,-68.5 --tiles 19XDG,19XEG \
 #     --extent 465000,8595000,525000,8655000 --name greenland/qaanaaq
 
-# select 41 (?) cloud-free frames for animation
+# select 42 cloud-free frames for animation
 selected="
 20160318_175038_458_S2A_RGB.jpg 20160321_180021_460_S2A_RGB.jpg
 20160324_181004_462_S2A_RGB.jpg 20160325_174028_749_S2A_RGB.jpg
@@ -26,24 +26,23 @@ selected="
 20160424_174125_261_S2A_RGB.jpg 20160504_173947_147_S2A_RGB.jpg
 20160506_181935_287_S2A_RGB.jpg 20160503_180920_455_S2A_RGB.jpg
 20160504_173947_147_S2A_RGB.jpg 20160506_181935_287_S2A_RGB.jpg
-20160507_174912_457_S2A_RGB.jpg 20160517_174913_462_S2A_RGB.jpg
-20160523_180922_457_S2A_RGB.jpg 20160524_173944_536_S2A_RGB.jpg
-20160605_181924_458_S2A_RGB.jpg 20160615_181922_460_S2A_RGB.jpg
-20160618_182919_461_S2A_RGB.jpg 20160628_182918_458_S2A_RGB.jpg
-20160706_174910_456_S2A_RGB.jpg 20160708_182920_459_S2A_RGB.jpg
-20160712_180919_461_S2A_RGB.jpg 20160713_174015_006_S2A_RGB.jpg
-20160715_181924_456_S2A_RGB.jpg 20160723_173907_455_S2A_RGB.jpg
-20160729_175916_460_S2A_RGB.jpg 20160730_172902_461_S2A_RGB.jpg
-20160808_175915_456_S2A_RGB.jpg 20160809_172902_463_S2A_RGB.jpg
-20160815_174910_462_S2A_RGB.jpg 20160910_181050_650_S2A_RGB.jpg
-20160913_181945_463_S2A_RGB.jpg 20160918_172958_464_S2A_RGB.jpg
-20160923_182055_459_S2A_RGB.jpg
+20160507_174912_457_S2A_RGB.jpg 20160509_182933_282_S2A_RGB.jpg
+20160517_174913_462_S2A_RGB.jpg 20160523_180922_457_S2A_RGB.jpg
+20160524_173944_536_S2A_RGB.jpg 20160605_181924_458_S2A_RGB.jpg
+20160615_181922_460_S2A_RGB.jpg 20160618_182919_461_S2A_RGB.jpg
+20160628_182918_458_S2A_RGB.jpg 20160706_174910_456_S2A_RGB.jpg
+20160708_182920_459_S2A_RGB.jpg 20160712_180919_461_S2A_RGB.jpg
+20160713_174015_006_S2A_RGB.jpg 20160715_181924_456_S2A_RGB.jpg
+20160723_173907_455_S2A_RGB.jpg 20160729_175916_460_S2A_RGB.jpg
+20160730_172902_461_S2A_RGB.jpg 20160808_175915_456_S2A_RGB.jpg
+20160809_172902_463_S2A_RGB.jpg 20160815_174910_462_S2A_RGB.jpg
+20160910_181050_650_S2A_RGB.jpg 20160913_181945_463_S2A_RGB.jpg
+20160918_172958_464_S2A_RGB.jpg 20160923_182055_459_S2A_RGB.jpg
 "
 
 # other usable images with small issues
 # 20160322_173001_458_S2A_RGB.jpg  # slight overcast
 # 20160421_172942_462_S2A_RGB.jpg  # small clouds
-# 20160509_182933_282_S2A_RGB.jpg  # se corner cut
 # 20160516_181926_455_S2A_RGB.jpg  # slight overcast
 # 20160521_172904_459_S2A_RGB.jpg  # small clouds
 # 20160529_182922_461_S2A_RGB.jpg  # small clouds
@@ -69,12 +68,14 @@ Contains modified Copernicus Sentinel data. Processed with SentinelFlow."
     if [ -f $ifile ] && [ ! -f $ofile ]
     then
         convert $ifile -crop 2880x1620+3060+2740 -resize 1920x1080 +repage \
-                -fill '#ffffff80' -draw 'rectangle 48,48,384,136' \
-                -font Bitstream-Vera-Sans-Bold -pointsize 48 -gravity northwest \
-                -fill black -annotate +64+64 $label \
-                -fill '#ffffff80' -draw 'rectangle 0,1032,1920,1080' \
-                -font Bitstream-Vera-Sans -pointsize 24 -gravity southeast \
-                -fill black -annotate +8+8 "$credit" $ofile
+                -fill '#ffffff80' -draw 'rectangle 40,40,320,120' \
+                -font Bitstream-Vera-Sans-Bold -pointsize 36 -gravity northwest \
+                -fill black -annotate +60+60 $label \
+                -draw "rectangle $((1920-260)),$((1080-65)),$((1920-60)),$((1080-60))" \
+                -pointsize 24 -gravity southeast -annotate +60+70 "3 km" $ofile
+#                -fill '#ffffff80' -draw 'rectangle 0,1032,1920,1080' \
+#                -font Bitstream-Vera-Sans -pointsize 24 -gravity southeast \
+#                -fill black -annotate +8+8 "$credit" $ofile
     fi
 done
 
