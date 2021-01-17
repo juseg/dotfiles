@@ -82,12 +82,29 @@ done
 # Assemble animation
 # ------------------
 
+# prepare bumpers
+[ -f $prefix.png ] || sf.mov.bumpers.py ${prefix#animation/}
 
-## animated gif
-#convert -delay 20 -loop 0 $prefix/*.jpg -delay 160 $ofile \
-#        -loop 0 -resize 50% $prefix.gif
+# assembling parametres (depends on frame rate)
+fade=12  # number of frames for fade in and fade out effects
+hold=25  # number of frames to hold in the beginning and end
+secs=$((8+2*hold/25))  # duration of main scene in seconds
+
+# prepare filtergraph for main scene
+filt="nullsrc=s=1920x1080:d=$secs[n]"  # create fixed duration stream
+filt+=";[0]minterpolate=10:dup"         # duplicate consecutive frames
+filt+=",minterpolate=25:blend"          # blend consecutive frames
+filt+=",loop=$hold:1:0,[n]overlay"  # hold first frame, delay end
+
+# add title frame and bumpers
+filt+=",fade=in:0:$fade,fade=out:$((secs*25-fade)):$fade[main];"  # main scene
+filt+="[1]fade=in:0:$fade,fade=out:$((4*25-fade)):$fade[head];"  # title frame
+filt+="[2]fade=in:0:$fade,fade=out:$((3*25-fade)):$fade[bysa];"  # license
+filt+="[head][main][bysa]concat=3" \
 
 # mp4 video
-ffmpeg -pattern_type glob -r 10 -i "$prefix/*.jpg" \
-    -filter_complex "nullsrc=s=1920x1080:d=4:r=10,[0]overlay" \
+ffmpeg -pattern_type glob -r 5 -i "$prefix/*.jpg" \
+    -loop 1 -t 2 -i ${prefix}.png \
+    -loop 1 -t 2 -i animation/bysa.png \
+    -filter_complex $filt \
     -pix_fmt yuv420p -c:v libx264 $prefix.mp4
