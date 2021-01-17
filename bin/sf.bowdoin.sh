@@ -1,105 +1,93 @@
 #!/bin/bash
 # Copyright (c) 2016-2021, Julien Seguinot (juseg.github.io)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# Assemble Bowdoin Glacier summer melt animation using Sentinelflow
 
-# host containing original files
-host="iceberg"
+# Fetch images
+# ------------
 
-# animation name and paths
-outname="anim_bowdoin_s2a"
-basedir="/scratch_net/iceberg_second/juliens/geodata/satellite/sentinel-2a"
-tempdir="/scratch_net/iceberg/juliens/anim/$outname"
+# change to sentinel2 directory
+cd /run/media/julien/archive/geodat/sentinel2/
 
-# list of dates picked for animation
-datelist="
-20160318_175038_458
-20160321_180021_460
-20160324_181004_462
-20160325_174028_749
-20160327_181959_462
-20160328_175044_578
-20160403_180957_459
-20160406_181959_460
-20160407_174950_459
-20160410_180125_659
-20160414_173948_462
-20160417_174954_463
-20160424_174125_261
-20160504_173947_147
-20160506_181935_287
-20160503_180920_455
-20160504_173947_147
-20160506_181935_287
-20160507_174912_457
-20160517_174913_462
-20160523_180922_457
-20160524_173944_536
-20160605_181924_458
-20160615_181922_460
-20160618_182919_461
-20160628_182918_458
-20160706_174910_456
-20160708_182920_459
-20160712_180919_461
-20160713_174015_006
-20160715_181924_456
-20160723_173907_455
-20160729_175916_460
-20160730_172902_461
-20160808_175915_456
-20160809_172902_463
-20160815_174910_462
-20160910_181050_650
-20160913_181945_463
-20160918_172958_464
-20160923_182055_459
+# Qaanaaq 60x60 km (this is done by sf.regions.sh)
+# sentinelflow.sh $*
+#     --intersect 77.7,-68.5 --tiles 19XDG,19XEG \
+#     --extent 465000,8595000,525000,8655000 --name greenland/qaanaaq
+
+# select 41 (?) cloud-free frames for animation
+selected="
+20160318_175038_458_S2A_RGB.jpg 20160321_180021_460_S2A_RGB.jpg
+20160324_181004_462_S2A_RGB.jpg 20160325_174028_749_S2A_RGB.jpg
+20160327_181959_462_S2A_RGB.jpg 20160328_175044_578_S2A_RGB.jpg
+20160403_180957_459_S2A_RGB.jpg 20160406_181959_460_S2A_RGB.jpg
+20160407_174950_459_S2A_RGB.jpg 20160410_180125_659_S2A_RGB.jpg
+20160414_173948_462_S2A_RGB.jpg 20160417_174954_463_S2A_RGB.jpg
+20160424_174125_261_S2A_RGB.jpg 20160504_173947_147_S2A_RGB.jpg
+20160506_181935_287_S2A_RGB.jpg 20160503_180920_455_S2A_RGB.jpg
+20160504_173947_147_S2A_RGB.jpg 20160506_181935_287_S2A_RGB.jpg
+20160507_174912_457_S2A_RGB.jpg 20160517_174913_462_S2A_RGB.jpg
+20160523_180922_457_S2A_RGB.jpg 20160524_173944_536_S2A_RGB.jpg
+20160605_181924_458_S2A_RGB.jpg 20160615_181922_460_S2A_RGB.jpg
+20160618_182919_461_S2A_RGB.jpg 20160628_182918_458_S2A_RGB.jpg
+20160706_174910_456_S2A_RGB.jpg 20160708_182920_459_S2A_RGB.jpg
+20160712_180919_461_S2A_RGB.jpg 20160713_174015_006_S2A_RGB.jpg
+20160715_181924_456_S2A_RGB.jpg 20160723_173907_455_S2A_RGB.jpg
+20160729_175916_460_S2A_RGB.jpg 20160730_172902_461_S2A_RGB.jpg
+20160808_175915_456_S2A_RGB.jpg 20160809_172902_463_S2A_RGB.jpg
+20160815_174910_462_S2A_RGB.jpg 20160910_181050_650_S2A_RGB.jpg
+20160913_181945_463_S2A_RGB.jpg 20160918_172958_464_S2A_RGB.jpg
+20160923_182055_459_S2A_RGB.jpg
 "
 
-# cloud-free dates not picked
-unselect="
-20160322_173001_458  # slight overcast
-20160421_172942_462  # small clouds
-20160509_182933_282  # se corner cut
-20160516_181926_455  # slight overcase
-20160521_172904_459  # small clouds
-20160529_182922_461  # small clouds
-20160612_180919_456  # small clouds
-20160626_174908_464  # small clouds
-20160722_181050_652  # small clouds
-20160825_174913_066  # overcast
-20160829_172859_459  # large clouds
-20160917_180022_497  # small clouds
-"
+# other usable images with small issues
+# 20160322_173001_458_S2A_RGB.jpg  # slight overcast
+# 20160421_172942_462_S2A_RGB.jpg  # small clouds
+# 20160509_182933_282_S2A_RGB.jpg  # se corner cut
+# 20160516_181926_455_S2A_RGB.jpg  # slight overcast
+# 20160521_172904_459_S2A_RGB.jpg  # small clouds
+# 20160529_182922_461_S2A_RGB.jpg  # small clouds
+# 20160612_180919_456_S2A_RGB.jpg  # small clouds
+# 20160626_174908_464_S2A_RGB.jpg  # small clouds
+# 20160722_181050_652_S2A_RGB.jpg  # small clouds
+# 20160825_174913_066_S2A_RGB.jpg  # overcast
+# 20160829_172859_459_S2A_RGB.jpg  # large clouds
+# 20160917_180022_497_S2A_RGB.jpg  # small clouds
 
-# create local frame directory if needed
-mkdir -p $outname
+# add text labels using imagemagick
+srcdir="composite/greenland/qaanaaq"
+prefix="animation/bowdoin"
 
-# prepare individual frames and save a local copy
-i=0
-ssh $host mkdir -p $tempdir
-for date in $datelist
+mkdir -p $prefix
+for frame in $selected
 do
-    ifile="$basedir/composite/greenland/qaanaaq/rgb/S2A_${date}_RGB.jpg"
-    ofile="$tempdir/$(printf "%04d" $i).png"
-    label="$(date -d${date:0:8} -u -R | cut -d ' ' -f 2-4)"
-    if [ ! -f $outname/$(basename $ofile) ]
+    ifile="$srcdir/$frame"
+    ofile="$prefix/$frame"
+    label="${frame:0:4}.${frame:4:2}.${frame:6:2}"
+    credit="CC BY-SA 4.0 J. Seguinot (2020). \
+Contains modified Copernicus Sentinel data. Processed with SentinelFlow."
+    if [ -f $ifile ] && [ ! -f $ofile ]
     then
-        ssh $host "convert \
--gravity northwest -crop 2400x1600+3200+2800 -resize 1800x1200 +repage \
--gravity northeast -annotate +25+25 \"$label\" -pointsize 24 -fill black \
--font DejaVu-Sans-Bold $ifile $ofile"
-        scp $host:$ofile $outname
+        convert $ifile -crop 2880x1620+3060+2740 -resize 1920x1080 +repage \
+                -fill '#ffffff80' -draw 'rectangle 48,48,384,136' \
+                -font Bitstream-Vera-Sans-Bold -pointsize 48 -gravity northwest \
+                -fill black -annotate +64+64 $label \
+                -fill '#ffffff80' -draw 'rectangle 0,1032,1920,1080' \
+                -font Bitstream-Vera-Sans -pointsize 24 -gravity southeast \
+                -fill black -annotate +8+8 "$credit" $ofile
     fi
-    i=$((i+1))
 done
 
-## assemble gif animation
-#convert -delay 20 -loop 0 $outname/????.png -layers Optimize $outname.gif
 
-# assemble video animation
-options="-r 5 -i $outname/%04d.png -pix_fmt yuv420p"
-avconv $options -c:v libx264 $outname.mp4 -y
-avconv $options -c:v theora $outname.ogg -y
+# Assemble animation
+# ------------------
 
-# remove local frames
-# rm -r frames
+
+## animated gif
+#convert -delay 20 -loop 0 $prefix/*.jpg -delay 160 $ofile \
+#        -loop 0 -resize 50% $prefix.gif
+
+# mp4 video
+ffmpeg -pattern_type glob -r 10 -i "$prefix/*.jpg" \
+    -filter_complex "nullsrc=s=1920x1080:d=4:r=10,[0]overlay" \
+    -pix_fmt yuv420p -c:v libx264 $prefix.mp4
