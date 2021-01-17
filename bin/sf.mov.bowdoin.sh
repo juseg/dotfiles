@@ -84,7 +84,7 @@ done
 # ------------------
 
 # prepare bumpers
-[ -f $prefix.png ] || sf.mov.bumpers.py ${prefix#animation/}
+[ -f $prefix.png ] || (cd animation && sf.mov.bumpers.py ${prefix#animation/})
 
 # assembling parametres (depends on frame rate)
 fade=12  # number of frames for fade in and fade out effects
@@ -106,6 +106,6 @@ filt+="[head][main][bysa]concat=3" \
 # mp4 video
 ffmpeg -pattern_type glob -r 5 -i "$prefix/*.jpg" \
     -loop 1 -t 2 -i ${prefix}.png \
-    -loop 1 -t 2 -i animation/bysa.png \
+    -loop 1 -t 2 -i animation/ccbysa.png \
     -filter_complex $filt \
     -pix_fmt yuv420p -c:v libx264 $prefix.mp4

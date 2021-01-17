@@ -43,7 +43,7 @@ def bumper_main(prefix):
     ax.text(-80, -40, METADATA['Credit'], linespacing=1.5)
 
     # save
-    fig.savefig('animation/'+prefix+'.png')
+    fig.savefig(prefix+'.png')
     plt.close(fig)
 
 
@@ -85,7 +85,7 @@ def bumper_bysa():
             weight='bold', family=['DeJaVu Sans'])
 
     # save
-    fig.savefig('animation/bysa.png')
+    fig.savefig('ccbysa.png')
     plt.close(fig)
 
 
