@@ -11,9 +11,9 @@
 cd /run/media/julien/archive/geodat/sentinel2/
 
 # Qaanaaq 60x60 km (this is done by sf.regions.sh)
-# sentinelflow.sh $*
-#     --intersect 77.7,-68.5 --tiles 19XDG,19XEG \
-#     --extent 465000,8595000,525000,8655000 --name greenland/qaanaaq
+sentinelflow.sh ${*:---offline} \
+    --intersect 77.7,-68.5 --tiles 19XDG,19XEG \
+    --extent 465000,8595000,525000,8655000 --name greenland/qaanaaq
 
 # select 42 cloud-free frames for animation
 selected="
@@ -56,7 +56,6 @@ selected="
 # add text labels using imagemagick
 srcdir="composite/greenland/qaanaaq"
 prefix="animation/bowdoin"
-
 mkdir -p $prefix
 for frame in $selected
 do
@@ -88,9 +87,9 @@ secs=$((8+2*hold/25))  # duration of main scene in seconds
 
 # prepare filtergraph for main scene
 filt="nullsrc=s=1920x1080:d=$secs[n]"  # create fixed duration stream
-filt+=";[0]minterpolate=10:dup"         # duplicate consecutive frames
-filt+=",minterpolate=25:blend"          # blend consecutive frames
-filt+=",loop=$hold:1:0,[n]overlay"  # hold first frame, delay end
+filt+=";[0]minterpolate=10:dup"        # duplicate consecutive frames
+filt+=",minterpolate=25:blend"         # blend consecutive frames
+filt+=",loop=$hold:1:0,[n]overlay"     # hold first frame, delay end
 
 # add title frame and bumpers
 filt+=",fade=in:0:$fade,fade=out:$((secs*25-fade)):$fade[main];"  # main scene
