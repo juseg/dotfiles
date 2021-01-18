@@ -73,6 +73,7 @@ set incsearch                   " search while typing
 set smartcase                   " uppercase-only-sensitive search
 
 " tab completion
+set wildmode=longest,list,full  " tab-complete, then list, then guess
 set wildmenu                    " activate menus
 
 " git integration
