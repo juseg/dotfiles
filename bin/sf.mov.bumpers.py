@@ -14,6 +14,7 @@ import matplotlib.pyplot as plt
 METADATA = {
     'Titles': {'anafi':     "Anafi Island through the seasons",
                'bowdoin':   "Bowdoin Glacier flow and summer melt season",
+               'chamoli':   "Chamoli slide progression before collapse",
                'santorini': "Santorini Caldera through the seasons",
                'vavilov':   "Vavilov Glacier surge and ice cap collapse"},
     'Author': "J. Seguinot, 2021",
