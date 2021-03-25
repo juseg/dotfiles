@@ -12,11 +12,11 @@ cd /run/media/julien/archive/geodat/sentinel2/
 
 # Chamoli 30x15 km
 sentinelflow.sh ${*:---offline} \
-    --intersect 30.4,79.7 --maxrows 20 --tiles 44RLU \
+    --intersect 30.4,79.7 --maxrows 60 --tiles 44RLU \
     --extent 360000,3355000,390000,3375000 \
     --name asia/chamoli
 
-# select 24 cloud-free frames for animation
+# select 25 cloud-free frames for animation
 selected="
 20200913_053034_359_S2B_RGB.jpg 20200918_053036_920_S2A_RGB.jpg
 20200928_053037_771_S2A_RGB.jpg 20201008_053035_565_S2A_RGB.jpg
@@ -29,14 +29,15 @@ selected="
 20201227_053031_851_S2A_RGB.jpg 20210101_053030_584_S2B_RGB.jpg
 20210111_053031_674_S2B_RGB.jpg 20210116_053033_117_S2A_RGB.jpg
 20210121_053032_118_S2B_RGB.jpg 20210126_053032_780_S2A_RGB.jpg
-20210131_053031_939_S2B_RGB.jpg 20210205_053031_766_S2A_RGB.jpg
-"
+20210131_053031_939_S2B_RGB.jpg"
+before="20210205_053031_766_S2A_RGB.jpg"  # just before
+after="20210210_053031_061_S2B_RGB.jpg"  # just after
 
 # add text labels using imagemagick
 srcdir="composite/asia/chamoli"
 prefix="animation/chamoli"
 mkdir -p $prefix
-for frame in $selected
+for frame in $selected $before $after
 do
     ifile="$srcdir/$frame"
     ofile="$prefix/$frame"
@@ -52,8 +53,9 @@ do
     fi
 done
 
-# add red circle on last image
-if [ -f ${ofile%.jpg}_bis.jpg ]
+# add black circle on last image before collapse
+ofile="$prefix/$before"
+if [ ! -f ${ofile}_bis.jpg ]
 then
     convert $ofile -fill none -stroke 'black' -strokewidth 5 \
             -draw 'circle 980,780 1100,790' ${ofile%.jpg}_bis.jpg
@@ -68,7 +70,7 @@ fi
 # assembling parametres (depends on frame rate)
 fade=12  # number of frames for fade in and fade out effects
 hold=25  # number of frames to hold in the beginning and end
-secs=$((12+2*hold/25))  # duration of main scene in seconds
+secs=$((14+2*hold/25))  # duration of main scene in seconds
 
 # prepare filtergraph for main scene
 # (it seems necessary to triplicate last frame before interp)
@@ -85,7 +87,14 @@ filt+="[head][main][bysa]concat=3" \
 
 # mp4 video
 ffmpeg -pattern_type glob -r 2 -i "$prefix/*.jpg" \
-    -loop 1 -t 2 -i ${prefix}.png \
+    -loop 1 -t 2 -i $prefix.png \
     -loop 1 -t 2 -i animation/ccbysa.png \
     -filter_complex $filt \
     -pix_fmt yuv420p -c:v libx264 $prefix.mp4
+
+# gif animation for twitter
+convert \
+    -delay 10 $(ls $prefix/*RGB.jpg | head -n -1) \
+    -delay 100 $prefix/${before%.jpg}_bis.jpg \
+    -delay 100 $prefix/${after} \
+    -crop 600x400+660+620 +repage $prefix.gif
