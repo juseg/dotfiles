@@ -47,31 +47,6 @@ $sf --name alps/grisons --offline --tiles 32TNS,32TNT,32TPS,32TPT \
     --extent 530000,5115000,615000,5215000 --resolution 10
 
 
-# Greenland
-# ---------
-
-# Inglefield Bay 200x150 km
-$sf --name greenland/inglefield \
-    --intersect -70.0,77.0,-67.5,78.0 --maxrows 40 \
-    --tiles 19XDF,19XDG,19XEF,19XEG \
-    --extent 405000,8535000,605000,8685000 --resolution 10
-
-# Qaanaaq 60x60 km (intersect on Bowdoin Glacier)
-$sf --name greenland/qaanaaq --offline \
-    --intersect 77.7,-68.5 --tiles 19XDG,19XEG \
-    --extent 465000,8595000,525000,8655000 --resolution 10
-
-# Eqip Sermia 90x40 km
-$sf --name greenland/eqip \
-    --intersect 69.8,-50.2 --tiles 22WEC \
-    --extent 500000,7720000,590000,7760000 --resolution 10
-
-# Ilulissat 120x50 km
-$sf --name greenland/ilulissat \
-    --intersect 69.1,-50.9 --tiles 22WDB,22WEB --maxrows 20 \
-    --extent 480000,7650000,600000,7700000 --resolution 10
-
-
 # Japan
 # -----
 
