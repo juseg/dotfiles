@@ -16,6 +16,6 @@
 #   email = not here for privacy
 [alias]
     wdiff = diff --color-words
-    tags = for-each-ref --sort=taggerdate --format '%(tag) %(taggerdate:short) %(subject)' refs/tags
+    tags = for-each-ref --sort=taggerdate --format '%(tag) %(*committerdate:short) %(subject)' refs/tags
 [core]
     editor = vim
