@@ -1,24 +1,8 @@
-" Copyright (c) 2013--2019, Julien Seguinot (juseg.github.io)
+" Copyright (c) 2013-2022, Julien Seguinot (juseg.github.io)
 " GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 
 " VIM configuration file, largely adapted from the link below
 " https://realpython.com/vim-and-python-a-match-made-in-heaven/
-
-" recommended plugins via Vundle
-" Plugin 'VundleVim/Vundle.vim'         " let Vundle manage Vundle
-" Plugin 'tmhedberg/SimpylFold'         " remove unwanted code folds
-" Plugin 'vim-scripts/indentpython.vim' " better indentation
-" Plugin 'Valloric/YouCompleteMe'       " auto complete using jedi
-" Plugin 'vim-syntastic/syntastic'      " check syntax on each save
-" Plugin 'nvie/vim-flake8'              " PEP 8 checking
-" Plugin 'jnurmine/Zenburn'             " recommended for terminal
-" Plugin 'altercation/vim-colors-solarized'  " recom for gui
-" Plugin 'scrooloose/nerdtree'          " file browsing
-" Plugin 'jistr/vim-nerdtree-tabs'      " file tabs
-" let NERDTreeIgnore=['\.pyc$', '\~$']  "ignore files in NERDTree
-" Plugin 'kien/ctrlp.vim'               " search for files, tags etc
-" Plugin 'tpope/vim-fugitive'           " git integration
-" Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " powerline options
 let g:powerline_pycmd="py3"     " avoid python2 error on load
