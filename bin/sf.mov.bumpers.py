@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright (c) 2021, Julien Seguinot (juseg.github.io)
+# Copyright (c) 2021-2022, Julien Seguinot (juseg.github.io)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 
 """Assemble bumbers for Sentinelflow animation."""
@@ -16,8 +16,9 @@ METADATA = {
                'bowdoin':   "Bowdoin Glacier flow and summer melt season",
                'chamoli':   "Chamoli slide progression before collapse",
                'santorini': "Santorini Caldera through the seasons",
+               'shispar':   "Shishpar Glacier surge animation",
                'vavilov':   "Vavilov Glacier surge and ice cap collapse"},
-    'Author': "J. Seguinot, 2021",
+    'Author': "J. Seguinot, 2022",
     'Credit': ("Contains modified Copernicus Sentinel data. "
                "Processed with Sentinelflow."),
     'License text': "This work is licensed under",
