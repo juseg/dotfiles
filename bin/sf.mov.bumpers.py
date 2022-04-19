@@ -15,6 +15,7 @@ METADATA = {
     'Titles': {'anafi':     "Anafi Island through the seasons",
                'bowdoin':   "Bowdoin Glacier flow and summer melt season",
                'chamoli':   "Chamoli slide progression before collapse",
+               'kiruna':    "Three years of mining and moving in Kiruna",
                'santorini': "Santorini Caldera through the seasons",
                'shispar':   "Shishpar Glacier surge animation",
                'vavilov':   "Vavilov Glacier surge and ice cap collapse"},
