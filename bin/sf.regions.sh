@@ -45,20 +45,3 @@ $sf --name alps/ticino --offline --tiles 32TMR,32TMS,32TNR,32TNS \
 # Grisons 85x100 km
 $sf --name alps/grisons --offline --tiles 32TNS,32TNT,32TPS,32TPT \
     --extent 530000,5115000,615000,5215000 --resolution 10
-
-
-# Japan
-# -----
-
-# Sapporo 120x100 km
-$sf --name japan/sapporo \
-    --intersect 42.8,141.1 --tiles 54TVN,54TWN --maxrows 20 \
-    --extent 440000,4700000,560000,4800000
-
-$sf --name japan/akanmashu \
-    --intersect 44.0,144.3 --tiles 54TYP --cloudcover 30 \
-    --extent 737500,4800000,807500,4900000
-
-$sf --name japan/daisetsu \
-    --intersect 43.7,142.8 --tiles 54TXP \
-    --extent 630000,4800000,660000,4850000
