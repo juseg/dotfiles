@@ -6,7 +6,7 @@
 mkdir -p ~/.config/git
 mkdir -p ~/.ssh
 
-for path in .bash_aliases .config .ssh/config .vim
+for path in .bash_aliases .config .ssh/config .vim .Xresources
 do
     if [ ! -e ~/$path ]  # file does not exists
     then
