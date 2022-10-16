@@ -78,6 +78,9 @@ vim.opt.updatetime=100          -- reduce update time for gitgutter
 -- FIXME rewrite in lua script
 -- vim.opt.listchars = "tab:→\ ,space:·,nbsp:␣,trail:•,eol:¶,precedes:«,extends:»"
 
+-- fix formatting (hard word wrap) in neovim>=0.8 and pylsp
+vim.opt.formatexpr = "pylsp#Format()"
+
 -- ### Colors (-> after/colors.lua )
 vim.g.gruvbox_italic = true
 vim.g.gruvbox_transparent_bg = true
