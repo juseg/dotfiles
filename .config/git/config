@@ -1,21 +1,11 @@
-# Copyright (c) 2013-2021, Julien Seguinot (juseg.github.io)
+# Copyright (c) 2013-2022, Julien Seguinot (juseg.github.io)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
-
-# Git user configuration
-# ======================
-
-# Git config files are read in this order:
-# * /etc/gitconfig (system-wide)
-# * ~/.config/git/config (this file)
-# * ~/.gitconfig (overrides this file)
-# * $GIT_DIR/config (repo-specific)
-# * $GIT_DIR/config.worktree (optional)
+#
+# .config/git/config - Git user configuration (can be overrived
 
 [user]
     name = Julien Seguinot
-#   email = not here for privacy
+    #   email = stored in ~/.gitconfig for privacy
 [alias]
     wdiff = diff --color-words
     tags = for-each-ref --sort=taggerdate --format '%(tag) %(*committerdate:short) %(subject)' refs/tags
-[core]
-    editor = vim
