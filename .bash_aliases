@@ -36,6 +36,13 @@ alias rmemail='sed -i "1,5 s/<.*seg.*@.*>/(juseg.github.io)/g"'
 # Installed commands
 # ------------------
 
+# move to trash
+alias del='gio trash'
+
+# application aliases
+alias mutt=neomutt
+alias vim=nvim
+
 # imagemagick aliases
 alias 1920p='convert -resize 1920x1920 -quality 95'
 alias 3840p='convert -resize 3840x3840 -quality 95'
@@ -88,3 +95,10 @@ alias pism.sync.output='pism.sync.output.project && pism.sync.output.local'
 # sentinel aliases
 alias sf.tileusage='ls $S2/granules | cut -c 5-10 | sort | uniq | while read tile ; do echo $(du -shc $S2/granules/*${tile}* | tail -1) $tile ; done | sort -h'
 alias sf.zoneusage='ls $S2/granules | cut -c 5-7 | sort | uniq | while read tile ; do echo $(du -shc $S2/granules/*${tile}* | tail -1) $tile ; done | sort -h'
+
+# switch displays
+alias dpi='xrandr --output DP1 --off --output eDP1 --mode 1920x1080 && sleep 1 && nitrogen --restore'
+alias dpe='xrandr --output eDP1 --off --output DP1 --mode 1920x1200 && sleep 1 && nitrogen --restore'
+
+# the annoying uib vpn
+alias vpn='openconnect-sso --server https://vpn3.uib.no'
