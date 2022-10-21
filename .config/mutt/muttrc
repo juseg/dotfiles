@@ -1,0 +1,57 @@
+# Copyright (c) 2022, Julien Seguinot (juseg.github.io)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# ~/.config/mutt/muttrc - Neomutt configuration file
+
+# General options
+set header_cache = "~/.cache/mutt"
+set imap_check_subscribed
+set imap_keepalive = 300
+unset imap_passive
+set mail_check = 60
+set mbox_type=Maildir
+
+# UiB receive options
+set imap_user="julien.seguinot@uib.no"
+set imap_pass=SECRET
+set folder="imap://outlook.office365.com/"
+set spoolfile="+Inbox"
+set postponed="+Drafts"
+set record="+Sent"
+set imap_authenticators = "oauthbearer:xoauth2"
+set imap_oauth_refresh_command = \
+    "~/.local/bin/mutt_oauth2.py ~/.local/share/mutt/uib.tokens"
+
+# UiB send options
+set smtp_url="smtp://${imap_user}@smtp.office365.com:587/"
+set smtp_pass=SECRET
+set realname="Julien Seguinot"
+set from="julien.seguinot@uib.no"
+set hostname="uib.no"
+set signature="Julien Seguinot"
+set ssl_force_tls = yes
+unset ssl_starttls
+set smtp_authenticators = ${imap_authenticators}
+set smtp_oauth_refresh_command = ${imap_oauth_refresh_command}
+
+# Appearance
+set sort = 'threads'
+set smart_wrap
+set sidebar_visible = 'yes'
+set sidebar_width = 16
+source ~/.config/mutt/colors
+
+# Navigate sidebar
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cj sidebar-next
+bind index,pager \Cl sidebar-open
+
+# Speed things up (https://wiki.archlinux.org/title/Mutt)
+set header_cache = ~/.cache/mutt
+set message_cachedir = "~/.cache/mutt"
+
+# archive macro (https://neomutt.org/guide/advancedusage.html)
+macro index ,a "<save-message>=Archives<enter><enter-command>echo 'Saved to archive'<enter>"
+
+# still working on this
+# auto_view text/html
