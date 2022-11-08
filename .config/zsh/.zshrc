@@ -7,5 +7,8 @@
 for filepath in /usr/share/zsh/manjaro-zsh-{config,prompt}
     [ -e $filepath ] && source $filepath
 
+# hardcoded in manjaro config, overwrite
+export HISTFILE="$XDG_DATA_HOME/history"
+
 # source shell aliases
 source $XDG_CONFIG_HOME/shell/aliases
