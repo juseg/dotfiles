@@ -5,7 +5,7 @@
 
 mkdir -p ~/.ssh
 
-for path in .config .ssh/config .Xresources .zprofile .zshrc
+for path in .config .ssh/config .Xresources .zprofile
 do
     if [ ! -e ~/$path ]  # file does not exists
     then

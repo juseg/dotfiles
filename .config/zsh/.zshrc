@@ -7,5 +7,5 @@
 for filepath in /usr/share/zsh/manjaro-zsh-{config,prompt}
     [ -e $filepath ] && source $filepath
 
-# source aliases
-source ~/.bash_aliases
+# source shell aliases
+source $XDG_CONFIG_HOME/shell/aliases
