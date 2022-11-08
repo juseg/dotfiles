@@ -1,17 +1,17 @@
 # Copyright (c) 2019-2022, Julien Seguinot (juseg.github.io)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# Link these dotfiles in user home directory
 
-# Update dotfile links
-
+# make any missing parent directory
 mkdir -p ~/.ssh
 
-for path in .config .ssh/config .xprofile .zprofile
+# link directories
+for path in .config .ssh/config
 do
-    if [ ! -e ~/$path ]  # file does not exists
-    then
-        ln -s $PWD/$path ~/$path
-    elif [ ! -h ~/$path ]  # file is not a link
-    then
-        echo "$path exists and is not a link"
-    fi
+    [ -e ~/$path ] || ln --symbolic $PWD/$path ~/$path
+    [ -h ~/$path ] || echo "$path exists and is not a link"
 done
+
+# copy relative links
+cp --no-clobber --no-dereference .{x,z}profile ~/
