@@ -4,5 +4,11 @@
 #
 # X11 profile (sourced by e.g. /etc/lightdm/Xsession)
 
+# xdg base directory
+export XDG_CONFIG_HOME=$HOME/.config
+
+# source shell profile (needed by lightdm)
+source $XDG_CONFIG_HOME/shell/profile
+
 # load X resources
 xrdb -merge $XDG_CONFIG_HOME/x11/xresources
