@@ -18,15 +18,27 @@ export PYTHONPATH=""
 export PYTHONPATH=$HOME/git/arch/cartowik:$PYTHONPATH
 export PYTHONPATH=$HOME/git/code/hyoga:$PYTHONPATH
 
-# local latex packages
-export TEXMFHOME=$HOME/.local/share/texmf
+# xdg base directories
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
 
-# gtk2 config, used by epdfview, lxappearance, viewnior
+# config files and directories
+# (gtk2 is used by epdfview, lxappearance, viewnior)
 # (epdfview is discontinued, should consider evince or mupdf)
-export GTK2_RC_FILES="$HOME/.config/gtk-2.0"
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+export MBSYNCRC="$XDG_CONFIG_HOME/mbsync/config"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-# used by manjaro-settings-manager
-export QT_QPA_PLATFORMTHEME="qt5ct"
+# data files and directories
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export HISTFILE="$XDG_DATA_HOME/history"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+export TEXMFHOME="$XDG_DATA_HOME/texmf"
+
+# application settings
+export QT_QPA_PLATFORMTHEME="qt5ct"  # used by manjaro-settings-manager
+export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"  # drop-down style
 
 # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
