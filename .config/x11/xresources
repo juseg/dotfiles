@@ -1,7 +1,8 @@
+! vim: set ft=xdefaults:
 ! Copyright (c) 2022, Julien Seguinot (juseg.github.io)
 ! GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 !
-! ~/.Xresource - The X resources for X server applications
+! X server resources (has to be manually sourced from ~/.config/x11/xprofile)
 !
 ! Edited from the manjaro i3 community edition
 ! https://gitlab.manjaro.org/profiles-and-settings/desktop-settings/
