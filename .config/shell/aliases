@@ -1,8 +1,7 @@
 # Copyright (c) 2013-2021, Julien Seguinot (juseg.github.io)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
-
-# Bash aliases
-# ============
+#
+# Shell aliases for any shell (sourced in .config/shell/profile)
 
 # Unix commands
 # -------------

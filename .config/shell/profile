@@ -42,3 +42,7 @@ export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"  # drop-down style
 
 # https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# shell aliases
+for filepath in $XDG_CONFIG_HOME/.config/shell/aliases
+    [ -f $filepath ] && source $filepath

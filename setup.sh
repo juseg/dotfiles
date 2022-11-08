@@ -3,10 +3,9 @@
 
 # Update dotfile links
 
-mkdir -p ~/.config/git
 mkdir -p ~/.ssh
 
-for path in .bash_aliases .config .ssh/config .Xresources .zsh{env,rc}
+for path in .config .ssh/config .Xresources .zprofile .zshrc
 do
     if [ ! -e ~/$path ]  # file does not exists
     then
