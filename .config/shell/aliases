@@ -101,3 +101,6 @@ alias dpe='xrandr --output eDP1 --off --output DP1 --mode 1920x1200 && sleep 1 &
 
 # the annoying uib vpn
 alias vpn='openconnect-sso --server https://vpn3.uib.no'
+
+# fix wget hosts file location
+alias wget="wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"

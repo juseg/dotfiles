@@ -23,22 +23,40 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 
+# cache files and directories
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
+export ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
+
 # config files and directories
 # (gtk2 is used by epdfview, lxappearance, viewnior)
 # (epdfview is discontinued, should consider evince or mupdf)
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
 export MBSYNCRC="$XDG_CONFIG_HOME/mbsync/config"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export WGETRC="$XDG_CONFIG_HOME/wgetrc"
 
 # data files and directories
+export BUNDLE_USER_HOME="$XDG_DATA_HOME/bundle"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export HISTFILE="$XDG_DATA_HOME/history"
+export IPYTHONDIR="$XDG_DATA_HOME/ipython"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export TEXMFHOME="$XDG_DATA_HOME/texmf"
+
+# runtime sockets
+# (https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user)
+export RXVT_SOCKET="$XDG_RUNTIME_DIR/urxvt-socket"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# these directories can't be moved at all
+# (see https://wiki.archlinux.org/title/XDG_Base_Directory)
+# .mozilla (18-yr old bug https://bugzilla.mozilla.org/show_bug.cgi?id=259356)
+# .thunderbird (11-yr bug https://bugzilla.mozilla.org/show_bug.cgi?id=735285)
+# .ssh (won't fix https://bugzilla.mindrot.org/show_bug.cgi?id=2050)
+# .Xauthority (export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" breaks lightdm)
+# .zoom (export SSB_HOME="$XDG_DATA_HOME"/zoom will break some features)
 
 # application settings
 export QT_QPA_PLATFORMTHEME="qt5ct"  # used by manjaro-settings-manager
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"  # drop-down style
-
-# https://wiki.archlinux.org/title/SSH_keys#Start_ssh-agent_with_systemd_user
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
