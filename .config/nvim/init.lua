@@ -9,7 +9,7 @@
 -- - neovim-cmp-buffer-git          # autocomplete from current buffer
 -- - neovim-cmp-latex-symbols-git   # autocomplete latex symbols
 -- - neovim-cmp-nvim-lsp-git        # autocomplete from language server
--- - neovim-cmp-nvim-lua            # autocomplete lua code
+-- - neovim-cmp-nvim-lua-git        # autocomplete lua code
 -- - neovim-cmp-path-git            # autocomplete paths
 -- - neovim-lspconfig               # language server config files
 -- - python-lsp-server              # language server for python
