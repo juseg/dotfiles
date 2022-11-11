@@ -193,7 +193,7 @@ cmp.setup {
 -- load lsp server for python
 local lsp = require('lspconfig')
 lsp.pylsp.setup {
-  capabilities = require('cmp_nvim_lsp').update_capabilities(
+  capabilities = require('cmp_nvim_lsp').default_capabilities(
     vim.lsp.protocol.make_client_capabilities())
 }
 
