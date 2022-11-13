@@ -81,7 +81,7 @@ alias work.dups='pylint.dups $(find ~/git/work -name "*.py")'
 # PISM output files excluded when leaving ETHZ:
 # - alpflo1(.500m)*/out*{1..9}0.nc: 45/51 out files = 459 GB
 # - cisbed4.3km*/out*{1..9}000.nc: 207(-1)/229 out files = 560 GB
-alias backup='rsync -vahP --delete --exclude={.cache,.googleearth,.local,.Skype,.thumbnails,.Trash*}'
+alias backup='rsync -vahP --delete --exclude={.cache,.googleearth,.local,.Skype,.thumbnails,".Trash*"}'
 alias backup.home='backup ~/ /run/media/julien/archive/home'
 alias backup.archive='backup /run/media/julien/archive/ /run/media/julien/backup'
 alias pism.sync='rsync -vahP --exclude={*~,*backup.nc,slurm*,SSAFD*,*failed.nc}'
