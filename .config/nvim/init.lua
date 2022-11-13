@@ -197,6 +197,22 @@ lsp.pylsp.setup {
     vim.lsp.protocol.make_client_capabilities())
 }
 
+-- ### Zen mode (-> lua/zen.lua)
+
+-- configure neovim zen mode
+require("zen-mode").setup {
+  window = {
+    width = 96, -- width of the zen window (chars, fraction or function)
+    height = 0.8, -- height of the zen window (chars, fraction or function)
+    options = {
+      colorcolumn= "0", -- disable color column
+      cursorline = false, -- disable cursorline
+      number = false, -- disable number column
+      signcolumn = "no", -- disable signcolumn
+    },
+  },
+}
+
 -- ### Auto command
 
 -- when saving file
