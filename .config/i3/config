@@ -12,6 +12,9 @@ set $mod Mod4
 # set default desktop layout (default is tiling)
 # workspace_layout tabbed <stacking|tabbed>
 
+
+# -- Appearance --------------------------------------------------------------
+
 # Configure border style <normal|1pixel|pixel xx|none|pixel>
 default_border pixel 1
 default_floating_border normal
@@ -31,6 +34,9 @@ font xft:URWGothic-Book 11
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
+
+# -- Applications-------------------------------------------------------------
+
 # start a terminal
 bindsym $mod+Return exec terminal
 
@@ -43,17 +49,14 @@ bindsym $mod+d exec rofi -show drun -theme gruvbox-dark-soft
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
 
-################################################################################################
-## sound-section - DO NOT EDIT if you wish to automatically upgrade Alsa -> Pulseaudio later! ##
-################################################################################################
-
+# alsa
 exec --no-startup-id volumeicon
 bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
+
+# pulseaudio
 #exec --no-startup-id pulseaudio
 #exec --no-startup-id pa-applet
 #bindsym $mod+Ctrl+m exec pavucontrol
-
-################################################################################################
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
@@ -79,6 +82,9 @@ bindsym $mod+Print --release exec --no-startup-id i3-scrot -w
 bindsym $mod+Shift+Print --release exec --no-startup-id i3-scrot -s
 bindsym $mod+Ctrl+Shift+h exec xdg-open /usr/share/doc/manjaro/i3_help.pdf
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
+
+
+# -- Windows -----------------------------------------------------------------
 
 # focus_follows_mouse no
 
@@ -143,6 +149,9 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
+
+# -- Workspaces --------------------------------------------------------------
+
 #navigate workspaces next / previous
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
@@ -196,6 +205,9 @@ bindsym $mod+Shift+8 move container to workspace $ws8; workspace $ws8
 # assign [class="Pcmanfm"] $ws3
 # assign [class="Skype"] $ws5
 
+
+# -- Floating mode -----------------------------------------------------------
+
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="calamares"] floating enable border normal
@@ -228,6 +240,9 @@ for_window [class="Xfburn"] floating enable
 # switch to workspace with urgent window automatically
 for_window [urgent=latest] focus
 
+
+# -- Restart and exit --------------------------------------------------------
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -253,6 +268,9 @@ mode "$mode_system" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
+
+# -- Resizing windows --------------------------------------------------------
 
 # Resize window (you can also use the mouse for that)
 bindsym $mod+r mode "resize"
@@ -280,6 +298,9 @@ mode "resize" {
 
 # Lock screen
 bindsym $mod+9 exec --no-startup-id blurlock
+
+
+# -- Startup -----------------------------------------------------------------
 
 # Autostart applications
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -328,6 +349,9 @@ set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 
+
+# -- Status bar --------------------------------------------------------------
+
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
 	i3bar_command i3bar
@@ -370,9 +394,8 @@ bindsym $mod+m bar mode toggle
 
   client.background       #2B2C2B
 
-#############################
-### settings for i3-gaps: ###
-#############################
+
+# -- Settings for i3-gaps ----------------------------------------------------
 
 # Set inner/outer gaps
 gaps inner 14
