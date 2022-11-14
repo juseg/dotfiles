@@ -82,3 +82,6 @@ URxvt.keysym.Control-End:         \033[1;5F
 URxvt.keysym.Control-Home:        \033[1;5H
 URxvt.keysym.Alt-End:             \033[1;3F
 URxvt.keysym.Alt-Home:            \033[1;3H
+
+! perl extensions (AUR package urxvt-font-size-git)
+URxvt.perl-ext-common:      default,font-size
