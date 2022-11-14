@@ -23,8 +23,7 @@ alias lat='la -rt'
 alias l='ls -F'
 
 # grep aliases
-alias grep='grep --color=auto'
-#alias grep='grep --exclude-dir={.git;.svn;_build}'
+alias grep='grep --color=auto --exclude-dir={.git;.svn;_build}'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
