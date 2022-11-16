@@ -32,3 +32,9 @@ set edit_headers
 
 # fix current line color
 color indicator brightwhite default
+
+# extract urls (manjaro package urlscan)
+macro index,pager \cb "<pipe-message> urlscan<enter>" \
+    "call urlscan to extract URLs out of a message"
+macro attach,compose \cb "<pipe-entry> urlscan<enter>" \
+    "call urlscan to extract URLs out of a message"
