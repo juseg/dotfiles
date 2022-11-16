@@ -12,14 +12,14 @@ source /usr/share/mutt-wizard/mutt-wizard.muttrc
 source ~/.config/mutt/accounts/posteo.muttrc
 
 # switching accounts
-macro index,pager i1 '\
+macro index,pager <F1> '\
     <sync-mailbox><enter-command>\
     source ~/.config/mutt/accounts/posteo.muttrc<enter>\
     <change-folder>!<enter>;<check-stats>' "switch to posteo"
-macro index,pager i2 '\
+macro index,pager <F2> '\
     <sync-mailbox><enter-command>\
     source ~/.config/mutt/accounts/uib.muttrc<enter>\
-    <change-folder>!<enter>;<check-stats>' "uib"
+    <change-folder>!<enter>;<check-stats>' "switch to uib"
 
 # -- My stuff ----------------------------------------------------------------
 
