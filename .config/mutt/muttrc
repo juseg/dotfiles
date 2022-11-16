@@ -23,5 +23,12 @@ macro index,pager <F2> '\
 
 # -- My stuff ----------------------------------------------------------------
 
+# open neovim in zen mode
+set editor="nvim +Zen"  # alt set nolinebreak nonumber
+
+# edit headers in editor
+set autoedit
+set edit_headers
+
 # fix current line color
 color indicator brightwhite default

@@ -199,7 +199,7 @@ lsp.pylsp.setup {
 
 -- ### Zen mode (-> lua/zen.lua)
 
--- configure neovim zen mode
+-- configure neovim zen mode (AUR package neovim-zen-mode-git)
 require("zen-mode").setup {
   window = {
     width = 96, -- width of the zen window (chars, fraction or function)
