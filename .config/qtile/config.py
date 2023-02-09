@@ -40,12 +40,13 @@ keys = [
     # toggle between layouts
     Key(mod, 'Tab', lazy.next_layout(), desc='Toggle between layouts'),
     Key(mod, 'w', lazy.window.kill(), desc='Kill focused window'),
+    Key(mod, 'f', lazy.window.toggle_fullscreen(), desc='Fullscreen'),
 
     # applications
     # FIXME configure rofi
     Key(mod, 'Return', lazy.spawn('terminal'), desc='Launch terminal'),
     Key(mod, 'b', lazy.spawn('firefox'), desc='Launch web browser'),
-    Key(mod, 'f', lazy.spawn('thunar'), desc='Launch file browser'),
+    Key(mod, 't', lazy.spawn('thunar'), desc='Launch file browser'),
     Key(mod, 'm', lazy.spawn('thunderbird'), desc='Launch browser'),
     Key(mod, 'r', lazy.spawncmd(), desc='Run command in prompt widget'),
     Key(modshift, 'Return', lazy.spawn(
