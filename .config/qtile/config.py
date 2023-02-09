@@ -133,7 +133,7 @@ def get_widgets(isfirst=True, islast=True):
             this_current_screen_border=colors[10],
             this_screen_border=colors[2],
             highlight_color=colors[0]),
-        widget.TextBox(text='|', foreground=colors[8])]
+        widget.TextBox(text='||', foreground=colors[8])]
 
     # widgets on any screen
     widgets += [
@@ -141,22 +141,30 @@ def get_widgets(isfirst=True, islast=True):
         widget.CurrentLayout(),
         widget.Prompt(prompt=':'),
         widget.TextBox(text='|', foreground=colors[8]),
-        widget.WindowName()]
+        widget.WindowName(foreground=colors[10])]
 
     # widgets on right screen
     if islast:
         widgets += [
+            widget.TextBox(text='||', foreground=colors[8]),
+            widget.Net(
+                foreground=colors[11],
+                format='{down} ↓↑{up}', prefix='k'),
             widget.TextBox(text='|', foreground=colors[8]),
-            widget.Net(format='{down} ↓↑{up}', prefix='k'),
-            widget.TextBox(text='|', foreground=colors[8]),
-            widget.CPU(format='{freq_current}GHz {load_percent}%'),
-            widget.ThermalSensor(),
+            widget.CPU(
+                foreground=colors[13],
+                format='{freq_current}GHz {load_percent}%'),
+            widget.ThermalSensor(
+                foreground=colors[13],
+                ),
             widget.TextBox(text='|', foreground=colors[8]),
             widget.Memory(
+                foreground=colors[12],
                 format='{MemUsed:.0f}/{MemTotal:.0f}{mm}', measure_mem='G'),
             widget.TextBox(text='|', foreground=colors[8]),
-            widget.Clock(format='%a %d %b %H:%M'),  # or '%c' to include seconds
-            widget.TextBox(text='|', foreground=colors[8]),
+            widget.Clock(
+                format='%a %d %b %H:%M'),  # or '%c' to include seconds
+            widget.TextBox(text='||', foreground=colors[8]),
             widget.Systray()]
 
     # return list of widget
@@ -174,10 +182,11 @@ dgroups_app_rules = [
     Rule(Match(wm_class=['Slack']), group='Chat')]
 
 # open applications in floating windows (use xprop to find wm class and name)
-floating_layout = layout.Floating(float_rules=[
-    *layout.Floating.default_float_rules,
-    Match(wm_class='ncview')])
-
+floating_layout = layout.Floating(
+    border_focus=colors[2], border_normal=colors[0], border_width=2,
+    float_rules=layout.Floating.default_float_rules+[
+        Match(wm_class=wm_class) for wm_class in (
+            'ncview', 'manjaro-settings-manager')])
 
 # -- Startup applications ----------------------------------------------------
 
