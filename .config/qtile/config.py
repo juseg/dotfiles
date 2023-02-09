@@ -4,6 +4,7 @@
 # ~/.config/qtile/config - qtile window manager config file
 
 import subprocess
+import Xlib.display
 from libqtile import bar, hook, layout, widget
 from libqtile.lazy import lazy
 from libqtile.config import Group, Key, Match, Screen, Rule
@@ -56,10 +57,9 @@ keys = [
 
 # -- Groups (workspaces) -----------------------------------------------------
 
-# define workspaces (or use icons ___)
-# FIXME add custom layouts
-names = ['Web', 'Code', 'Term', 'Docs', 'Mail', 'Chat', 'Music', 'Photo']
-groups = [Group(name, dict(layout='max')) for name in names]
+# define workspaces
+names = ['Web', 'Code', 'Term', 'Mail', 'Docs', 'Chat', 'Music', 'Photo']
+groups = [Group(name) for name in names]
 
 # assign keybindings
 for i, name in enumerate(names, 1):
@@ -82,11 +82,9 @@ colors = [
 # layouts (first is the default)
 layouts = [
     layout.MonadTall(
-        border_width=1, margin=8, border_focus=colors[2],
-        border_normal=colors[0]),
-    layout.Max(),
-    layout.RatioTile(),
-]
+        border_focus=colors[2], border_normal=colors[0], border_width=2,
+        margin=12, single_border_width=0, single_margin=0),
+    layout.Max()]
 
 # -- Screens and widgets -----------------------------------------------------
 
