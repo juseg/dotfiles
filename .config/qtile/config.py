@@ -31,12 +31,10 @@ keys = [
     Key(modshift, 'j', lazy.layout.shuffle_down(),  desc='Move window down'),
     Key(modshift, 'k', lazy.layout.shuffle_up(),    desc='Move window up'),
 
-    # grow windows
-    Key(modcontrol, 'h', lazy.layout.grow_left(),   desc='Grow window left'),
-    Key(modcontrol, 'l', lazy.layout.grow_right(),  desc='Grow window right'),
-    Key(modcontrol, 'j', lazy.layout.grow_down(),   desc='Grow window down'),
-    Key(modcontrol, 'k', lazy.layout.grow_up(),     desc='Grow window up'),
-    Key(mod, 'n', lazy.layout.normalize(), desc='Reset all window sizes'),
+    # resize monad windows (commands vary by layout)
+    Key(modcontrol, 'h', lazy.layout.shrink_main(), desc='Shrink main window'),
+    Key(modcontrol, 'l', lazy.layout.grow_main(),   desc='Grow main window'),
+    Key(mod, 'n', lazy.layout.set_ratio(0.5), desc='Reset all window sizes'),
 
     # toggle between layouts
     Key(mod, 'Tab', lazy.next_layout(), desc='Toggle between layouts'),
