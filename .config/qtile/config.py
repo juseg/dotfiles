@@ -98,57 +98,71 @@ layouts = [
 widget_defaults = dict(
     font='Fira Code', fontsize=12, foreground=colors[15])
 
-# widgets on left screen
-widgets_left = [
-    widget.GroupBox(
-        active=colors[15],
-        font='Fira Code Bold',
-        foreground=colors[2],
-        highlight_method='line',
-        inactive=colors[8],
-        other_current_screen_border=colors[12],
-        other_screen_border=colors[4],
-        rounded=False,
-        this_current_screen_border=colors[10],
-        this_screen_border=colors[2],
-        highlight_color=colors[0],
-    ),
-    widget.TextBox(text='|', foreground=colors[8]),
-    widget.CurrentLayoutIcon(padding=0, scale=0.75),
-    widget.CurrentLayout(),
-    widget.Prompt(prompt=':'),
-    widget.TextBox(text='|', foreground=colors[8]),
-    widget.WindowName(),
-]
 
-# widgets on right screen
-widgets_right = [
-    widget.CurrentLayoutIcon(padding=0, scale=0.75),
-    widget.CurrentLayout(),
-    widget.Prompt(prompt=':'),
-    widget.TextBox(text='|', foreground=colors[8]),
-    widget.WindowName(),
-    widget.TextBox(text='|', foreground=colors[8]),
-    widget.Net(format='{down} ↓↑{up}', prefix='k'),
-    widget.TextBox(text='|', foreground=colors[8]),
-    widget.CPU(format='{freq_current}GHz {load_percent}%'),
-    widget.ThermalSensor(),
-    widget.TextBox(text='|', foreground=colors[8]),
-    widget.Memory(
-        format='{MemUsed:.0f}/{MemTotal:.0f}{mm}', measure_mem='G'),
-    widget.TextBox(text='|', foreground=colors[8]),
-    widget.Clock(format='%a %d %b %H:%M'),  # or '%c' to include seconds
-    widget.TextBox(text='|', foreground=colors[8]),
-    widget.Systray()]
+def get_screens():
+    """Initialize as many screens as x11 detected."""
+    screens = []
+    count = Xlib.display.Display().screen_count()
+    for i in range(count):
+        widgets = get_widgets(isfirst=(i == 0), islast=(i == count-1))
+        screens.append(Screen(
+            bottom=bar.Bar(widgets, size=24, background=colors[0]),
+            wallpaper=f'~/.local/share/backgrounds/background-{i}.jpg'))
+    return screens
 
-# screens
-screens = [
-    Screen(
-        bottom=bar.Bar(widgets_left, size=24, background=colors[0]),
-        wallpaper='~/.local/share/backgrounds/background0.jpg'),
-    Screen(
-        bottom=bar.Bar(widgets_right, size=24, background=colors[0]),
-        wallpaper='~/.local/share/backgrounds/background1.jpg')]
+
+def get_widgets(isfirst=True, islast=True):
+    """Initialize widgets for a given monitor."""
+
+    # create empty list
+    widgets = []
+
+    # widgets on leftmost screen only
+    if isfirst:
+        widgets += [
+            widget.GroupBox(
+            active=colors[15],
+            font='Fira Code Bold',
+            foreground=colors[2],
+            highlight_method='line',
+            inactive=colors[8],
+            other_current_screen_border=colors[12],
+            other_screen_border=colors[4],
+            rounded=False,
+            this_current_screen_border=colors[10],
+            this_screen_border=colors[2],
+            highlight_color=colors[0]),
+        widget.TextBox(text='|', foreground=colors[8])]
+
+    # widgets on any screen
+    widgets += [
+        widget.CurrentLayoutIcon(padding=0, scale=0.75),
+        widget.CurrentLayout(),
+        widget.Prompt(prompt=':'),
+        widget.TextBox(text='|', foreground=colors[8]),
+        widget.WindowName()]
+
+    # widgets on right screen
+    if islast:
+        widgets += [
+            widget.TextBox(text='|', foreground=colors[8]),
+            widget.Net(format='{down} ↓↑{up}', prefix='k'),
+            widget.TextBox(text='|', foreground=colors[8]),
+            widget.CPU(format='{freq_current}GHz {load_percent}%'),
+            widget.ThermalSensor(),
+            widget.TextBox(text='|', foreground=colors[8]),
+            widget.Memory(
+                format='{MemUsed:.0f}/{MemTotal:.0f}{mm}', measure_mem='G'),
+            widget.TextBox(text='|', foreground=colors[8]),
+            widget.Clock(format='%a %d %b %H:%M'),  # or '%c' to include seconds
+            widget.TextBox(text='|', foreground=colors[8]),
+            widget.Systray()]
+
+    # return list of widget
+    return widgets
+
+
+screens = get_screens()
 
 # -- Configuration variables -------------------------------------------------
 
