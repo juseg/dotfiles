@@ -127,18 +127,18 @@ def get_widgets(isfirst=True, islast=True):
     if isfirst:
         widgets += [
             widget.GroupBox(
-            active=colors[15],
-            font='Fira Code Bold',
-            foreground=colors[2],
-            highlight_method='line',
-            inactive=colors[8],
-            other_current_screen_border=colors[12],
-            other_screen_border=colors[4],
-            rounded=False,
-            this_current_screen_border=colors[10],
-            this_screen_border=colors[2],
-            highlight_color=colors[0]),
-        widget.TextBox(text='||', foreground=colors[8])]
+                active=colors[15],
+                font='Fira Code Bold',
+                foreground=colors[2],
+                highlight_method='line',
+                inactive=colors[8],
+                other_current_screen_border=colors[12],
+                other_screen_border=colors[4],
+                rounded=False,
+                this_current_screen_border=colors[10],
+                this_screen_border=colors[2],
+                highlight_color=colors[0]),
+            widget.TextBox(text='||', foreground=colors[8])]
 
     # widgets on any screen
     widgets += [
