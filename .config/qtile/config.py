@@ -103,7 +103,12 @@ widget_defaults = dict(
 def get_screens():
     """Initialize as many screens as x11 detected."""
     screens = []
-    count = Xlib.display.Display().screen_count()
+    display = Xlib.display.Display()
+    resources = display.screen().root.xrandr_get_screen_resources()
+    count = len(list(filter(
+        lambda output: display.xrandr_get_output_info(
+            output, resources.config_timestamp).crtc,
+        resources.outputs)))
     for i in range(count):
         widgets = get_widgets(isfirst=(i == 0), islast=(i == count-1))
         screens.append(Screen(
