@@ -1,7 +1,9 @@
 # Copyright (c) 2023, Julien Seguinot (juseg.github.io)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
-# ~/.config/qtile/config - qtile window manager config file
+# ~/.config/qtile/config - qtile window manager config file"""
+
+"""Qtile window manager configuration file."""
 
 import subprocess
 import Xlib.display
@@ -192,6 +194,7 @@ floating_layout = layout.Floating(
     float_rules=layout.Floating.default_float_rules+[
         Match(wm_class=wm_class) for wm_class in (
             'ncview', 'manjaro-settings-manager')])
+
 
 # -- Startup applications ----------------------------------------------------
 
