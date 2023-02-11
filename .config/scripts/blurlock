@@ -8,4 +8,4 @@ res=$(xrandr -q|sed -n 's/.*current[ ]\([0-9]*\) x \([0-9]*\),.*/\1x\2/p')
 # get screenshot, blur, and lock (faster than i3lock-color)
 import -silent -window root jpeg:- | \
     convert - -scale 20% -blur 0x2.5 -resize 500% RGB:- | \
-    i3lock --raw $RESOLUTION:rgb -i /dev/stdin -e $@
+    i3lock --raw $res:rgb -i /dev/stdin -e $@
