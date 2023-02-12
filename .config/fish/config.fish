@@ -98,29 +98,29 @@ alias wget "wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 # ./functions/fish_git_prompt, or in ./fish_variables.
 
 # configure git prompt
-set fish_git_prompt_show_informative_status 1  # dirty files, unpushed, etc
-set fish_git_prompt_use_informative_chars 0
-set fish_git_prompt_showdirtystate 1  # uncommitted changes
-set fish_git_prompt_showuntrackedfiles 1  # untracked files (slow)
-set fish_git_prompt_showupstream informative  # commits ahead/behind if any
-set fish_git_prompt_showstashstate 1  # number of stashes
-set fish_git_prompt_describe_style branch
-set fish_git_prompt_showcolorhints 1  # color
+set __fish_git_prompt_show_informative_status 1  # dirty files, unpushed, etc
+set __fish_git_prompt_use_informative_chars 0
+set __fish_git_prompt_showdirtystate 1  # uncommitted changes
+set __fish_git_prompt_showuntrackedfiles 1  # untracked files (slow)
+set __fish_git_prompt_showupstream informative  # commits ahead/behind if any
+set __fish_git_prompt_showstashstate 1  # number of stashes
+set __fish_git_prompt_describe_style branch
+set __fish_git_prompt_showcolorhints 1  # color
 
 # git prompt flags in the order they appear
-set fish_git_prompt_char_stateseparator '|'   # between branch and flags
-set fish_git_prompt_char_cleanstate     '✓'   # when nothing else applies
-set fish_git_prompt_char_dirtystate     '*'   # unstaged changes
-set fish_git_prompt_char_invalidstate   '!'   # changes to staged files
-set fish_git_prompt_char_stagedstate    '+'   # staged for commit
-set fish_git_prompt_char_untrackedfiles '?'   # untracked files
-set fish_git_prompt_char_stashstate     '$'   # stash entries
+set __fish_git_prompt_char_stateseparator '|'   # between branch and flags
+set __fish_git_prompt_char_cleanstate     '✓'   # when nothing else applies
+set __fish_git_prompt_char_dirtystate     '*'   # unstaged changes
+set __fish_git_prompt_char_invalidstate   '!'   # changes to staged files
+set __fish_git_prompt_char_stagedstate    '+'   # staged for commit
+set __fish_git_prompt_char_untrackedfiles '?'   # untracked files
+set __fish_git_prompt_char_stashstate     '$'   # stash entries
 
 # git prompt colors in the order they appear
-set fish_git_prompt_color_branch green        # when nothing else applies
-set fish_git_prompt_color_branch_detached red     # detached head
-set fish_git_prompt_color_branch_dirty yellow     # unstaged changes
-set fish_git_prompt_color_branch_staged yellow    # staged changes
-set fish_git_prompt_color_cleanstate green    # when nothing else applies
-set fish_git_prompt_color_flags yellow        # anything else but invalid
-set fish_git_prompt_color_invalidstate red    # changes to staged files
+set __fish_git_prompt_color_branch green        # when nothing else applies
+set __fish_git_prompt_color_branch_detached red     # detached head
+set __fish_git_prompt_color_branch_dirty yellow     # unstaged changes
+set __fish_git_prompt_color_branch_staged yellow    # staged changes
+set __fish_git_prompt_color_cleanstate green    # when nothing else applies
+set __fish_git_prompt_color_flags yellow        # anything else but invalid
+set __fish_git_prompt_color_invalidstate red    # changes to staged files
