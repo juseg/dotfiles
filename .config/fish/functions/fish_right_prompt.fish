@@ -3,14 +3,16 @@ function fish_right_prompt -d 'Show non-zero exit status and command duration.'
     # save status of last command
     set -l last_status $status
 
+    # initialize global status count on first call
+    set -q __fish_prompt_status_generation
+        or set -g __fish_prompt_status_generation $status_generation
+
     # exit if status count was carried over (no command issued)
-    if not set -q __fish_prompt_status_generation
-        or test $__fish_prompt_status_generation = $status_generation
-            return
-    end
+    test $__fish_prompt_status_generation = $status_generation
+        and return
 
     # save status call in global variable for next call
-    set -g __fish_prompt_status_generation $status_generation
+    set __fish_prompt_status_generation $status_generation
 
     # print non-zero exit status
     if not contains $last_status 0 141
