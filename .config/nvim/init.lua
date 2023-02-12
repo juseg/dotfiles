@@ -1,4 +1,4 @@
--- Copyright (c) 2013-2022, Julien Seguinot (juseg.github.io)
+-- Copyright (c) 2013-2023, Julien Seguinot (juseg.github.io)
 -- GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 --
 -- ~/.config/nvim/init.lua - Neovim configuration file using lua script
@@ -217,3 +217,8 @@ require("zen-mode").setup {
 
 -- when saving file
 vim.cmd('autocmd BufWritePre * %s/\\s\\+$//e')  -- remove trailing space
+
+-- color fish files with zsh syntax (FIXME use treesitter instead)
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+    pattern = '*.fish',
+    command = 'set syntax=zsh'})
