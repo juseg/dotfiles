@@ -6,10 +6,10 @@ return require('packer').startup(function(use)
     use { 'wbthomason/packer.nvim' }
 
     -- just enough to source init.lua
+    use { 'ellisonleao/gruvbox.nvim' }  -- lua port of gruvbox colorscheme
     use { 'folke/zen-mode.nvim' }       -- distraction-free mode
     use { 'hrsh7th/cmp-nvim-lsp' }      -- autocomplete from language server
     use { 'hrsh7th/nvim-cmp' }          -- autocomplete engine
-    use { 'morhetz/gruvbox' }           -- colorscheme gruvbox
 
     -- current Manjaro / AUR packages
     -- - neovim-cmp                     # the autocompletion engine
@@ -24,7 +24,6 @@ return require('packer').startup(function(use)
     -- - vim-airline-gruvbox-git        # vim airline gruvbox theme
 
     -- to be added soon
-    -- use { 'ellisonleao/gruvbox.nvim' }
     -- use { 'mbbill/undotree' }
     -- use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = {
     --     { 'nvim-lua/plenary.nvim' } } }
