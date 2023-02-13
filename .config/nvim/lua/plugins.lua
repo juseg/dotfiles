@@ -2,14 +2,13 @@
 
 return require('packer').startup(function(use)
 
-    -- packer manages itself
-    use { 'wbthomason/packer.nvim' }
+    use { 'wbthomason/packer.nvim' }    -- packer manages itself
 
-    -- just enough to source init.lua
     use { 'ellisonleao/gruvbox.nvim' }  -- lua port of gruvbox colorscheme
     use { 'folke/zen-mode.nvim' }       -- distraction-free mode
     use { 'hrsh7th/cmp-nvim-lsp' }      -- autocomplete from language server
     use { 'hrsh7th/nvim-cmp' }          -- autocomplete engine
+    use { 'nvim-lualine/lualine.nvim' } -- blazing fast status line
 
     -- current Manjaro / AUR packages
     -- - neovim-cmp                     # the autocompletion engine
@@ -20,8 +19,6 @@ return require('packer').startup(function(use)
     -- - neovim-cmp-path-git            # autocomplete paths
     -- - neovim-lspconfig               # language server config files
     -- - python-lsp-server              # language server for python
-    -- - vim-airline                    # vim airline also for neovim
-    -- - vim-airline-gruvbox-git        # vim airline gruvbox theme
 
     -- to be added soon
     -- use { 'mbbill/undotree' }

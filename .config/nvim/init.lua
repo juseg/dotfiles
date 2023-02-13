@@ -6,4 +6,3 @@
 require('autocmd')      -- automatic commands
 require('remap')        -- key mappings
 require('set')          -- neovim settings
-
