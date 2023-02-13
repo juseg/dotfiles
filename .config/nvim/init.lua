@@ -22,12 +22,6 @@ require('set')          -- neovim settings
 -- fix formatting (hard word wrap) in neovim>=0.8 and pylsp
 vim.opt.formatexpr = "pylsp#Format()"
 
--- ### Colors (-> after/colors.lua )
-vim.g.gruvbox_italic = true
-vim.g.gruvbox_transparent_bg = true
-vim.cmd('colorscheme gruvbox')
-vim.cmd('hi Normal ctermbg=None')          -- transparent background
-
 -- ### Filetype specific
 -- FIXME convert to lua script
 
