@@ -16,15 +16,7 @@
 -- - vim-airline                    # vim airline also for neovim
 -- - vim-airline-gruvbox-git        # vim airline gruvbox theme
 
+require('autocmd')      -- automatic commands
 require('remap')        -- key mappings
 require('set')          -- neovim settings
 
--- ### Auto command
-
--- when saving file
-vim.cmd('autocmd BufWritePre * %s/\\s\\+$//e')  -- remove trailing space
-
--- color fish files with zsh syntax (FIXME use treesitter instead)
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
-    pattern = '*.fish',
-    command = 'set syntax=zsh'})
