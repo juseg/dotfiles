@@ -8,6 +8,7 @@ return require('packer').startup(function(use)
     use { 'folke/zen-mode.nvim' }       -- distraction-free mode
     use { 'hrsh7th/cmp-nvim-lsp' }      -- autocomplete from language server
     use { 'hrsh7th/nvim-cmp' }          -- autocomplete engine
+    use { 'lewis6991/gitsigns.nvim' }   -- git signs in gutter
     use { 'nvim-lualine/lualine.nvim' } -- blazing fast status line
 
     -- current Manjaro / AUR packages
