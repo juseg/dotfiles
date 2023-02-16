@@ -12,6 +12,7 @@ return require('packer').startup(function(use)
     use { 'nvim-lualine/lualine.nvim' } -- blazing fast status line
     use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = {
         { 'nvim-lua/plenary.nvim' } } } -- fuzzy file finder
+    use { 'nvim-treesitter/nvim-treesitter', run = ':TSupdate' }
 
     -- current Manjaro / AUR packages
     -- - neovim-cmp                     # the autocompletion engine
@@ -25,7 +26,6 @@ return require('packer').startup(function(use)
 
     -- to be added soon
     -- use { 'mbbill/undotree' }
-    -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSupdate' }
     -- use { 'tpope/vim-fugitive' }
 
     -- compare this to current LSP setup
