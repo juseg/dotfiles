@@ -2,8 +2,10 @@
 
 return require('packer').startup(function(use)
 
+    -- plugin manager
     use { 'wbthomason/packer.nvim' }    -- packer manages itself
 
+    -- lua plugins
     use { 'ellisonleao/gruvbox.nvim' }  -- lua port of gruvbox colorscheme
     use { 'folke/zen-mode.nvim' }       -- distraction-free mode
     use { 'hrsh7th/cmp-nvim-lsp' }      -- autocomplete from language server
@@ -15,6 +17,9 @@ return require('packer').startup(function(use)
         { 'nvim-lua/plenary.nvim' } } } -- fuzzy file finder
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSupdate' }
 
+    -- vim script plugins
+    use { 'tpope/vim-fugitive' }        -- git commands in buffers
+
     -- current Manjaro / AUR packages
     -- - neovim-cmp                     # the autocompletion engine
     -- - neovim-cmp-buffer-git          # autocomplete from current buffer
@@ -24,9 +29,6 @@ return require('packer').startup(function(use)
     -- - neovim-cmp-path-git            # autocomplete paths
     -- - neovim-lspconfig               # language server config files
     -- - python-lsp-server              # language server for python
-
-    -- to be added soon
-    -- use { 'tpope/vim-fugitive' }
 
     -- compare this to current LSP setup
     -- use { 'VonHeikemen/lsp-zero.nvim', branch = 'v1.x', requires = {
