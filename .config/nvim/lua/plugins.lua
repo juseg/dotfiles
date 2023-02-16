@@ -10,6 +10,8 @@ return require('packer').startup(function(use)
     use { 'hrsh7th/nvim-cmp' }          -- autocomplete engine
     use { 'lewis6991/gitsigns.nvim' }   -- git signs in gutter
     use { 'nvim-lualine/lualine.nvim' } -- blazing fast status line
+    use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = {
+        { 'nvim-lua/plenary.nvim' } } } -- fuzzy file finder
 
     -- current Manjaro / AUR packages
     -- - neovim-cmp                     # the autocompletion engine
@@ -23,8 +25,6 @@ return require('packer').startup(function(use)
 
     -- to be added soon
     -- use { 'mbbill/undotree' }
-    -- use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = {
-    --     { 'nvim-lua/plenary.nvim' } } }
     -- use { 'nvim-treesitter/nvim-treesitter', run = ':TSupdate' }
     -- use { 'tpope/vim-fugitive' }
 
