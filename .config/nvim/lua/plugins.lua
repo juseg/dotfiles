@@ -8,8 +8,6 @@ return require('packer').startup(function(use)
     -- lua plugins
     use { 'ellisonleao/gruvbox.nvim' }  -- lua port of gruvbox colorscheme
     use { 'folke/zen-mode.nvim' }       -- distraction-free mode
-    use { 'hrsh7th/cmp-nvim-lsp' }      -- autocomplete from language server
-    use { 'hrsh7th/nvim-cmp' }          -- autocomplete engine
     use { 'lewis6991/gitsigns.nvim' }   -- git signs in gutter
     use { 'mbbill/undotree' }           -- undo tree with branches
     use { 'nvim-lualine/lualine.nvim' } -- blazing fast status line
@@ -20,32 +18,26 @@ return require('packer').startup(function(use)
     -- vim script plugins
     use { 'tpope/vim-fugitive' }        -- git commands in buffers
 
-    -- current Manjaro / AUR packages
-    -- - neovim-cmp                     # the autocompletion engine
-    -- - neovim-cmp-buffer-git          # autocomplete from current buffer
-    -- - neovim-cmp-latex-symbols-git   # autocomplete latex symbols
-    -- - neovim-cmp-nvim-lsp-git        # autocomplete from language server
-    -- - neovim-cmp-nvim-lua-git        # autocomplete lua code
-    -- - neovim-cmp-path-git            # autocomplete paths
-    -- - neovim-lspconfig               # language server config files
-    -- - python-lsp-server              # language server for python
+    -- autocompletion and lsp
+    -- (FIXME choose mason auto-install or Manjaro packages)
+    use { 'VonHeikemen/lsp-zero.nvim', branch = 'v1.x', requires = {
 
-    -- compare this to current LSP setup
-    -- use { 'VonHeikemen/lsp-zero.nvim', branch = 'v1.x', requires = {
-    --     -- LSP Support
-    --     {'neovim/nvim-lspconfig'},             -- Required
-    --     {'williamboman/mason.nvim'},           -- Optional
-    --     {'williamboman/mason-lspconfig.nvim'}, -- Optional
-    --     -- Autocompletion
-    --     {'hrsh7th/nvim-cmp'},         -- Required
-    --     {'hrsh7th/cmp-nvim-lsp'},     -- Required
-    --     {'hrsh7th/cmp-buffer'},       -- Optional
-    --     {'hrsh7th/cmp-path'},         -- Optional
-    --     {'saadparwaiz1/cmp_luasnip'}, -- Optional
-    --     {'hrsh7th/cmp-nvim-lua'},     -- Optional
-    --     -- Snippets
-    --     {'L3MON4D3/LuaSnip'},             -- Required
-    --     {'rafamadriz/friendly-snippets'}, -- Optional
-    -- } }
+        -- LSP Support
+        {'neovim/nvim-lspconfig'},      -- language server config (required)
+        -- {'williamboman/mason.nvim'},           -- manage servers (optional)
+        -- {'williamboman/mason-lspconfig.nvim'}, -- manage servers (optional)
+
+        -- Autocompletion
+        { 'hrsh7th/cmp-nvim-lsp' },     -- complete from lsp (required)
+        { 'hrsh7th/nvim-cmp' },         -- complete engine (required)
+        { 'hrsh7th/cmp-buffer' },       -- complete from buffer (optional)
+        { 'hrsh7th/cmp-path' },         -- complete paths (optional)
+        { 'hrsh7th/cmp-nvim-lua' },     -- complete runtime nvim (optional)
+        { 'saadparwaiz1/cmp_luasnip' }, -- complete from snippets (optional)
+
+        -- Snippets
+        {'L3MON4D3/LuaSnip'},             -- snippets engine (required)
+        {'rafamadriz/friendly-snippets'}, -- snippets definitions (optional)
+    } }
 
 end)

@@ -1,72 +1,44 @@
 -- ~/.config/nvim/after/plugin/lsp.lua - Autocompletion and LSP --------------
+--
+-- After ThePrimeagen (https://www.youtube.com/watch?v=w7i4amO_zaE)
 
--- fix formatting (hard word wrap) in neovim>=0.8 and pylsp
-vim.opt.formatexpr = "pylsp#Format()"
+-- load lsp-zero preset
+local lsp = require('lsp-zero').preset()
+lsp.setup()
 
--- popup menu, even for single match, with no match preselected
-vim.opt.completeopt = menu,menuone,noselect
+-- configure servers if installed (list at ~/.local/share/nvim/site/pack/\
+-- packer/start/nvim-lspconfig/doc/server_configurations.md)
+lsp.setup_servers({'cssls', 'html', 'lua_ls', 'marksman', 'pylsp', 'texlab'})
 
--- setup neovim-cmp (adapted from https://github.com/hrsh7th/nvim-cmp)
+-- override cmp configuration (instead of using lsp.setup_nvim_cmp)
 local cmp = require 'cmp'
-cmp.setup {
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
+cmp.setup(lsp.defaults.cmp_config({
 
-  -- key mappings
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),    -- ??
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),     -- ??
-    ['<C-Space>'] = cmp.mapping.complete(),     -- ??
-    ['<C-e>'] = cmp.mapping.abort(),            -- close suggestions
-    ['<CR>'] = cmp.mapping.confirm(             -- confirm current choice
-      { select = true }), -- auto select first choice
-  }),
-  -- sources, ranked by priority
-  sources = cmp.config.sources({
-    -- { name = 'gh_issues' },                  -- looks useful
-    { name = 'nvim_lua'},                       -- lua, useful to config vim
-    { name = 'nvim_lsp'},                       -- language server protocol
-    { name = 'path' },
-    -- { name = 'luasnip' },                    -- code snippets
-    -- { name = 'buffer', keyword_lenght = 5 }, -- buffer, a bit intrusive
-  }),
+    -- navigate suggestions
+    mapping = lsp.defaults.cmp_mappings({
+        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+        ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-Space>'] = cmp.mapping.complete(),
+    }),
 
-  -- snippets, required accordint to nvim-cmp readme
-  -- snippet = {
-  --   expand = function(args)
-  --     require('luasnip').lsp_expand(args.body)  -- For `luasnip` users.
-  --   end,
-  -- },
+    -- appearance (not supported by lsp.setup_nvim_cmp)
+    experimental = { ghost_text = true },
+    window = { completion = cmp.config.window.bordered() },
+}))
 
-  -- formatting of each source
-  -- to add icons see https://github.com/hrsh7th/nvim-cmp/wiki/Menu-Appearance
-  formatting = {
-    format = function(entry, vim_item)
-      vim_item.menu = ({
-        buffer = "[Buffer]",
-        -- gh_issues = "[issues]",
-        -- luasnip = "[snip]",
-        nvim_lsp = "[LSP]",
-        path = "[Path]",
-        latex_symbols = "[LaTeX]",
-      })[entry.source.name]
-      return vim_item
-    end
-  },
-
-  -- experimental features
-  experimental = {
-    ghost_text = true,          -- shows virtual text as you type
-  },
-
-  -- windows appearance (colors can be changed with highlight)
-  window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
-  },
-}
-
--- load lsp server for python
-local lsp = require('lspconfig')
-lsp.pylsp.setup {
-  capabilities = require('cmp_nvim_lsp').default_capabilities(
-    vim.lsp.protocol.make_client_capabilities())
-}
+-- additional keys on current buffer if it uses lsp
+lsp.on_attach(function(client, bufnr)
+  local opts = {buffer = bufnr, remap = false}
+  vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
+  vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)
+  vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
+  vim.keymap.set('n', '<leader>vrr', function() vim.lsp.buf.references() end, opts)
+  vim.keymap.set('n', '<leader>vws', function() vim.lsp.buf.workspace_symbol() end, opts)
+  vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
+  vim.keymap.set('n', '[d', function() vim.diagnostic.goto_next() end, opts)
+  vim.keymap.set('n', ']d', function() vim.diagnostic.goto_prev() end, opts)
+  vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
+end)
