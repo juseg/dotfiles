@@ -9,6 +9,7 @@ return require('packer').startup(function(use)
     use { 'hrsh7th/cmp-nvim-lsp' }      -- autocomplete from language server
     use { 'hrsh7th/nvim-cmp' }          -- autocomplete engine
     use { 'lewis6991/gitsigns.nvim' }   -- git signs in gutter
+    use { 'mbbill/undotree' }           -- undo tree with branches
     use { 'nvim-lualine/lualine.nvim' } -- blazing fast status line
     use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = {
         { 'nvim-lua/plenary.nvim' } } } -- fuzzy file finder
@@ -25,7 +26,6 @@ return require('packer').startup(function(use)
     -- - python-lsp-server              # language server for python
 
     -- to be added soon
-    -- use { 'mbbill/undotree' }
     -- use { 'tpope/vim-fugitive' }
 
     -- compare this to current LSP setup
