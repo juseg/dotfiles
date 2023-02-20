@@ -4,11 +4,17 @@
 
 -- load lsp-zero preset
 local lsp = require('lsp-zero').preset()
-lsp.setup()
+
+-- fix undefined global vim
+lsp.configure('lua_ls', {
+    settings = { Lua = { diagnostics = { globals = { 'vim' } } } } })
 
 -- configure servers if installed (list at ~/.local/share/nvim/site/pack/\
 -- packer/start/nvim-lspconfig/doc/server_configurations.md)
 lsp.setup_servers({'cssls', 'html', 'lua_ls', 'marksman', 'pylsp', 'texlab'})
+
+-- setup needs to come after configure
+lsp.setup()
 
 -- override cmp configuration (instead of using lsp.setup_nvim_cmp)
 local cmp = require 'cmp'
