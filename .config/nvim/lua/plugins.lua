@@ -14,6 +14,7 @@ return require('packer').startup(function(use)
     use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = {
         { 'nvim-lua/plenary.nvim' } } } -- fuzzy file finder
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSupdate' }
+    use { 'terrortylor/nvim-comment' }  -- toggle comments
 
     -- vim script plugins
     use { 'tpope/vim-fugitive' }        -- git commands in buffers
