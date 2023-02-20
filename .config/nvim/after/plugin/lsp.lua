@@ -9,6 +9,10 @@ local lsp = require('lsp-zero').preset()
 lsp.configure('lua_ls', {
     settings = { Lua = { diagnostics = { globals = { 'vim' } } } } })
 
+-- enable pylint
+lsp.configure('pylsp', {
+    settings = { pylsp = { plugins = { pylint = { enabled = true } } } } })
+
 -- configure servers if installed (list at ~/.local/share/nvim/site/pack/\
 -- packer/start/nvim-lspconfig/doc/server_configurations.md)
 lsp.setup_servers({'cssls', 'html', 'lua_ls', 'marksman', 'pylsp', 'texlab'})
