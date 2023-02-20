@@ -42,6 +42,7 @@ cmp.setup(lsp.defaults.cmp_config({
 lsp.on_attach(function(client, bufnr)
   local opts = {buffer = bufnr, remap = false}
   vim.keymap.set('i', '<C-h>', function() vim.lsp.buf.signature_help() end, opts)
+  vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
   vim.keymap.set('n', '<leader>vca', function() vim.lsp.buf.code_action() end, opts)
   vim.keymap.set('n', '<leader>vd', function() vim.diagnostic.open_float() end, opts)
   vim.keymap.set('n', '<leader>vrn', function() vim.lsp.buf.rename() end, opts)
