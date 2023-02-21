@@ -20,6 +20,9 @@ lsp.setup_servers({'cssls', 'html', 'lua_ls', 'marksman', 'pylsp', 'texlab'})
 -- setup needs to come after configure
 lsp.setup()
 
+-- diagnostics as virtual text (needs to come after setup)
+vim.diagnostic.config({ virtual_text = true })
+
 -- override cmp configuration (instead of using lsp.setup_nvim_cmp)
 local cmp = require 'cmp'
 local cmp_select = { behavior = cmp.SelectBehavior.Select }

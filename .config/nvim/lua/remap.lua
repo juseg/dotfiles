@@ -21,15 +21,13 @@ vim.keymap.set('n', '<C-j>', '<C-W>j') -- move to split below
 vim.keymap.set('n', '<C-k>', '<C-W>k') -- move to split above
 vim.keymap.set('n', '<C-l>', '<C-W>l') -- move to split right
 
+-- quickfix nagivation
+vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz") -- next quickfix entry
+vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>zz") -- previous quickfix entry
+
 -- buffer navigation
 vim.keymap.set('n', '<C-u>', '<C-u>zz') -- move up and center
 vim.keymap.set('n', '<C-d>', '<C-d>zz') -- move down and center
-
--- quickfix nagivation (FIXME try Trouble)
--- vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
--- vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
--- vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
--- vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 -- copy and paste
 vim.keymap.set('n', '<leader>p', '"+p') -- paste from clipboard
