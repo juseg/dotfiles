@@ -4,5 +4,6 @@
 -- ~/.config/nvim/init.lua - Neovim configuration file using lua script
 
 require('autocmd')      -- automatic commands
+require('nordic')       -- nordic tweaks
 require('remap')        -- key mappings
 require('set')          -- neovim settings

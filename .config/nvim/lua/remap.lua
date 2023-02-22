@@ -49,9 +49,3 @@ vim.keymap.set('n', 'N', 'Nzzzv') -- search backward, center, and unfold
 vim.keymap.set('n', 'Q', '<nop>') -- disable repeat last register
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv") -- move selection down
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv") -- move selection up
-
--- nordic tweaks
-vim.keymap.set('n', 'ød', '[d', { remap = true })
-vim.keymap.set('n', 'æd', ']d', { remap = true })
-vim.keymap.set('n', 'øc', '[c', { remap = true })
-vim.keymap.set('n', 'æc', ']c', { remap = true })
