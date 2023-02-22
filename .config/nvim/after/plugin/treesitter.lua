@@ -1,14 +1,14 @@
 -- ~/.config/nvim/after/plugin/treesitter.lua - Language parsing -------------
 
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
 
-  -- listed parsers should always be installed
-  ensure_installed = { 'help', 'lua', 'python' },
+    -- listed parsers should always be installed
+    ensure_installed = { 'help', 'lua', 'python' },
 
-  -- automatically install missing parsers when entering buffer
-  auto_install = true,
+    -- automatically install missing parsers when entering buffer
+    auto_install = true,
 
-  -- setting to `false` will disable the whole extension
-  highlight = { enable = true },
+    -- setting to `false` will disable the whole extension
+    highlight = { enable = true },
 
 }

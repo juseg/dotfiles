@@ -15,7 +15,7 @@ lsp.configure('pylsp', {
 
 -- configure servers if installed (list at ~/.local/share/nvim/site/pack/\
 -- packer/start/nvim-lspconfig/doc/server_configurations.md)
-lsp.setup_servers({'cssls', 'html', 'lua_ls', 'marksman', 'pylsp', 'texlab'})
+lsp.setup_servers({ 'cssls', 'html', 'lua_ls', 'marksman', 'pylsp', 'texlab' })
 
 -- setup needs to come after configure
 lsp.setup()
@@ -27,7 +27,6 @@ vim.diagnostic.config({ virtual_text = true })
 local cmp = require 'cmp'
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 cmp.setup(lsp.defaults.cmp_config({
-
     -- navigate suggestions
     mapping = lsp.defaults.cmp_mappings({
         ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
@@ -35,7 +34,6 @@ cmp.setup(lsp.defaults.cmp_config({
         ['<C-y>'] = cmp.mapping.confirm({ select = true }),
         ['<C-Space>'] = cmp.mapping.complete(),
     }),
-
     -- appearance (not supported by lsp.setup_nvim_cmp)
     experimental = { ghost_text = true },
     window = { completion = cmp.config.window.bordered() },

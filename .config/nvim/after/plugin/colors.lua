@@ -1,7 +1,7 @@
 -- ~/.config/nvim/after/plugin/colors.lua - Colorscheme ----------------------
 
 -- transparent gruvbox
-require("gruvbox").setup({transparent_mode = true})
+require("gruvbox").setup({ transparent_mode = true })
 vim.cmd.colorscheme('gruvbox')
 
 -- transparent background for any other colorscheme

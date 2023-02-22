@@ -5,8 +5,7 @@ vim.opt.belloff = 'all'
 
 -- line numbers and newlines
 vim.opt.linebreak = true        -- break line between words
-vim.opt.number = true           -- enable line numbering
-vim.opt.relativenumber = true   -- relative line numbers (testing)
+vim.opt.relativenumber = true   -- relative line numbers
 vim.opt.cursorline = true       -- highlight current line
 vim.opt.colorcolumn = "80"      -- color column 80 (pep8 limit)
 
