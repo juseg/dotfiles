@@ -16,9 +16,6 @@ return require('packer').startup(function(use)
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSupdate' }
     use { 'terrortylor/nvim-comment' }  -- toggle comments
 
-    -- vim script plugins
-    use { 'tpope/vim-fugitive' }        -- git commands in buffers
-
     -- autocompletion and lsp
     -- (FIXME choose mason auto-install or Manjaro packages)
     use { 'VonHeikemen/lsp-zero.nvim', branch = 'v1.x', requires = {
