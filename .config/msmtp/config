@@ -1,0 +1,19 @@
+# Copyright (c) 2023, Julien Seguinot (juseg.dev)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# ~/.config/mbsync/config - Msmtp configuration file
+
+# general settings
+defaults
+auth on
+tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile ~/.local/share/msmtp/msmtp.log
+
+# juseg account (FIXME encrypt password)
+account juseg
+host mail.gandi.net
+port 587
+eval echo "from $(cat ~/.config/secrets/juseg.user)"
+eval echo "user $(cat ~/.config/secrets/juseg.user)"
+passwordeval "cat ~/.config/secrets/juseg.pass"
