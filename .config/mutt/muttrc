@@ -1,27 +1,42 @@
-# Copyright (c) 2022, Julien Seguinot (juseg.github.io)
+# Copyright (c) 2022-2023, Julien Seguinot (juseg.dev)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
 # ~/.config/mutt/muttrc - Neomutt configuration file
+#
+# After:
+# - https://blog.flaport.net/configuring-neomutt-for-email.html
+# - https://github.com/LukeSmithxyz/mutt-wizard/
+# - https://jonathanh.co.uk/blog/mutt-setup/
+#
+# Requires:
+# - isync
+# - msmtp
+# - neomutt
+# - urlscan
 
-# -- Mutt wizard -------------------------------------------------------------
 
-# mutt wizard defaults
-source /usr/share/mutt-wizard/mutt-wizard.muttrc
+# -- Account settings --------------------------------------------------------
 
-# load default account
-source ~/.config/mutt/accounts/posteo.muttrc
+# account settings
+set from = `cat ~/.config/secrets/juseg.user`
+set realname = "Julien Seguinot"
+set mbox_type = Maildir
+set folder = "~/.local/share/mail/juseg"
+set sendmail = "msmtp -a juseg"
 
-# switching accounts
-macro index,pager <F1> '\
-    <sync-mailbox><enter-command>\
-    source ~/.config/mutt/accounts/posteo.muttrc<enter>\
-    <change-folder>!<enter>;<check-stats>' "switch to posteo"
-macro index,pager <F2> '\
-    <sync-mailbox><enter-command>\
-    source ~/.config/mutt/accounts/uib.muttrc<enter>\
-    <change-folder>!<enter>;<check-stats>' "switch to uib"
+# cache settings
+set header_cache = "~/.cache/mutt/juseg/headers"
+set message_cachedir = "~/.cache/mutt/juseg/bodies"
 
-# -- My stuff ----------------------------------------------------------------
+# mailbox settings
+set spoolfile = "+Inbox"
+set postponed = "+Drafts"
+set record = "+Sent"
+set trash = "+Trash"
+mailboxes =Inbox =Archive =Drafts =Junk =Sent =Trash
+
+
+# -- General settings --------------------------------------------------------
 
 # open neovim in zen mode
 set editor="nvim +Zen"  # alt set nolinebreak nonumber
