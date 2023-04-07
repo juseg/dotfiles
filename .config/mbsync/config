@@ -1,0 +1,26 @@
+# Copyright (c) 2023, Julien Seguinot (juseg.dev)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# ~/.config/mbsync/config - Mbsync (isync) configuration file
+
+# remote account (FIXME encrypt password)
+IMAPStore juseg-remote
+Host mail.gandi.net
+UserCmd "cat ~/.config/secrets/juseg.user"
+PassCmd "cat ~/.config/secrets/juseg.pass"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# local store
+MaildirStore juseg-local
+SubFolders Verbatim
+Path ~/.local/share/mail/juseg/
+Inbox ~/.local/share/mail/juseg/Inbox
+
+# channel
+Channel juseg
+Far :juseg-remote:
+Near :juseg-local:
+Create Both
+Expunge Both
+SyncState *
