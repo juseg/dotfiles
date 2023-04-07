@@ -36,6 +36,39 @@ set trash = "+Trash"
 mailboxes =Inbox =Archive =Drafts =Junk =Sent =Trash
 
 
+# -- Key bindings ------------------------------------------------------------
+
+# vim navigation
+bind index l display-message
+bind pager,attach h exit
+
+# sidebar navigation
+bind index,pager \Cj sidebar-next
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cl sidebar-open
+bind index,pager b sidebar-toggle-visible
+
+# go to folders
+bind index,pager g noop
+macro index,pager gi "<change-folder>=Inbox<enter>" "go to inbox"
+macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
+macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
+macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
+macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
+macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
+
+# sync mailbox
+macro index S "<shell-escape>mbsync juseg<enter>" "sync mailbox"
+
+# archive and junk
+macro index,pager A "<save-message>=Archive<enter>" "move to archive"
+macro index,pager J "<save-message>=Junk<enter>" "move to junk"
+
+# extract urls with urlscan
+macro index,pager \cb "<pipe-message> urlscan<enter>" "extract urls"
+macro attach,compose \cb "<pipe-entry> urlscan<enter>" "extract urls"
+
+
 # -- General settings --------------------------------------------------------
 
 # open neovim in zen mode
@@ -48,8 +81,3 @@ set edit_headers
 # fix current line color
 color indicator brightwhite default
 
-# extract urls (manjaro package urlscan)
-macro index,pager \cb "<pipe-message> urlscan<enter>" \
-    "call urlscan to extract URLs out of a message"
-macro attach,compose \cb "<pipe-entry> urlscan<enter>" \
-    "call urlscan to extract URLs out of a message"
