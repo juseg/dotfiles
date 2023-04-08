@@ -92,6 +92,44 @@ set sidebar_short_path = yes
 set sidebar_next_new_wrap = yes
 set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
 
-# fix current line color
-color indicator brightwhite default
 
+# -- Colors ------------------------------------------------------------------
+
+# message body
+color body blue default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # emails
+color body blue default "[a-z]+://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # urls
+color body brightgreen default "^[#]+ \.*" # headings
+color body brightyellow default "^(\t| )*(-|\\*)" # list markers
+color body green default "\`[^\`]*\`" # code
+
+# message header
+color header white black ".*"
+color header blue default "^(From|To|CC|BCC)"
+color header green default "^(Subject)"
+
+# mailbox index
+color index brightdefault default "!~R" # unread emails
+color index yellow default "~F !~D" # flagged (important) and not deleted
+color index green default "~Q !~D" # replied to and not deleted
+color index red default "~= !~D" # duplicate and not deleted
+color index blue default "~T" # tagged (selected)
+color index white default "~D" # deleted (marked for deletion)
+color index_collapsed blue default # number of messages in thread
+color index_number white default # message number in mailbox
+
+# current line
+color indicator underline default default
+
+# quotes
+color quoted blue default
+color quoted1 white default
+color quoted2 white default
+color quoted3 white default
+color quoted4 white default
+color quoted5 white default
+
+# signatures
+color signature white default
+
+# top and bottom bars
+color status white black
