@@ -72,12 +72,25 @@ macro attach,compose \cb "<pipe-entry> urlscan<enter>" "extract urls"
 
 # -- General settings --------------------------------------------------------
 
-# open neovim in zen mode
-set editor="nvim +Zen"  # alt set nolinebreak nonumber
+# alternative identities
+alternates ".*@juseg.dev"
 
-# edit headers in editor
-set autoedit
-set edit_headers
+# editing and replying
+set autoedit # skip subject and recipient prompt
+set edit_headers # edit headers alongside message body
+set editor="nvim +Zen" # neovim zen mode
+set forward_format = "Fwd: %s" # default to %a[uthor]: %s[ubject]
+set forward_quote # forward messages as quotes
+set include # quote messages in replies
+set mail_check_stats # count messages in mailboxes (needed for %N)
+set reverse_name # reply as address written to if it is in alternates
+
+# sidebar properties
+set sidebar_visible = no
+set sidebar_width = 20
+set sidebar_short_path = yes
+set sidebar_next_new_wrap = yes
+set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
 
 # fix current line color
 color indicator brightwhite default
