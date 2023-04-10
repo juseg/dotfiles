@@ -3,11 +3,11 @@
 #
 # ~/.config/mbsync/config - Mbsync (isync) configuration file
 
-# remote account (FIXME encrypt password)
+# remote account
 IMAPStore juseg-remote
 Host mail.gandi.net
-UserCmd "cat ~/.config/secrets/juseg.user"
-PassCmd "cat ~/.config/secrets/juseg.pass"
+UserCmd "secret-tool lookup account juseg value user"
+PassCmd "secret-tool lookup account juseg value pass"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 

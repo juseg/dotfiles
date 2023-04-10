@@ -11,6 +11,7 @@
 # Requires:
 # - abook
 # - isync
+# - libsecret
 # - lynx
 # - msmtp
 # - neomutt
@@ -21,7 +22,7 @@
 # -- Account settings --------------------------------------------------------
 
 # account settings
-set from = "Julien Seguinot <`cat ~/.config/secrets/juseg.user`>"
+set from = "Julien Seguinot <`secret-tool lookup account juseg value user`>"
 set realname = "Julien Seguinot"
 set mbox_type = Maildir
 set folder = "~/.local/share/mail/juseg"
