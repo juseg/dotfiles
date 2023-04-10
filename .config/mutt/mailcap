@@ -1,0 +1,7 @@
+# Copyright (c) 2023, Julien Seguinot (juseg.dev)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# ~/.config/mutt/mailcap - Neomutt email attachments
+#
+text/html; $BROWSER %s
+text/html; lynx -assume_charset=%{charset} -display_charset=utf-8 -dump %s; nametemplate=%s.html; copiousoutput
