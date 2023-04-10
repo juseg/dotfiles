@@ -99,6 +99,8 @@ set forward_quote # forward messages as quotes
 set include # quote messages in replies
 set mail_check_stats # count messages in mailboxes (needed for %N)
 set reverse_name # reply as address written to if it is in alternates
+set wait_key = no # no "press key to continue" after sync
+set sort = "threads" # sort by threads
 
 # sidebar properties
 set sidebar_visible = no
