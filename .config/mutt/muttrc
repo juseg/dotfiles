@@ -92,6 +92,7 @@ macro attach,compose \cb "<pipe-entry> urlscan<enter>" "extract urls"
 alternates ".*@juseg.dev"
 
 # editing and replying
+set confirmappend = no # skip confirmation when appening to e.g. archive
 set edit_headers # edit headers alongside message body
 set editor="nvim +Zen" # neovim zen mode
 set forward_format = "Fwd: %s" # default to %a[uthor]: %s[ubject]
