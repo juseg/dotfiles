@@ -75,8 +75,7 @@ macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
 macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
 
 # sync mailbox (-c option needed until mbsync 1.5)
-macro index S "<shell-escape>mbsync -c ~/.config/mbsync/config juseg<enter> \
-    <shell-escape>notmuch new<enter>" "sync mailbox"
+macro index S "<shell-escape>mbsync -c ~/.config/mbsync/config juseg<enter><shell-escape>notmuch new<enter>" "sync mailbox"
 
 # archive and junk
 macro index,pager A "<save-message>=Archive<enter>" "move to archive"
