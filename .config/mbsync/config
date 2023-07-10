@@ -21,6 +21,7 @@ Inbox ~/.local/share/mail/juseg/Inbox
 Channel juseg
 Far :juseg-remote:
 Near :juseg-local:
+Patterns *
 Create Both
 Expunge Both
 SyncState *
