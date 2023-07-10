@@ -1,0 +1,17 @@
+# Copyright (c) 2023, Julien Seguinot (juseg.dev)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# ~/.config/systemd/user/mbsync.timer - Mail synchronization timer
+#
+# From https://wiki.archlinux.org/title/Isync#Automatic_synchronization
+
+[Unit]
+Description=Mailbox synchronization timer
+
+[Timer]
+OnBootSec=2m
+OnUnitActiveSec=5m
+Unit=mbsync.service
+
+[Install]
+WantedBy=timers.target
