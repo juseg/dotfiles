@@ -10,7 +10,8 @@ Description=Mailbox synchronization service
 
 [Service]
 Type=oneshot
-ExecStart=mbsync -Va; notmuch new
+# (-c option needed until mbsync 1.5)
+ExecStart=mbsync -c $XDG_CONFIG_HOME/mbsync/config -Va ; notmuch new
 
 [Install]
 WantedBy=default.target
