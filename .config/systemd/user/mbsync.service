@@ -1,0 +1,17 @@
+# Copyright (c) 2023, Julien Seguinot (juseg.dev)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# ~/.config/systemd/user/mbsync.service - Mail synchronization service
+#
+# From https://wiki.archlinux.org/title/Isync#Automatic_synchronization
+
+[Unit]
+Description=Mailbox synchronization service
+
+[Service]
+Type=oneshot
+# (-c option needed until mbsync 1.5)
+ExecStart=mbsync -c /home/julien/.config/mbsync/config -Va ; notmuch new
+
+[Install]
+WantedBy=default.target

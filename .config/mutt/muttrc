@@ -1,40 +1,158 @@
-# Copyright (c) 2022, Julien Seguinot (juseg.github.io)
+# Copyright (c) 2022-2023, Julien Seguinot (juseg.dev)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
 # ~/.config/mutt/muttrc - Neomutt configuration file
+#
+# After:
+# - https://blog.flaport.net/configuring-neomutt-for-email.html
+# - https://github.com/LukeSmithxyz/mutt-wizard/
+# - https://jonathanh.co.uk/blog/mutt-setup/
+#
+# Requires:
+# - abook
+# - isync
+# - libsecret
+# - lynx
+# - msmtp
+# - neomutt
+# - notmuch
+# - urlscan
 
-# -- Mutt wizard -------------------------------------------------------------
 
-# mutt wizard defaults
-source /usr/share/mutt-wizard/mutt-wizard.muttrc
+# -- Account settings --------------------------------------------------------
 
-# load default account
-source ~/.config/mutt/accounts/posteo.muttrc
+# account settings
+set from = "Julien Seguinot <`secret-tool lookup account juseg value user`>"
+set realname = "Julien Seguinot"
+set mbox_type = Maildir
+set folder = "~/.local/share/mail/juseg"
+set sendmail = "msmtp -a juseg"
 
-# switching accounts
-macro index,pager <F1> '\
-    <sync-mailbox><enter-command>\
-    source ~/.config/mutt/accounts/posteo.muttrc<enter>\
-    <change-folder>!<enter>;<check-stats>' "switch to posteo"
-macro index,pager <F2> '\
-    <sync-mailbox><enter-command>\
-    source ~/.config/mutt/accounts/uib.muttrc<enter>\
-    <change-folder>!<enter>;<check-stats>' "switch to uib"
+# cache settings
+set header_cache = "~/.cache/mutt/juseg/headers"
+set message_cachedir = "~/.cache/mutt/juseg/bodies"
 
-# -- My stuff ----------------------------------------------------------------
+# mailbox settings
+set spoolfile = "+Inbox"
+set postponed = "+Drafts"
+set record = "+Sent"
+set trash = "+Trash"
+mailboxes =Inbox =Archive =Drafts =Junk =Sent =Trash
 
-# open neovim in zen mode
-set editor="nvim +Zen"  # alt set nolinebreak nonumber
 
-# edit headers in editor
-set autoedit
-set edit_headers
+# -- Key bindings ------------------------------------------------------------
 
-# fix current line color
-color indicator brightwhite default
+# vim navigation
+bind index l display-message
+bind pager,attach h exit
 
-# extract urls (manjaro package urlscan)
-macro index,pager \cb "<pipe-message> urlscan<enter>" \
-    "call urlscan to extract URLs out of a message"
-macro attach,compose \cb "<pipe-entry> urlscan<enter>" \
-    "call urlscan to extract URLs out of a message"
+# sidebar navigation
+bind index,pager \Cj sidebar-next
+bind index,pager \Ck sidebar-prev
+bind index,pager \Cl sidebar-open
+bind index,pager b sidebar-toggle-visible
+
+# manage contacts with abook
+bind editor <Tab> complete-query
+set query_command = \
+    "abook --datafile ~/.local/share/mail/abook --mutt-query '%s'"
+macro index,pager a \
+    "<pipe-message>abook --datafile ~/.local/share/mail/abook \
+    --add-email-quiet<return>" "Save contact"
+
+# search with notmuch and show results as threads
+bind index \\ vfolder-from-query
+set nm_default_url = "notmuch://$HOME/.local/share/mail"
+set nm_query_type = "threads"
+
+# go to folders
+bind index,pager g noop
+macro index,pager gi "<change-folder>=Inbox<enter>" "go to inbox"
+macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
+macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
+macro index,pager gj "<change-folder>=Junk<enter>" "go to junk"
+macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
+macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
+
+# sync mailbox (-c option needed until mbsync 1.5)
+macro index S "<shell-escape>mbsync -c $XDG_CONFIG_HOME/mbsync/config juseg<enter><shell-escape>notmuch new<enter>" "sync mailbox"
+
+# archive and junk
+macro index,pager A "<tag-prefix><save-message>=Archive<enter>" "move to archive"
+macro index,pager J "<tag-prefix><save-message>=Junk<enter>" "move to junk"
+
+# extract urls with urlscan
+macro index,pager \cb "<pipe-message> urlscan<enter>" "extract urls"
+macro attach,compose \cb "<pipe-entry> urlscan<enter>" "extract urls"
+
+
+# -- General settings --------------------------------------------------------
+
+# alternative identities
+alternates ".*@juseg.dev"
+
+# editing and replying
+set confirmappend = no # skip confirmation when appening to e.g. archive
+set edit_headers # edit headers alongside message body
+set editor="nvim +Zen" # neovim zen mode
+set forward_format = "Fwd: %s" # default to %a[uthor]: %s[ubject]
+set forward_quote # forward messages as quotes
+set include # quote messages in replies
+set mail_check_stats # count messages in mailboxes (needed for %N)
+set reverse_name # reply as address written to if it is in alternates
+set wait_key = no # no "press key to continue" after sync
+set sort = "threads" # sort by threads
+
+# sidebar properties
+set sidebar_visible = no
+set sidebar_width = 20
+set sidebar_short_path = yes
+set sidebar_next_new_wrap = yes
+set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
+
+# view html emails
+set mailcap_path = "~/.config/mutt/mailcap"
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+
+# -- Colors ------------------------------------------------------------------
+
+# message body
+color body blue default "[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+" # emails
+color body blue default "[a-z]+://[\-\.,/%~_:?&=\#a-zA-Z0-9]+" # urls
+color body brightgreen default "^[#]+ \.*" # headings
+color body brightyellow default "^(\t| )*(-|\\*)" # list markers
+color body green default "\`[^\`]*\`" # code
+
+# message header
+color header white black ".*"
+color header blue default "^(From|To|CC|BCC)"
+color header green default "^(Subject)"
+
+# mailbox index
+color index brightdefault default "!~R" # unread emails
+color index yellow default "~F !~D" # flagged (important) and not deleted
+color index green default "~Q !~D" # replied to and not deleted
+color index red default "~= !~D" # duplicate and not deleted
+color index blue default "~T" # tagged (selected)
+color index white default "~D" # deleted (marked for deletion)
+color index_collapsed blue default # number of messages in thread
+color index_number white default # message number in mailbox
+
+# current line
+color indicator underline default default
+
+# quotes
+color quoted blue default
+color quoted1 white default
+color quoted2 white default
+color quoted3 white default
+color quoted4 white default
+color quoted5 white default
+
+# signatures
+color signature white default
+
+# top and bottom bars
+color status white black

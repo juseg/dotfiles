@@ -91,6 +91,9 @@ abbr vpn openconnect-sso --server https://vpn3.uib.no
 # wget -- fix wget hosts file location
 alias wget "wget --hsts-file=$XDG_CACHE_HOME/wget-hsts"
 
+# mbsync -- needed until version 1.5
+alias mbsync "mbsync -c $XDG_CONFIG_HOME/mbsync/config"
+
 
 # -- Fish Git prompt ---------------------------------------------------------
 #
