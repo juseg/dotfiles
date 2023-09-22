@@ -21,23 +21,9 @@
 
 # -- Account settings --------------------------------------------------------
 
-# account settings
-set from = "Julien Seguinot <`secret-tool lookup account juseg value user`>"
-set realname = "Julien Seguinot"
-set mbox_type = Maildir
-set folder = "~/.local/share/mail/juseg"
-set sendmail = "msmtp -a juseg"
+# default account
+source ~/.config/mutt/juseg.rc
 
-# cache settings
-set header_cache = "~/.cache/mutt/juseg/headers"
-set message_cachedir = "~/.cache/mutt/juseg/bodies"
-
-# mailbox settings
-set spoolfile = "+Inbox"
-set postponed = "+Drafts"
-set record = "+Sent"
-set trash = "+Trash"
-mailboxes =Inbox =Archive =Drafts =Junk =Sent =Trash
 
 
 # -- Key bindings ------------------------------------------------------------
