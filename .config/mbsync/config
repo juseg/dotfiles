@@ -25,3 +25,27 @@ Patterns *
 Create Both
 Expunge Both
 SyncState *
+
+# remote account
+IMAPStore uib-remote
+Host outlook.office365.com
+AuthMechs XOAUTH2
+UserCmd "secret-tool lookup account uib value user"
+PassCmd "/usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/uib.tokens --encryption-pipe 'gpg --encrypt --recipient oauth2'"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# local store
+MaildirStore uib-local
+SubFolders Verbatim
+Path ~/.local/share/mail/uib/
+Inbox ~/.local/share/mail/uib/Inbox
+
+# channel
+Channel uib
+Far :uib-remote:
+Near :uib-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *
