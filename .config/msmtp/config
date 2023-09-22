@@ -17,3 +17,12 @@ port 587
 eval echo "from $(secret-tool lookup account juseg value user)"
 eval echo "user $(secret-tool lookup account juseg value user)"
 passwordeval "secret-tool lookup account juseg value pass"
+
+# uib account
+account uib
+host smtp.office365.com
+port 587
+auth xoauth2
+eval echo "from $(secret-tool lookup account uib value user)"
+eval echo "user $(secret-tool lookup account uib value user)"
+passwordeval "/usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/uib.tokens --encryption-pipe 'gpg --encrypt --recipient oauth2'"
