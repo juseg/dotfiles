@@ -103,10 +103,10 @@ set sort = "threads" # sort by threads
 
 # sidebar properties
 set sidebar_visible = no
-set sidebar_width = 20
+set sidebar_width = 24
 set sidebar_short_path = yes
 set sidebar_next_new_wrap = yes
-set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
+set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'
 
 # view html emails
 set mailcap_path = "~/.config/mutt/mailcap"
