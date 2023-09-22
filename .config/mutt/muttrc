@@ -24,7 +24,18 @@
 # default account
 source ~/.config/mutt/juseg.rc
 
+# switch account
+bind index,pager g noop
+macro index,pager gh \
+    '<sync-mailbox><enter-command>source ~/.config/mutt/juseg.rc \
+    <enter><change-folder>!<enter>;<check-stats>' "go to juseg account"
+macro index,pager gw \
+    '<sync-mailbox><enter-command>source ~/.config/mutt/uib.rc \
+    <enter><change-folder>!<enter>;<check-stats>' "go to uib account"
 
+# folder hooks (need to be in main config file?)
+folder-hook "~/.local/share/mail/juseg/.*" 'source ~/.config/mutt/juseg.rc'
+folder-hook "~/.local/share/mail/uib/.*" 'source ~/.config/mutt/uib.rc'
 
 # -- Key bindings ------------------------------------------------------------
 
@@ -52,7 +63,6 @@ set nm_default_url = "notmuch://$HOME/.local/share/mail"
 set nm_query_type = "threads"
 
 # go to folders
-bind index,pager g noop
 macro index,pager gi "<change-folder>=Inbox<enter>" "go to inbox"
 macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
 macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
