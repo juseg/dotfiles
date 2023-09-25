@@ -26,7 +26,7 @@
 # - Install an XOAUTH2 plugin, e.g.
 #     pamac build cyrus-sasl-xoauth2-git
 # - Generate a key to encrypt tokens
-#     gpg --gen-key oauth2
+#     gpg --gen-key  # Real name: oauth2
 # - Authorize tokens app (old secret from Thunderbird, might expire)
 #     /usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/uib.tokens \
 #       --authflow localhostauthcode --authorize --provider microsoft \
