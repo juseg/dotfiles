@@ -17,28 +17,46 @@
 # - neomutt
 # - notmuch
 # - urlscan
+#
+# Encrypt emails and passwords with libsecret:
+# $ secret-tool store --label=juseg.pass account juseg value user
+# $ secret-tool store --label=juseg.pass account juseg value pass
+#
+# Configure the annoying UiB auth (office365):
+# - Install an XOAUTH2 plugin, e.g.
+#     pamac build cyrus-sasl-xoauth2-git
+# - Generate a key to encrypt tokens
+#     gpg --gen-key  # Real name: oauth2
+# - Authorize tokens app (old secret from Thunderbird, might expire)
+#     /usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/uib.tokens \
+#       --authflow localhostauthcode --authorize --provider microsoft \
+#       --client-id "08162f7c-0fd2-4200-a84a-f25a4db0b584" \
+#       --client-secret "TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82" \
+#       --encryption-pipe "gpg --encrypt --recipient oauth2" --verbose
+# - Test that everything works
+#     /usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/uib.tokens \
+#       --encryption-pipe 'gpg --encrypt --recipient oauth2' --test --verbose
+#     mbsync uib
+#     echo "Subject: Test msmtp from uib" | msmtp -a uib -- "my@email"
 
 
 # -- Account settings --------------------------------------------------------
 
-# account settings
-set from = "Julien Seguinot <`secret-tool lookup account juseg value user`>"
-set realname = "Julien Seguinot"
-set mbox_type = Maildir
-set folder = "~/.local/share/mail/juseg"
-set sendmail = "msmtp -a juseg"
+# default account
+source ~/.config/mutt/juseg.rc
 
-# cache settings
-set header_cache = "~/.cache/mutt/juseg/headers"
-set message_cachedir = "~/.cache/mutt/juseg/bodies"
+# switch account
+bind index,pager g noop
+macro index,pager gh \
+    '<sync-mailbox><enter-command>source ~/.config/mutt/juseg.rc \
+    <enter><change-folder>!<enter>;<check-stats>' "go to juseg account"
+macro index,pager gw \
+    '<sync-mailbox><enter-command>source ~/.config/mutt/uib.rc \
+    <enter><change-folder>!<enter>;<check-stats>' "go to uib account"
 
-# mailbox settings
-set spoolfile = "+Inbox"
-set postponed = "+Drafts"
-set record = "+Sent"
-set trash = "+Trash"
-mailboxes =Inbox =Archive =Drafts =Junk =Sent =Trash
-
+# folder hooks (need to be in main config file?)
+folder-hook "~/.local/share/mail/juseg/.*" 'source ~/.config/mutt/juseg.rc'
+folder-hook "~/.local/share/mail/uib/.*" 'source ~/.config/mutt/uib.rc'
 
 # -- Key bindings ------------------------------------------------------------
 
@@ -66,7 +84,6 @@ set nm_default_url = "notmuch://$HOME/.local/share/mail"
 set nm_query_type = "threads"
 
 # go to folders
-bind index,pager g noop
 macro index,pager gi "<change-folder>=Inbox<enter>" "go to inbox"
 macro index,pager ga "<change-folder>=Archive<enter>" "go to archive"
 macro index,pager gd "<change-folder>=Drafts<enter>" "go to drafts"
@@ -75,7 +92,9 @@ macro index,pager gs "<change-folder>=Sent<enter>" "go to sent"
 macro index,pager gt "<change-folder>=Trash<enter>" "go to trash"
 
 # sync mailbox (-c option needed until mbsync 1.5)
-macro index S "<shell-escape>mbsync -c $XDG_CONFIG_HOME/mbsync/config juseg<enter><shell-escape>notmuch new<enter>" "sync mailbox"
+macro index S \
+    "<shell-escape>mbsync -c $XDG_CONFIG_HOME/mbsync/config -a \
+    <enter><shell-escape>notmuch new<enter>" "sync mailbox"
 
 # archive and junk
 macro index,pager A "<tag-prefix><save-message>=Archive<enter>" "move to archive"
@@ -105,10 +124,10 @@ set sort = "threads" # sort by threads
 
 # sidebar properties
 set sidebar_visible = no
-set sidebar_width = 20
+set sidebar_width = 24
 set sidebar_short_path = yes
 set sidebar_next_new_wrap = yes
-set sidebar_format = '%B%?F? [%F]?%* %?N?%N/? %?S?%S?'
+set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'
 
 # view html emails
 set mailcap_path = "~/.config/mutt/mailcap"

@@ -6,6 +6,7 @@
 #
 # FIXME: these environment variables are read when starting an X session, so
 # they will be available in X-terminals, but not in consoles or remote shells.
+# Also not in systemd services, this is an issue for e.g. GPG!
 # I want to make them accessible to fish, but fish uses a different syntax.
 # Here are possible solutions:
 # - rewrite this file as `setenv ENV value` and implement a setenv function in

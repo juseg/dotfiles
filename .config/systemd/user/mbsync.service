@@ -10,6 +10,10 @@ Description=Mailbox synchronization service
 
 [Service]
 Type=oneshot
+# FIXME duplicates xprofile, see comment there (%h means $HOME, see
+# https://www.freedesktop.org/software/systemd/man/systemd.unit.html)
+Environment="GNUPGHOME=%h/.local/share/gnupg"
+Environment="NOTMUCH_CONFIG=%h/.config/notmuch/config"
 # (-c option needed until mbsync 1.5)
 ExecStart=mbsync -c /home/julien/.config/mbsync/config -Va ; notmuch new
 
