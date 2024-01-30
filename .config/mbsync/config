@@ -27,6 +27,29 @@ Expunge Both
 SyncState *
 
 # remote account
+IMAPStore posteo-remote
+Host posteo.de
+UserCmd "secret-tool lookup account posteo value user"
+PassCmd "secret-tool lookup account posteo value pass"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# local store
+MaildirStore posteo-local
+SubFolders Verbatim
+Path ~/.local/share/mail/posteo/
+Inbox ~/.local/share/mail/posteo/Inbox
+
+# channel
+Channel posteo
+Far :posteo-remote:
+Near :posteo-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *
+
+# remote account
 IMAPStore uib-remote
 Host outlook.office365.com
 AuthMechs XOAUTH2
