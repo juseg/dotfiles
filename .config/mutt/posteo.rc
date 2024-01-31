@@ -1,0 +1,28 @@
+# Copyright (c) 2022-2024, Julien Seguinot (juseg.dev)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# ~/.config/mutt/posteo.rc - Neomutt configuration for posteo account
+
+# account settings
+set from = "Julien Seguinot <`secret-tool lookup account posteo value user`>"
+set realname = "Julien Seguinot"
+set mbox_type = Maildir
+set folder = "~/.local/share/mail/posteo"
+set sendmail = "msmtp -a posteo"
+
+# cache settings
+set header_cache = "~/.cache/mutt/posteo/headers"
+set message_cachedir = "~/.cache/mutt/posteo/bodies"
+
+# mailbox settings
+set spoolfile = "+Inbox"
+set postponed = "+Drafts"
+set record = "+Sent"
+set trash = "+Trash"
+named-mailboxes \
+  "Posteo Inbox" =Inbox \
+  "- Archive" =Archive \
+  "- Drafts" =Drafts \
+  "- Junk" =Junk \
+  "- Sent" =Sent \
+  "- Trash" =Trash
