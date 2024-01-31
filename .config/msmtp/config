@@ -18,6 +18,14 @@ eval echo "from $(secret-tool lookup account juseg value user)"
 eval echo "user $(secret-tool lookup account juseg value user)"
 passwordeval "secret-tool lookup account juseg value pass"
 
+# posteo account
+account posteo
+host posteo.de
+port 587
+eval echo "user $(secret-tool lookup account posteo value user)"
+eval echo "from $(secret-tool lookup account posteo value user)"
+passwordeval "secret-tool lookup account posteo value pass"
+
 # uib account
 account uib
 host smtp.office365.com
