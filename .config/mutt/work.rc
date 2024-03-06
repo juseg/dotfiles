@@ -1,0 +1,28 @@
+# Copyright (c) 2022-2023, Julien Seguinot (juseg.dev)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# ~/.config/mutt/work.rc - Neomutt configuration for work account
+
+# account settings
+set from = "Julien Seguinot <`secret-tool lookup account work value user`>"
+set realname = "Julien Seguinot"
+set mbox_type = Maildir
+set folder = "~/.local/share/mail/work"
+set sendmail = "msmtp -a work"
+
+# cache settings
+set header_cache = "~/.cache/mutt/work/headers"
+set message_cachedir = "~/.cache/mutt/work/bodies"
+
+# mailbox settings
+set spoolfile = "+Inbox"
+set postponed = "+Drafts"
+set record = "+Sent"
+set trash = "+Trash"
+named-mailboxes \
+  "Work Inbox" =Inbox \
+  "- Archive" =Archive \
+  "- Drafts" =Drafts \
+  "- Junk" =Junk \
+  "- Sent" =Sent \
+  "- Trash" =Trash

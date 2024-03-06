@@ -72,3 +72,26 @@ Patterns *
 Create Both
 Expunge Both
 SyncState *
+
+# remote account
+IMAPStore work-remote
+Host mail.gandi.net
+UserCmd "secret-tool lookup account work value user"
+PassCmd "secret-tool lookup account work value pass"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# local store
+MaildirStore work-local
+SubFolders Verbatim
+Path ~/.local/share/mail/work/
+Inbox ~/.local/share/mail/work/Inbox
+
+# channel
+Channel work
+Far :work-remote:
+Near :work-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *

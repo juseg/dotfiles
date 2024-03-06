@@ -53,14 +53,18 @@ macro index,pager gh \
 macro index,pager gp \
     '<sync-mailbox><enter-command>source ~/.config/mutt/posteo.rc \
     <enter><change-folder>!<enter>;<check-stats>' "go to posteo account"
-macro index,pager gw \
+macro index,pager gu \
     '<sync-mailbox><enter-command>source ~/.config/mutt/uib.rc \
     <enter><change-folder>!<enter>;<check-stats>' "go to uib account"
+macro index,pager gw \
+    '<sync-mailbox><enter-command>source ~/.config/mutt/work.rc \
+    <enter><change-folder>!<enter>;<check-stats>' "go to work account"
 
 # folder hooks (need to be in main config file?)
 folder-hook "~/.local/share/mail/home/.*" 'source ~/.config/mutt/home.rc'
 folder-hook "~/.local/share/mail/posteo/.*" 'source ~/.config/mutt/posteo.rc'
 folder-hook "~/.local/share/mail/uib/.*" 'source ~/.config/mutt/uib.rc'
+folder-hook "~/.local/share/mail/work/.*" 'source ~/.config/mutt/work.rc'
 
 # -- Key bindings ------------------------------------------------------------
 

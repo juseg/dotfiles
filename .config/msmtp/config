@@ -34,3 +34,10 @@ auth xoauth2
 eval echo "from $(secret-tool lookup account uib value user)"
 eval echo "user $(secret-tool lookup account uib value user)"
 passwordeval "/usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/uib.tokens --encryption-pipe 'gpg --encrypt --recipient oauth2'"
+
+# work account
+account work
+host mail.gandi.net
+port 587
+eval echo "from $(secret-tool lookup account work value user)"
+eval echo "user $(secret-tool lookup account work value user)"
