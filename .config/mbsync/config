@@ -4,23 +4,23 @@
 # ~/.config/mbsync/config - Mbsync (isync) configuration file
 
 # remote account
-IMAPStore juseg-remote
+IMAPStore home-remote
 Host mail.gandi.net
-UserCmd "secret-tool lookup account juseg value user"
-PassCmd "secret-tool lookup account juseg value pass"
+UserCmd "secret-tool lookup account home value user"
+PassCmd "secret-tool lookup account home value pass"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 # local store
-MaildirStore juseg-local
+MaildirStore home-local
 SubFolders Verbatim
-Path ~/.local/share/mail/juseg/
-Inbox ~/.local/share/mail/juseg/Inbox
+Path ~/.local/share/mail/home/
+Inbox ~/.local/share/mail/home/Inbox
 
 # channel
-Channel juseg
-Far :juseg-remote:
-Near :juseg-local:
+Channel home
+Far :home-remote:
+Near :home-local:
 Patterns *
 Create Both
 Expunge Both

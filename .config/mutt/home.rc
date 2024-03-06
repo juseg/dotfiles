@@ -1,18 +1,18 @@
-# Copyright (c) 2022-2023, Julien Seguinot (juseg.dev)
+# Copyright (c) 2022-2024, Julien Seguinot (juseg.dev)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
-# ~/.config/mutt/juseg.rc - Neomutt configuration for juseg account
+# ~/.config/mutt/home.rc - Neomutt configuration for home account
 
 # account settings
-set from = "Julien Seguinot <`secret-tool lookup account juseg value user`>"
+set from = "Julien Seguinot <`secret-tool lookup account home value user`>"
 set realname = "Julien Seguinot"
 set mbox_type = Maildir
-set folder = "~/.local/share/mail/juseg"
-set sendmail = "msmtp -a juseg"
+set folder = "~/.local/share/mail/home"
+set sendmail = "msmtp -a home"
 
 # cache settings
-set header_cache = "~/.cache/mutt/juseg/headers"
-set message_cachedir = "~/.cache/mutt/juseg/bodies"
+set header_cache = "~/.cache/mutt/home/headers"
+set message_cachedir = "~/.cache/mutt/home/bodies"
 
 # mailbox settings
 set spoolfile = "+Inbox"
@@ -20,7 +20,7 @@ set postponed = "+Drafts"
 set record = "+Sent"
 set trash = "+Trash"
 named-mailboxes \
-  "JuSeg Inbox" =Inbox \
+  "Home Inbox" =Inbox \
   "- Archive" =Archive \
   "- Drafts" =Drafts \
   "- Junk" =Junk \

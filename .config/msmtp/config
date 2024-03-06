@@ -10,13 +10,13 @@ tls on
 tls_trust_file /etc/ssl/certs/ca-certificates.crt
 logfile ~/.local/share/msmtp/msmtp.log
 
-# juseg account
-account juseg
+# home account
+account home
 host mail.gandi.net
 port 587
-eval echo "from $(secret-tool lookup account juseg value user)"
-eval echo "user $(secret-tool lookup account juseg value user)"
-passwordeval "secret-tool lookup account juseg value pass"
+eval echo "from $(secret-tool lookup account home value user)"
+eval echo "user $(secret-tool lookup account home value user)"
+passwordeval "secret-tool lookup account home value pass"
 
 # posteo account
 account posteo

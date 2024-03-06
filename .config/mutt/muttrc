@@ -19,8 +19,8 @@
 # - urlscan
 #
 # Encrypt emails and passwords with libsecret:
-# $ secret-tool store --label=juseg.pass account juseg value user
-# $ secret-tool store --label=juseg.pass account juseg value pass
+# $ secret-tool store --label=home.user account home value user
+# $ secret-tool store --label=home.pass account home value pass
 #
 # Configure the annoying UiB auth (office365):
 # - Install an XOAUTH2 plugin, e.g.
@@ -43,13 +43,13 @@
 # -- Account settings --------------------------------------------------------
 
 # default account
-source ~/.config/mutt/juseg.rc
+source ~/.config/mutt/home.rc
 
 # switch account
 bind index,pager g noop
 macro index,pager gh \
-    '<sync-mailbox><enter-command>source ~/.config/mutt/juseg.rc \
-    <enter><change-folder>!<enter>;<check-stats>' "go to juseg account"
+    '<sync-mailbox><enter-command>source ~/.config/mutt/home.rc \
+    <enter><change-folder>!<enter>;<check-stats>' "go to home account"
 macro index,pager gp \
     '<sync-mailbox><enter-command>source ~/.config/mutt/posteo.rc \
     <enter><change-folder>!<enter>;<check-stats>' "go to posteo account"
@@ -58,7 +58,7 @@ macro index,pager gw \
     <enter><change-folder>!<enter>;<check-stats>' "go to uib account"
 
 # folder hooks (need to be in main config file?)
-folder-hook "~/.local/share/mail/juseg/.*" 'source ~/.config/mutt/juseg.rc'
+folder-hook "~/.local/share/mail/home/.*" 'source ~/.config/mutt/home.rc'
 folder-hook "~/.local/share/mail/posteo/.*" 'source ~/.config/mutt/posteo.rc'
 folder-hook "~/.local/share/mail/uib/.*" 'source ~/.config/mutt/uib.rc'
 
