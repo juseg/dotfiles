@@ -74,6 +74,30 @@ Expunge Both
 SyncState *
 
 # remote account
+IMAPStore vub-remote
+Host outlook.office365.com
+AuthMechs XOAUTH2
+UserCmd "secret-tool lookup account vub value user"
+PassCmd "/usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/vub.tokens --encryption-pipe 'gpg --encrypt --recipient oauth2'"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# local store
+MaildirStore vub-local
+SubFolders Verbatim
+Path ~/.local/share/mail/vub/
+Inbox ~/.local/share/mail/vub/Inbox
+
+# channel
+Channel vub
+Far :vub-remote:
+Near :vub-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *
+
+# remote account
 IMAPStore work-remote
 Host mail.gandi.net
 UserCmd "secret-tool lookup account work value user"

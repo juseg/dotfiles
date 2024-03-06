@@ -35,6 +35,15 @@ eval echo "from $(secret-tool lookup account uib value user)"
 eval echo "user $(secret-tool lookup account uib value user)"
 passwordeval "/usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/uib.tokens --encryption-pipe 'gpg --encrypt --recipient oauth2'"
 
+# vub account
+account vub
+host smtp.office365.com
+port 587
+auth xoauth2
+eval echo "from $(secret-tool lookup account vub value user)"
+eval echo "user $(secret-tool lookup account vub value user)"
+passwordeval "/usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/vub.tokens --encryption-pipe 'gpg --encrypt --recipient oauth2'"
+
 # work account
 account work
 host mail.gandi.net

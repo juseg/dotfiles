@@ -56,6 +56,9 @@ macro index,pager gp \
 macro index,pager gu \
     '<sync-mailbox><enter-command>source ~/.config/mutt/uib.rc \
     <enter><change-folder>!<enter>;<check-stats>' "go to uib account"
+macro index,pager gv \
+    '<sync-mailbox><enter-command>source ~/.config/mutt/vub.rc \
+    <enter><change-folder>!<enter>;<check-stats>' "go to vub account"
 macro index,pager gw \
     '<sync-mailbox><enter-command>source ~/.config/mutt/work.rc \
     <enter><change-folder>!<enter>;<check-stats>' "go to work account"
@@ -64,6 +67,7 @@ macro index,pager gw \
 folder-hook "~/.local/share/mail/home/.*" 'source ~/.config/mutt/home.rc'
 folder-hook "~/.local/share/mail/posteo/.*" 'source ~/.config/mutt/posteo.rc'
 folder-hook "~/.local/share/mail/uib/.*" 'source ~/.config/mutt/uib.rc'
+folder-hook "~/.local/share/mail/vub/.*" 'source ~/.config/mutt/vub.rc'
 folder-hook "~/.local/share/mail/work/.*" 'source ~/.config/mutt/work.rc'
 
 # -- Key bindings ------------------------------------------------------------
