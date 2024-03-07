@@ -4,7 +4,7 @@
 # ~/.config/mutt/work.rc - Neomutt configuration for work account
 
 # account settings
-set from = "Julien Seguinot <`secret-tool lookup account work value user`>"
+set from = "Julien Seguinot <`secret-tool lookup account work value from`>"
 set realname = "Julien Seguinot"
 set mbox_type = Maildir
 set folder = "~/.local/share/mail/work"

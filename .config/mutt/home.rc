@@ -4,7 +4,7 @@
 # ~/.config/mutt/home.rc - Neomutt configuration for home account
 
 # account settings
-set from = "Julien Seguinot <`secret-tool lookup account home value user`>"
+set from = "Julien Seguinot <`secret-tool lookup account home value from`>"
 set realname = "Julien Seguinot"
 set mbox_type = Maildir
 set folder = "~/.local/share/mail/home"
