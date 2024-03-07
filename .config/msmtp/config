@@ -50,3 +50,4 @@ host mail.gandi.net
 port 587
 eval echo "from $(secret-tool lookup account work value from)"
 eval echo "user $(secret-tool lookup account work value user)"
+passwordeval "secret-tool lookup account work value pass"
