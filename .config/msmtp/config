@@ -1,4 +1,4 @@
-# Copyright (c) 2023, Julien Seguinot (juseg.dev)
+# Copyright (c) 2023-2024, Julien Seguinot (juseg.dev)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
 # ~/.config/mbsync/config - Msmtp configuration file
@@ -26,11 +26,11 @@ eval echo "user $(secret-tool lookup account posteo value user)"
 eval echo "from $(secret-tool lookup account posteo value user)"
 passwordeval "secret-tool lookup account posteo value pass"
 
-# uib account
-account uib
+# vub account
+account vub
 host smtp.office365.com
 port 587
 auth xoauth2
-eval echo "from $(secret-tool lookup account uib value user)"
-eval echo "user $(secret-tool lookup account uib value user)"
-passwordeval "/usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/uib.tokens --encryption-pipe 'gpg --encrypt --recipient oauth2'"
+eval echo "from $(secret-tool lookup account vub value user)"
+eval echo "user $(secret-tool lookup account vub value user)"
+passwordeval "/usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/vub.tokens --encryption-pipe 'gpg --encrypt --recipient oauth2'"
