@@ -1,4 +1,4 @@
-# Copyright (c) 2022-2023, Julien Seguinot (juseg.dev)
+# Copyright (c) 2022-2024, Julien Seguinot (juseg.dev)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
 # ~/.config/mutt/muttrc - Neomutt configuration file
@@ -22,22 +22,22 @@
 # $ secret-tool store --label=juseg.pass account juseg value user
 # $ secret-tool store --label=juseg.pass account juseg value pass
 #
-# Configure the annoying UiB auth (office365):
+# Configure the annoying VUB auth (office365):
 # - Install an XOAUTH2 plugin, e.g.
 #     pamac build cyrus-sasl-xoauth2-git
 # - Generate a key to encrypt tokens
 #     gpg --gen-key  # Real name: oauth2
 # - Authorize tokens app (old secret from Thunderbird, might expire)
-#     /usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/uib.tokens \
+#     /usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/vub.tokens \
 #       --authflow localhostauthcode --authorize --provider microsoft \
 #       --client-id "08162f7c-0fd2-4200-a84a-f25a4db0b584" \
 #       --client-secret "TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82" \
 #       --encryption-pipe "gpg --encrypt --recipient oauth2" --verbose
 # - Test that everything works
-#     /usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/uib.tokens \
+#     /usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/vub.tokens \
 #       --encryption-pipe 'gpg --encrypt --recipient oauth2' --test --verbose
-#     mbsync uib
-#     echo "Subject: Test msmtp from uib" | msmtp -a uib -- "my@email"
+#     mbsync vub
+#     echo "Subject: Test msmtp from vub" | msmtp -a vub -- "my@email"
 
 
 # -- Account settings --------------------------------------------------------
@@ -54,13 +54,13 @@ macro index,pager gp \
     '<sync-mailbox><enter-command>source ~/.config/mutt/posteo.rc \
     <enter><change-folder>!<enter>;<check-stats>' "go to posteo account"
 macro index,pager gw \
-    '<sync-mailbox><enter-command>source ~/.config/mutt/uib.rc \
-    <enter><change-folder>!<enter>;<check-stats>' "go to uib account"
+    '<sync-mailbox><enter-command>source ~/.config/mutt/vub.rc \
+    <enter><change-folder>!<enter>;<check-stats>' "go to vub account"
 
 # folder hooks (need to be in main config file?)
 folder-hook "~/.local/share/mail/juseg/.*" 'source ~/.config/mutt/juseg.rc'
 folder-hook "~/.local/share/mail/posteo/.*" 'source ~/.config/mutt/posteo.rc'
-folder-hook "~/.local/share/mail/uib/.*" 'source ~/.config/mutt/uib.rc'
+folder-hook "~/.local/share/mail/vub/.*" 'source ~/.config/mutt/vub.rc'
 
 # -- Key bindings ------------------------------------------------------------
 
