@@ -1,4 +1,4 @@
-# Copyright (c) 2023, Julien Seguinot (juseg.dev)
+# Copyright (c) 2023-2024, Julien Seguinot (juseg.dev)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
 # ~/.config/mbsync/config - Mbsync (isync) configuration file
@@ -50,24 +50,24 @@ Expunge Both
 SyncState *
 
 # remote account
-IMAPStore uib-remote
+IMAPStore vub-remote
 Host outlook.office365.com
 AuthMechs XOAUTH2
-UserCmd "secret-tool lookup account uib value user"
-PassCmd "/usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/uib.tokens --encryption-pipe 'gpg --encrypt --recipient oauth2'"
+UserCmd "secret-tool lookup account vub value user"
+PassCmd "/usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/vub.tokens --encryption-pipe 'gpg --encrypt --recipient oauth2'"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 # local store
-MaildirStore uib-local
+MaildirStore vub-local
 SubFolders Verbatim
-Path ~/.local/share/mail/uib/
-Inbox ~/.local/share/mail/uib/Inbox
+Path ~/.local/share/mail/vub/
+Inbox ~/.local/share/mail/vub/Inbox
 
 # channel
-Channel uib
-Far :uib-remote:
-Near :uib-local:
+Channel vub
+Far :vub-remote:
+Near :vub-local:
 Patterns *
 Create Both
 Expunge Both
