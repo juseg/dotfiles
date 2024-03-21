@@ -1,0 +1,10 @@
+# Copyright (c) 2024, Julien Seguinot (juseg.dev)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# ~/.config/aerc/stylesets/default - Aerc default styleset
+
+# add minor tweaks to default style
+border.reverse=false
+dirlist_*.selected.bold=true
+msglist_flagged.fg=yellow
+tab.selected.bold=true
