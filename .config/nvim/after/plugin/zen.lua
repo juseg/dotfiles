@@ -13,10 +13,11 @@ require("zen-mode").setup {
         },
     },
     -- disable autocompletion
-    on_open = function(win)
+    on_open = function()
         require('cmp').setup.buffer { enabled = false }
     end,
     on_close = function()
         require('cmp').setup.buffer { enabled = true }
+        vim.cmd.quit{mods={confirm=true}}
     end,
 }
