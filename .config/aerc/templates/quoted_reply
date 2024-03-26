@@ -1,11 +1,5 @@
-# Copyright (c) 2024, Julien Seguinot (juseg.dev)
-# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
-#
-# ~/.config/aerc/templates/quoted_reply - Aerc quoted reply template
-
 X-Mailer: aerc {{version}}
 
-On {{dateFormat (.OriginalDate | toLocal) "Mon Jan 2, 2006 at 3:04 PM MST"}}, {{(index .OriginalFrom 0).Name}} wrote:
 {{ if eq .OriginalMIMEType "text/html" -}}
 	{{- trimSignature (exec `/usr/lib/aerc/filters/html` .OriginalText) | quote -}}
 {{- else -}}
