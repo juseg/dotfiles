@@ -1,5 +1,6 @@
 X-Mailer: aerc {{version}}
 
+{{dateFormat (.OriginalDate | toLocal) "2006-01-02 15:04"}}, {{(index .OriginalFrom 0).Name}}:
 {{ if eq .OriginalMIMEType "text/html" -}}
 	{{- trimSignature (exec `/usr/lib/aerc/filters/html` .OriginalText) | quote -}}
 {{- else -}}
