@@ -68,7 +68,7 @@ Inbox ~/.local/share/mail/vub/Inbox
 Channel vub-main
 Far :vub-remote:
 Near :vub-local:
-Patterns Archive, Drafts, Inbox
+Patterns Archive Drafts INBOX
 Create Both
 Expunge Both
 SyncState *
