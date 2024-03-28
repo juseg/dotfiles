@@ -1,3 +1,4 @@
 *.pyc
+/aerc/accounts.conf
 /nvim/plugin/packer_compiled.lua
 /secrets
