@@ -64,11 +64,36 @@ SubFolders Verbatim
 Path ~/.local/share/mail/vub/
 Inbox ~/.local/share/mail/vub/Inbox
 
-# channel
-Channel vub
+# main channel
+Channel vub-main
 Far :vub-remote:
 Near :vub-local:
-Patterns *
+Patterns Archive Drafts INBOX
 Create Both
 Expunge Both
 SyncState *
+
+# rename Junk Email to Junk
+Channel vub-junk
+Far :vub-remote:"Junk Email"
+Near :vub-local:Junk
+Create Near
+
+# rename Sent Items to Sent
+Channel vub-sent
+Far :vub-remote:"Sent Items"
+Near :vub-local:Sent
+Create Near
+
+# rename Deleted Items to Trash
+Channel vub-trash
+Far :vub-remote:"Deleted Items"
+Near :vub-local:Trash
+Create Near
+
+# group channels together
+Group vub
+Channel vub-main
+Channel vub-junk
+Channel vub-sent
+Channel vub-trash

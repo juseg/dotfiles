@@ -12,6 +12,7 @@ return require('packer').startup(function(use)
     use { 'mbbill/undotree' }           -- undo tree with branches
     use { 'nvim-lualine/lualine.nvim' } -- blazing fast status line
     use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = {
+        { 'https://git.hubrecht.ovh/hubrecht/telescope-notmuch.nvim' },
         { 'nvim-lua/plenary.nvim' } } } -- fuzzy file finder
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSupdate' }
     use { 'terrortylor/nvim-comment' }  -- toggle comments
