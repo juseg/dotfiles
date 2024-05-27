@@ -9,3 +9,5 @@
 [alias]
     wdiff = diff --color-words
     tags = for-each-ref --sort=taggerdate --format '%(tag) %(*committerdate:short) %(subject)' refs/tags
+[push]
+    autoSetupRemote = true
