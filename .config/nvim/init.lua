@@ -5,7 +5,6 @@
 
 -- FIXME move to config/*.lua as in lazyvim?
 require('autocmd') -- automatic commands
-require('nordic') -- nordic tweaks
 require('remap') -- key mappings
 require('set') -- neovim settings
 
