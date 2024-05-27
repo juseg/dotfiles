@@ -16,7 +16,7 @@ return {
     { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = {
         'https://git.hubrecht.ovh/hubrecht/telescope-notmuch.nvim',
         'nvim-lua/plenary.nvim' } },    -- fuzzy file finder
-    { 'nvim-treesitter/nvim-treesitter', build = 'TSupdate'},
+    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
     'terrortylor/nvim-comment',         -- toggle comments
 
     -- autocompletion and lsp

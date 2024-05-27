@@ -3,7 +3,7 @@
 require 'nvim-treesitter.configs'.setup {
 
     -- listed parsers should always be installed
-    ensure_installed = { 'help', 'lua', 'python' },
+    ensure_installed = { 'lua', 'python', 'vimdoc' },
 
     -- automatically install missing parsers when entering buffer
     auto_install = true,
