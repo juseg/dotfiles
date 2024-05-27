@@ -1,11 +1,11 @@
-# Copyright (c) 2013-2022, Julien Seguinot (juseg.github.io)
+# Copyright (c) 2013-2024, Julien Seguinot (juseg.dev)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
-# .config/git/config - Git user configuration (can be overrived
+# .config/git/config - Git user configuration
 
 [user]
     name = Julien Seguinot
-    #   email = stored in ~/.gitconfig for privacy
+    email = 1186928+juseg@users.noreply.github.com
 [alias]
     wdiff = diff --color-words
     tags = for-each-ref --sort=taggerdate --format '%(tag) %(*committerdate:short) %(subject)' refs/tags
