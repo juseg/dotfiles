@@ -1,4 +1,4 @@
--- ~/.config/nvim/lua/plugins.lua - Plugin manager  --------------------------
+-- ~/.config/nvim/lua/plugin/init.lua - Plugin manager  ----------------------
 
 -- FIXME move plugin specs along with after files to separate files
 -- (see https://github.com/folke/lazy.nvim#-structuring-your-plugins)
@@ -8,7 +8,6 @@ return {
     -- 'wbthomason/packer.nvim'         -- packer manages itself
 
     -- lua plugins
-    'ellisonleao/gruvbox.nvim',         -- lua port of gruvbox colorscheme
     'folke/zen-mode.nvim',              -- distraction-free mode
     'lewis6991/gitsigns.nvim',          -- git signs in gutter
     'mbbill/undotree',                  -- undo tree with branches
