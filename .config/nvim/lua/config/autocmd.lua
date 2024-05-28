@@ -1,4 +1,7 @@
--- ~/.config/nvim/lua/autocmd.lua - Automatic commands -----------------------
+-- Copyright (c) 2019-2024, Julien Seguinot (juseg.dev)
+-- GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+--
+-- ~/.config/nvim/lua/config/autocmd.lua - Automatic commands ----------------
 
 -- remove trailing space outside diffs
 vim.api.nvim_create_autocmd('BufWritePre', {

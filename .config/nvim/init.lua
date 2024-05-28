@@ -3,10 +3,10 @@
 --
 -- ~/.config/nvim/init.lua - Neovim configuration file using lua script
 
--- FIXME move to config/*.lua as in lazyvim?
-require('autocmd') -- automatic commands
-require('remap') -- key mappings
-require('set') -- neovim settings
+-- load neovim base configuration
+require('config.autocmd') -- automatic commands
+require('config.keymaps') -- key mappings
+require('config.options') -- neovim settings
 
 -- bootstrap lazy (see https://github.com/folke/lazy.nvim#-installation)
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'

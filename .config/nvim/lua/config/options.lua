@@ -1,4 +1,7 @@
--- ~/.config/nvim/lua/set.lua - Neovim settings ------------------------------
+-- Copyright (c) 2013-2024, Julien Seguinot (juseg.dev)
+-- GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+--
+-- ~/.config/nvim/lua/config/options.lua - Key mappings ----------------------
 
 -- turn off bell
 vim.opt.belloff = 'all'
