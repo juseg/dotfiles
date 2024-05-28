@@ -10,7 +10,6 @@ return {
     -- lua plugins
     'folke/zen-mode.nvim',              -- distraction-free mode
     'mbbill/undotree',                  -- undo tree with branches
-    'nvim-lualine/lualine.nvim',        -- blazing fast status line
     { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = {
         'https://git.hubrecht.ovh/hubrecht/telescope-notmuch.nvim',
         'nvim-lua/plenary.nvim' } },    -- fuzzy file finder
