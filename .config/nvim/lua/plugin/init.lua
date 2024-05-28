@@ -16,7 +16,6 @@ return {
         'https://git.hubrecht.ovh/hubrecht/telescope-notmuch.nvim',
         'nvim-lua/plenary.nvim' } },    -- fuzzy file finder
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
-    'terrortylor/nvim-comment',         -- toggle comments
 
     -- autocompletion and lsp
     -- (FIXME choose mason auto-install or Manjaro packages)
