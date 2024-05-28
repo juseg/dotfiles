@@ -22,17 +22,24 @@ return {
         map('n', '[H', function() gs.nav_hunk('first') end, 'First hunk')
 
         -- actions on hunks
-        local opts = { buffer = bufnr }
-        vim.keymap.set({ 'n', 'v' }, '<leader>hs', gs.stage_hunk, opts)
-        vim.keymap.set({ 'n', 'v' }, '<leader>hr', gs.reset_hunk, opts)
-        vim.keymap.set('n', '<leader>hu', gs.undo_stage_hunk, opts)
-        vim.keymap.set('n', '<leader>hp', gs.preview_hunk, opts)
-        vim.keymap.set('n', '<leader>hb', gs.blame_line, opts)
-        vim.keymap.set('n', '<leader>hd', gs.diffthis, opts)
+        map({ 'n', 'v' }, '<leader>hs', gs.stage_hunk, 'Stage hunk')
+        map({ 'n', 'v' }, '<leader>hr', gs.reset_hunk, 'Reset hunk')
+        map('n', '<leader>hb', gs.blame_line, 'Blame line')
+        map('n', '<leader>hB', function() gs.blame_line({ full = true }) end,
+            'Blame with diff')
+        map('n', '<leader>hi', gs.preview_hunk_inline, 'Preview hunk inline')
+        map('n', '<leader>hp', gs.preview_hunk, 'Preview hunk')
+        map('n', '<leader>ht', gs.toggle_deleted, 'Toggle deletions')
+        map('n', '<leader>hu', gs.undo_stage_hunk, 'Undo stage hunk')
 
         -- actions on buffer
-        vim.keymap.set('n', '<leader>hS', gs.stage_buffer, opts)
-        vim.keymap.set('n', '<leader>hR', gs.reset_buffer, opts)
+        map('n', '<leader>hd', gs.diffthis, 'Diff to index')
+        map('n', '<leader>hD', function() gs.diffthis('~') end, 'Diff to ~')
+        map('n', '<leader>hS', gs.stage_buffer, 'Stage buffer')
+        map('n', '<leader>hR', gs.reset_buffer, 'Reset buffer')
+
+        -- text selection
+        map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<cr>', 'in hunk')
 
       end,
     },
