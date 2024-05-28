@@ -9,7 +9,6 @@ return {
 
     -- lua plugins
     'folke/zen-mode.nvim',              -- distraction-free mode
-    'lewis6991/gitsigns.nvim',          -- git signs in gutter
     'mbbill/undotree',                  -- undo tree with branches
     'nvim-lualine/lualine.nvim',        -- blazing fast status line
     { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = {
