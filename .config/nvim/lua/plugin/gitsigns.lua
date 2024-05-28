@@ -1,11 +1,17 @@
--- ~/.config/nvim/after/plugin/gitsigns.lua - Git signs in gutter ------------
+-- Copyright (c) 2023-2024, Julien Seguinot (juseg.dev)
+-- GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+--
+-- ~/.config/nvim/lua/plugin/gitsigns.lua - Git signs in gutter --------------
 
--- buffer mappings
-require('gitsigns').setup {
-    on_attach = function(bufnr)
+-- git signs and hunk commands
+return {
+  { "lewis6991/gitsigns.nvim",
+    opts = {
+      on_attach = function(bufnr)
         local gs = package.loaded.gitsigns
 
         -- hunk navigation (from gitsigns readme)
+        -- FIXME can be simplified thanks to lazy-loading
         vim.keymap.set('n', ']c', function()
             if vim.wo.diff then return ']c' end
             vim.schedule(function() gs.next_hunk() end)
@@ -29,5 +35,8 @@ require('gitsigns').setup {
         -- actions on buffer
         vim.keymap.set('n', '<leader>hS', gs.stage_buffer, opts)
         vim.keymap.set('n', '<leader>hR', gs.reset_buffer, opts)
-    end
+
+      end,
+    },
+  },
 }
