@@ -5,23 +5,21 @@
 
 -- git signs and hunk commands
 return {
-  { "lewis6991/gitsigns.nvim",
+  { 'lewis6991/gitsigns.nvim',
     opts = {
-      on_attach = function(bufnr)
-        local gs = package.loaded.gitsigns
+      on_attach = function(buffer)
 
-        -- hunk navigation (from gitsigns readme)
-        -- FIXME can be simplified thanks to lazy-loading
-        vim.keymap.set('n', ']c', function()
-            if vim.wo.diff then return ']c' end
-            vim.schedule(function() gs.next_hunk() end)
-            return '<Ignore>'
-        end, { buffer = bufnr, expr = true })
-        vim.keymap.set('n', '[c', function()
-            if vim.wo.diff then return '[c' end
-            vim.schedule(function() gs.prev_hunk() end)
-            return '<Ignore>'
-        end, { buffer = bufnr, expr = true })
+        -- local aliases for concision
+        local gs = package.loaded.gitsigns
+        local function map(mode, lhs, rhs, desc)
+          vim.keymap.set(mode, lhs, rhs, { buffer = buffer, desc = desc })
+        end
+
+        -- hunk navigation
+        map('n', ']h', function() gs.nav_hunk('next') end, 'Next hunk')
+        map('n', '[h', function() gs.nav_hunk('prev') end, 'Prev hunk')
+        map('n', ']H', function() gs.nav_hunk('last') end, 'Last hunk')
+        map('n', '[H', function() gs.nav_hunk('first') end, 'First hunk')
 
         -- actions on hunks
         local opts = { buffer = bufnr }
