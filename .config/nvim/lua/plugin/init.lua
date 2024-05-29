@@ -7,9 +7,6 @@ return {
     -- plugin manager
     -- 'wbthomason/packer.nvim'         -- packer manages itself
 
-    -- lua plugins
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
-
     -- autocompletion and lsp
     -- (FIXME choose mason auto-install or Manjaro packages)
     { 'VonHeikemen/lsp-zero.nvim', branch = 'v1.x', dependencies = {
