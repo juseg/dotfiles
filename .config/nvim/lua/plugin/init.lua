@@ -8,7 +8,6 @@ return {
     -- 'wbthomason/packer.nvim'         -- packer manages itself
 
     -- lua plugins
-    'folke/zen-mode.nvim',              -- distraction-free mode
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
 
     -- autocompletion and lsp
