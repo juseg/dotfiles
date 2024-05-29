@@ -9,7 +9,6 @@ return {
 
     -- lua plugins
     'folke/zen-mode.nvim',              -- distraction-free mode
-    'mbbill/undotree',                  -- undo tree with branches
     { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate'},
 
     -- autocompletion and lsp

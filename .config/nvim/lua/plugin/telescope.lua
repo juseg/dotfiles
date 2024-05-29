@@ -88,9 +88,22 @@ return {
 
   -- notmuch adresses
   { 'https://git.hubrecht.ovh/hubrecht/telescope-notmuch.nvim',
-    dependencies = { 'nvim-telescope/telescope.nvim' },
-    keys = { {
-      '<leader>fa', '<cmd>Telescope notmuch theme=cursor<CR>',
-      desc = 'Find adresses' } },
+    dependencies = { 'nvim-telescope/telescope.nvim' ,
+      dependencies = { 'nvim-lua/plenary.nvim' },
+    },
+    keys = {
+      { '<leader>fa', '<cmd>Telescope notmuch theme=cursor<CR>',
+      desc = 'Find adresses' },
+    }
+  },
+
+  -- undo tree
+  { 'debugloop/telescope-undo.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim' ,
+      dependencies = { 'nvim-lua/plenary.nvim' },
+    },
+    keys = {
+      { '<leader>u', '<cmd>Telescope undo<cr>', desc = 'Undo history'},
+    }
   }
 }
