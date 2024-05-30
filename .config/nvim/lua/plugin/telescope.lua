@@ -70,7 +70,7 @@ return {
       { '<leader>ld', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>',
         desc = 'Dynamic symbols' },
 
-      -- FIXME move to lsp.lua
+      -- lsp navigation
       { 'gr', '<cmd>Telescope lsp_references<cr>',
         desc = 'Go to references' },
       { 'gi', '<cmd>Telescope lsp_implementations<cr>',
