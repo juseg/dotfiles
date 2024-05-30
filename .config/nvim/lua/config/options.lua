@@ -1,7 +1,7 @@
 -- Copyright (c) 2013-2024, Julien Seguinot (juseg.dev)
 -- GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 --
--- ~/.config/nvim/lua/config/options.lua - Key mappings ----------------------
+-- ~/.config/nvim/lua/config/options.lua - Neovim options --------------------
 
 -- turn off bell
 vim.opt.belloff = 'all'
@@ -46,3 +46,7 @@ vim.opt.updatetime = 50         -- fast update for e.g. gitsigns
 vim.opt.listchars = {           -- show spaces in list mode
     tab = '→~', space = '·', nbsp = '␣', trail = '•', eol = '¶',
     precedes = '«', extends = '»' }
+
+-- nice diagnostics window
+vim.diagnostic.config({
+    float = { border = 'rounded' }, virtual_text = true })
