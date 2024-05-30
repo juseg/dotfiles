@@ -11,12 +11,18 @@ vim.g.mapleader = ' '
 -- remap the mode key
 vim.keymap.set('i', 'jj', '<esc>', { desc = 'exit insert mode' })
 
--- lint, execute and make
-vim.keymap.set('n', '<F7>', '<cmd>!flake8 %<cr>') -- run flake8 on file
-vim.keymap.set('n', '<F8>', '<cmd>!pylint %<cr>') -- run pylint on file
-vim.keymap.set('n', '<F9>', '<cmd>!%:p<cr>') -- execute current file
-vim.keymap.set('n', '<F10>', '<cmd>!chmod +x %<cr>', { silent = true })
-vim.keymap.set('n', '<F12>', '<cmd>!make<cr>') -- run make
+-- actions on file
+vim.keymap.set('n', '<leader><leader>', '<cmd>:w<cr><cmd>!%:p&<cr>', {
+  desc = 'Write and exec' })
+vim.keymap.set('n', '<leader>,', '<cmd>!%:p<cr>', { desc = 'Exec file' })
+vim.keymap.set('n', '<leader>.', '<cmd>so<cr>', { desc = 'Source file' })
+vim.keymap.set('n', '<leader>a', '<cmd>chmod +x %<cr>', {
+  desc = 'Allow execution', silent = true })
+vim.keymap.set('n', '<leader>b', '<cmd>!%:p&<cr>', { desc = 'Background exec' })
+vim.keymap.set('n', '<leader>e', vim.cmd.Ex, { desc = 'Open explorer' })
+vim.keymap.set('n', '<leader>f', '<cmd>!flake8 %<cr>', { desc = 'Run flake8' })
+vim.keymap.set('n', '<leader>l', '<cmd>!pylint %<cr>', { desc = 'Run pylint' })
+vim.keymap.set('n', '<leader>m', '<cmd>!make<cr>', { desc = 'Run make' })
 
 -- split navigation
 vim.keymap.set('n', '<C-h>', '<C-W>h', { desc = 'move to split left' })
@@ -46,8 +52,6 @@ vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = 'Yank to system' })
 vim.keymap.set({ 'n', 'v' }, '<leader>x', '"_x', { desc = 'Delete to void' })
 
 -- other leader key mappings
-vim.keymap.set('n', '<leader><leader>', '<cmd>so<cr>') -- source current file
-vim.keymap.set('n', '<leader>e', vim.cmd.Ex) -- open file explorer
 vim.keymap.set('n', '<leader>s',
   [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
   { desc = 'Replace current word' })
