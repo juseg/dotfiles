@@ -24,6 +24,12 @@ vim.keymap.set('n', '<C-j>', '<C-W>j') -- move to split below
 vim.keymap.set('n', '<C-k>', '<C-W>k') -- move to split above
 vim.keymap.set('n', '<C-l>', '<C-W>l') -- move to split right
 
+-- split resizing
+vim.keymap.set('n', '<C-H>', '<cmd>vertical resize -4<cr>') -- Narrow window
+vim.keymap.set('n', '<C-J>', '<cmd>resize -4<cr>') -- Shorten window
+vim.keymap.set('n', '<C-K>', '<cmd>resize +4<cr>') -- Grow window
+vim.keymap.set('n', '<C-L>', '<cmd>vertical resize +4<cr>') -- Widen window
+
 -- quickfix nagivation
 vim.keymap.set("n", "<C-n>", "<cmd>cnext<CR>zz") -- next quickfix entry
 vim.keymap.set("n", "<C-p>", "<cmd>cprev<CR>zz") -- previous quickfix entry
