@@ -7,4 +7,7 @@
 return {
   'nvim-lualine/lualine.nvim',
   config = true,
+  opts = { sections = { lualine_x = {'encoding', 'fileformat', 'filetype', {
+    require('lazy.status').updates,
+    cond = require('lazy.status').has_updates } } } }
 }

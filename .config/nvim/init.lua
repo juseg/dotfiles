@@ -18,4 +18,4 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- load specs (https://github.com/folke/lazy.nvim#-structuring-your-plugins)
-require('lazy').setup('plugin')
+require('lazy').setup('plugin', { checker = { enabled = true, notify = false }})
