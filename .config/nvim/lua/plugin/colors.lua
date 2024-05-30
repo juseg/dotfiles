@@ -6,6 +6,8 @@
 -- lua port of gruvbox colorscheme
 return {
   { 'ellisonleao/gruvbox.nvim',
+    lazy = false, -- load during startup as the main colorscheme
+    priority = 1000, -- avoid e.g. black border on zen-mode
     config = function(_, opts)
       require('gruvbox').setup(opts)
       vim.cmd.colorscheme('gruvbox')
