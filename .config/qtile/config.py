@@ -169,6 +169,13 @@ def get_widgets(isfirst=True, islast=True):
                 foreground=colors[12],
                 format='{MemUsed:.0f}/{MemTotal:.0f}{mm}', measure_mem='G'),
             widget.TextBox(text='|', foreground=colors[8]),
+            widget.Maildir(
+                empty_color=colors[8], nonempty_color=colors[9],
+                maildir_path='~/.local/share/mail/', sub_folders=[
+                    {'label': 'JS', 'path': 'juseg/Inbox'},
+                    {'label': 'VUB', 'path': 'vub/Inbox'}],
+                subfolder_fmt='{label} {value}',  update_interval=300),
+            widget.TextBox(text='|', foreground=colors[8]),
             widget.Clock(
                 format='%a %d %b %H:%M'),  # or '%c' to include seconds
             widget.TextBox(text='||', foreground=colors[8]),
