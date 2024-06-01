@@ -17,7 +17,6 @@ return {
       ['<leader>g'] = { name = 'goto'},
       ['<leader>h'] = { name = 'hunk', ['#'] = 'which_key_ignore' },
       ['<leader>t'] = { name = 'treesitter'},
-      ['<leader>w'] = { name = 'workspace', ['#'] = 'which_key_ignore' },
     })
   end,
 
