@@ -1,0 +1,10 @@
+#!/bin/sh
+# Copyright (c) 2024, Julien Seguinot (juseg.dev)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# ~/.config/pinentry/preexec - Pinentry pre-exec hook ------------------------
+
+# prefer secret-service aware graphical modes
+test -e /usr/lib/libgcr-base-3.so.1 && exec /usr/bin/pinentry-gnome3 "$@"
+test -e /usr/lib/libgtk-x11-2.0.so.0 && exec /usr/bin/pinentry-gtk-2 "$@"
+test -e /usr/lib/libQt5Widgets.so.5 && exec /usr/bin/pinentry-qt     "$@"
