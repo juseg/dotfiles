@@ -1,4 +1,3 @@
 *.pyc
 /aerc/accounts.conf
-/nvim/plugin/packer_compiled.lua
 /systemd/user/*.wants
