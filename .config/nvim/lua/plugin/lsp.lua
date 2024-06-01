@@ -50,40 +50,46 @@ return {
     -- load friendly-snippets into luasnip
     require('luasnip.loaders.from_vscode').lazy_load()
 
-    -- auto-command on lsp-attached buffers
-    local on_attach = function(_, buffer)
-
-      -- highlight references (from :help document_highlight)
+    -- highlight references (from :help document_highlight)
+    local add_highlight = function(_, buffer)
       vim.api.nvim_create_autocmd('CursorHold', {
           buffer = buffer, callback = vim.lsp.buf.document_highlight })
       vim.api.nvim_create_autocmd('CursorHoldI', {
           buffer = buffer,  callback = vim.lsp.buf.document_highlight })
       vim.api.nvim_create_autocmd('CursorMoved', {
           buffer = buffer,  callback = vim.lsp.buf.clear_references })
+    end
 
-      -- additional keymaps
+    -- additional keymaps on lsp-attached buffers
+    local add_keymaps = function(_, buffer)
       local function map(mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, { buffer = buffer, desc = desc })
       end
       map('i', '<C-k>', vim.lsp.buf.signature_help, 'Inline help')
       map('n', 'K', vim.lsp.buf.hover, 'Hover help')
       map('n', '<leader>ca', vim.lsp.buf.code_action, 'Code action')
-      map('n', '<leader>cf', vim.lsp.buf.format, 'Code format')
-      map('n', '<leader>cr', vim.lsp.buf.rename, 'Code rename')
-      map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder')
-      map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder')
-      map('n', '<leader>wl', function()
+      map('n', '<leader>cd', vim.lsp.buf.add_workspace_folder,
+          'Add workspace directory')
+      map('n', '<leader>ce', vim.lsp.buf.remove_workspace_folder,
+          'Exclude workspace directory')
+      map('n', '<leader>cf', vim.lsp.buf.format, 'Format code with LSP')
+      map('n', '<leader>cr', vim.lsp.buf.rename, 'Rename object')
+      map('n', '<leader>cw', function()
           print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
         end, 'List workspace folders')
+    end
 
-    -- end on-attach auto-command
+    -- default auto-command on lsp-attached buffers
+    local on_attach = function(_, buffer)
+      add_highlight(_, buffer)
+      add_keymaps(_, buffer)
     end
 
     -- load default configurations
     local lspconfig = require('lspconfig')
     lspconfig.cssls.setup({ on_attach = on_attach })
     lspconfig.html.setup({ on_attach = on_attach })
-    lspconfig.marksman.setup({ on_attach = on_attach })
+    lspconfig.marksman.setup({ on_attach = add_keymaps })
     lspconfig.texlab.setup({ on_attach = on_attach })
     lspconfig.lua_ls.setup({ on_attach = on_attach, settings = {
       Lua = { diagnostics = { globals = { 'vim' } } } } })
