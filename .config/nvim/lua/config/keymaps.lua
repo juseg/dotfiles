@@ -20,9 +20,11 @@ vim.keymap.set('n', '<leader>a', '<cmd>chmod +x %<cr>', {
   desc = 'Allow execution', silent = true })
 vim.keymap.set('n', '<leader>b', '<cmd>!%:p&<cr>', { desc = 'Background exec' })
 vim.keymap.set('n', '<leader>e', vim.cmd.Ex, { desc = 'Open explorer' })
-vim.keymap.set('n', '<leader>f', '<cmd>!flake8 %<cr>', { desc = 'Run flake8' })
-vim.keymap.set('n', '<leader>l', '<cmd>!pylint %<cr>', { desc = 'Run pylint' })
+vim.keymap.set('n', '<leader>l', '<cmd>!flake8 % && pylint %<cr>', {
+  desc = 'Run flake8 and pylint' })
 vim.keymap.set('n', '<leader>m', '<cmd>!make<cr>', { desc = 'Run make' })
+vim.keymap.set('n', '<leader>q', '<cmd>:q<cr>', { desc = 'Quit neovim' })
+vim.keymap.set('n', '<leader>w', '<cmd>:w<cr>', { desc = 'Write file' })
 
 -- split navigation
 vim.keymap.set('n', '<C-h>', '<C-W>h', { desc = 'move to split left' })

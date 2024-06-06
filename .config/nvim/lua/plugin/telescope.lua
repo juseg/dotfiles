@@ -16,7 +16,7 @@ return {
     module = true,
     keys = {
 
-      -- find pickers
+      -- find pickers (unused letters: i j l n q u y)
       { '<leader>fb', '<cmd>Telescope buffers<cr>',
         desc = 'Find buffers' },
       { '<leader>fc', '<cmd>Telescope command_history<cr>',
@@ -35,8 +35,8 @@ return {
         desc = 'Find keymaps' },
       { '<leader>fm', '<cmd>Telescope man_pages<cr>',
         desc = 'Find man pages' },
-      { '<leader>fo', '<cmd>Telescope vim_options<cr>',
-        desc = 'Find options' },
+      { '<leader>fo', '<cmd>Telescope treesitter<cr>',
+        desc = 'Find treesitter objects' },
       { '<leader>fp', '<cmd>Telescope builtin<cr>',
         desc = 'Find pickers' },
       { '<leader>fr', '<cmd>Telescope oldfiles<cr>',
@@ -45,6 +45,8 @@ return {
         desc = 'Find spelling' },
       { '<leader>ft', '<cmd>Telescope filetypes<cr>',
         desc = 'Find filetypes' },
+      { '<leader>fv', '<cmd>Telescope vim_options<cr>',
+        desc = 'Find vim options' },
       { '<leader>fw', '<cmd>Telescope live_grep<cr>',
         desc = 'Find with ripgrep' },
       { '<leader>fx', '<cmd>Telescope planets<cr>',
@@ -79,10 +81,6 @@ return {
         desc = 'Go to definitions' },
       { 'gt', '<cmd>Telescope lsp_type_definitions<cr>',
         desc = 'Go to type definitions' },
-
-      -- treesitter picker
-      { '<leader>ts', '<cmd>Telescope treesitter<cr>',
-        desc = 'Treesitter symbols!' },
     }
   },
 
