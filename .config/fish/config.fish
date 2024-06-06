@@ -15,11 +15,11 @@ set -g fish_greeting
 # as functions in ./functions, but isn't it a pain to maintain so many files?
 
 # application shortcuts
+abbr a aerc
 abbr c cd
 abbr d gio trash
 abbr g git
 abbr l ls
-abbr m neomutt
 abbr v nvim
 abbr z nvim -c 'Zen'
 

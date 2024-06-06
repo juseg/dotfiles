@@ -34,3 +34,6 @@ auth xoauth2
 eval echo "from $(secret-tool lookup account vub value user)"
 eval echo "user $(secret-tool lookup account vub value user)"
 passwordeval "/usr/share/neomutt/oauth2/mutt_oauth2.py ~/.local/var/vub.tokens --encryption-pipe 'gpg --encrypt --recipient oauth2'"
+
+# msmtp --read-envelope-from fallback
+account default: juseg
