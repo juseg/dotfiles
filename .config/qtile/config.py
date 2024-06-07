@@ -222,8 +222,8 @@ def autostart():
     """Autostart background applications."""
     for cmd in [
             # '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1',
-            # 'blueman-applet',         # not installed on polaris
-            # 'xfce4-power-manager',    # not relevant on polaris
+            # 'xfce4-power-manager',    # only relevant on laptop
+            'blueman-applet',  # tray bluetooth manager
             'xautolock -time 10 -locker blurlock',  # session lock
             'picom -b',     # transparency and fade effects
             'clipit',       # tray clipboard manager
