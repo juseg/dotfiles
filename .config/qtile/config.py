@@ -105,8 +105,8 @@ def scale(fontsize):
 
 
 # widgets default style
-widget_defaults = dict(
-    font='Fira Code', fontsize=12, foreground=colors[15])
+widget_defaults = {
+    'font': 'Fira Code', 'fontsize': scale(12), 'foreground': colors[15]}
 
 
 def get_screens():
