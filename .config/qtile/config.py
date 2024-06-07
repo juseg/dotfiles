@@ -39,6 +39,10 @@ keys = [
     Key(modcontrol, 'l', lazy.layout.grow_main(),   desc='Grow main window'),
     Key(mod, 'n', lazy.layout.set_ratio(0.5), desc='Reset all window sizes'),
 
+    # move focus between screens (only works with two monitors)
+    Key(mod, 'p', lazy.to_screen(0), desc='Move focus to previous screen'),
+    Key(mod, 'n', lazy.to_screen(1), desc='Move focus to next screen'),
+
     # toggle between layouts
     Key(mod, 'Tab', lazy.next_layout(), desc='Toggle between layouts'),
     Key(mod, 'w', lazy.window.kill(), desc='Kill focused window'),
