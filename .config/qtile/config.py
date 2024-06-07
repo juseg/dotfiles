@@ -97,6 +97,13 @@ layouts = [
 # * web: Canto (RSS), ImapWidget, KhalCalendar, Maildir, Notify
 # * other: CheckUpdates, Chord, Cilpboard, Countdown, KeyboardLayout, Pomodoro
 
+
+def scale(fontsize):
+    """Scale a font size according to screen height."""
+    height = Xlib.display.Display().screen().root.get_geometry().height
+    return int(height/1080*fontsize)
+
+
 # widgets default style
 widget_defaults = dict(
     font='Fira Code', fontsize=12, foreground=colors[15])
@@ -111,11 +118,10 @@ def get_screens():
         lambda output: display.xrandr_get_output_info(
             output, resources.config_timestamp).crtc,
         resources.outputs)))
-    size = int(24 * display.screen().root.get_geometry().height / 1080)
     for i in range(count):
         widgets = get_widgets(isfirst=(i == 0), islast=(i == count-1))
         screens.append(Screen(
-            bottom=bar.Bar(widgets, size=size, background=colors[0]),
+            bottom=bar.Bar(widgets, size=scale(24), background=colors[0]),
             wallpaper=f'~/.local/share/backgrounds/background-{i}.jpg'))
     return screens
 
