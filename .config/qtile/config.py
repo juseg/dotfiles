@@ -186,7 +186,7 @@ def get_widgets(isfirst=True, islast=True):
             widget.Clock(
                 format='%a %d %b %H:%M'),  # or '%c' to include seconds
             widget.TextBox(text='||', foreground=colors[8]),
-            widget.Systray()]
+            widget.Systray(icon_size=scale(18))]
 
     # return list of widget
     return widgets
