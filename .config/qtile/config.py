@@ -211,7 +211,7 @@ floating_layout = layout.Floating(
     border_focus=colors[2], border_normal=colors[0], border_width=2,
     float_rules=layout.Floating.default_float_rules+[
         Match(wm_class=wm_class) for wm_class in (
-            'ncview', 'manjaro-settings-manager')])
+            'Ncview', 'manjaro-settings-manager')])
 
 
 # -- Startup applications ----------------------------------------------------
