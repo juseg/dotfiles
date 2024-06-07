@@ -198,9 +198,9 @@ screens = get_screens()
 
 # open applications to specific workspaces
 dgroups_app_rules = [
-    Rule(Match(wm_class=['Navigator']), group='Web'),
-    Rule(Match(wm_class=['Mail']), group='Mail'),
-    Rule(Match(wm_class=['Slack']), group='Chat')]
+    Rule(Match(wm_class='Navigator'), group='Web'),
+    Rule(Match(wm_class='Mail'), group='Mail'),
+    Rule(Match(wm_class='Slack'), group='Chat')]
 
 # open applications in floating windows (use xprop to find wm class and name)
 floating_layout = layout.Floating(
