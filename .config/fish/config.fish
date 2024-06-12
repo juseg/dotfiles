@@ -8,6 +8,11 @@
 # replace default greeting with nothing
 set -g fish_greeting
 
+# temporary fix for login shells
+set -x XDG_CACHE_HOME "$HOME/.cache"
+set -x XDG_CONFIG_HOME "$HOME/.config"
+set -x XDG_DATA_HOME "$HOME/.local/share"
+
 # -- Key bindings ------------------------------------------------------------
 #
 # NOTE: alternatively fish will call fish_user_key_bindings if it exists
