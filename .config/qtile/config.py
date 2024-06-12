@@ -39,6 +39,10 @@ keys = [
     Key(modcontrol, 'l', lazy.layout.grow_main(),   desc='Grow main window'),
     Key(mod, 'n', lazy.layout.set_ratio(0.5), desc='Reset all window sizes'),
 
+    # move focus between screens (only works with two monitors)
+    Key(mod, 'p', lazy.to_screen(0), desc='Move focus to previous screen'),
+    Key(mod, 'n', lazy.to_screen(1), desc='Move focus to next screen'),
+
     # toggle between layouts
     Key(mod, 'Tab', lazy.next_layout(), desc='Toggle between layouts'),
     Key(mod, 'w', lazy.window.kill(), desc='Kill focused window'),
@@ -97,9 +101,16 @@ layouts = [
 # * web: Canto (RSS), ImapWidget, KhalCalendar, Maildir, Notify
 # * other: CheckUpdates, Chord, Cilpboard, Countdown, KeyboardLayout, Pomodoro
 
+
+def scale(fontsize):
+    """Scale a font size according to screen height."""
+    height = Xlib.display.Display().screen().root.get_geometry().height
+    return int(height/1080*fontsize)
+
+
 # widgets default style
-widget_defaults = dict(
-    font='Fira Code', fontsize=12, foreground=colors[15])
+widget_defaults = {
+    'font': 'Fira Code', 'fontsize': scale(12), 'foreground': colors[15]}
 
 
 def get_screens():
@@ -114,7 +125,7 @@ def get_screens():
     for i in range(count):
         widgets = get_widgets(isfirst=(i == 0), islast=(i == count-1))
         screens.append(Screen(
-            bottom=bar.Bar(widgets, size=24, background=colors[0]),
+            bottom=bar.Bar(widgets, size=scale(24), background=colors[0]),
             wallpaper=f'~/.local/share/backgrounds/background-{i}.jpg'))
     return screens
 
@@ -179,7 +190,7 @@ def get_widgets(isfirst=True, islast=True):
             widget.Clock(
                 format='%a %d %b %H:%M'),  # or '%c' to include seconds
             widget.TextBox(text='||', foreground=colors[8]),
-            widget.Systray()]
+            widget.Systray(icon_size=scale(18))]
 
     # return list of widget
     return widgets
@@ -191,16 +202,16 @@ screens = get_screens()
 
 # open applications to specific workspaces
 dgroups_app_rules = [
-    Rule(Match(wm_class=['Navigator']), group='Web'),
-    Rule(Match(wm_class=['Mail']), group='Mail'),
-    Rule(Match(wm_class=['Slack']), group='Chat')]
+    Rule(Match(wm_class='Navigator'), group='Web'),
+    Rule(Match(wm_class='Mail'), group='Mail'),
+    Rule(Match(wm_class='Slack'), group='Chat')]
 
 # open applications in floating windows (use xprop to find wm class and name)
 floating_layout = layout.Floating(
     border_focus=colors[2], border_normal=colors[0], border_width=2,
     float_rules=layout.Floating.default_float_rules+[
         Match(wm_class=wm_class) for wm_class in (
-            'ncview', 'manjaro-settings-manager')])
+            'Ncview', 'manjaro-settings-manager')])
 
 
 # -- Startup applications ----------------------------------------------------
@@ -211,8 +222,8 @@ def autostart():
     """Autostart background applications."""
     for cmd in [
             # '/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1',
-            # 'blueman-applet',         # not installed on polaris
-            # 'xfce4-power-manager',    # not relevant on polaris
+            # 'xfce4-power-manager',    # only relevant on laptop
+            'blueman-applet',  # tray bluetooth manager
             'xautolock -time 10 -locker blurlock',  # session lock
             'picom -b',     # transparency and fade effects
             'clipit',       # tray clipboard manager

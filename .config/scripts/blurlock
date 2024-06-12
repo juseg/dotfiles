@@ -1,11 +1,13 @@
 #!/bin/bash
+# Copyright (c) 2023-2024, Julien Seguinot (juseg.dev)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
-# blurlock - blur screen and lock with i3lock (from Manjaro i3exit)
+# blurlock - blur screen and lock with i3lock (after Manjaro i3exit)
 
 # get screen resolution
 res=$(xrandr -q|sed -n 's/.*current[ ]\([0-9]*\) x \([0-9]*\),.*/\1x\2/p')
 
 # get screenshot, blur, and lock (faster than i3lock-color)
 import -silent -window root jpeg:- | \
-    convert - -scale 20% -blur 0x2.5 -resize 500% RGB:- | \
+    magick - -scale 20% -blur 0x2.5 -resize 500% RGB:- | \
     i3lock --raw $res:rgb -i /dev/stdin -e $@

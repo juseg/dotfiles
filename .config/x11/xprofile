@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (c) 2022-2023, Julien Seguinot (juseg.github.io)
+# Copyright (c) 2022-2024 Julien Seguinot (juseg.dev)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
 # X11 profile (sourced by e.g. /etc/lightdm/Xsession)
@@ -72,5 +72,7 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export QT_QPA_PLATFORMTHEME="qt5ct"  # used by manjaro-settings-manager
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"  # drop-down style
 
-# load X resources
+# load X resources and adapt dpi to screen height
 xrdb -merge $XDG_CONFIG_HOME/x11/xresources
+height=$(xrandr -q|sed -n 's/.*current.* x \([0-9]*\),.*/\1/p')
+echo "Xft.dpi: $((96*$height/1080))" | xrdb -merge
