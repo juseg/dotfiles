@@ -1,4 +1,4 @@
-# Copyright (c) 2023, Julien Seguinot (juseg.github.io)
+# Copyright (c) 2023-2024, Julien Seguinot (juseg.dev)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
 # ~/.config/fish/config.fish -- Fish shell configuration file
@@ -8,6 +8,12 @@
 # replace default greeting with nothing
 set -g fish_greeting
 
+# -- Key bindings ------------------------------------------------------------
+#
+# NOTE: alternatively fish will call fish_user_key_bindings if it exists
+
+# autocomplete with Ctrl-y
+bind \cy accept-autosuggestion
 
 # -- Abbreviations -----------------------------------------------------------
 #
