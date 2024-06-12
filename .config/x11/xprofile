@@ -1,5 +1,5 @@
 #!/bin/sh
-# Copyright (c) 2022-2024 Julien Seguinot (juseg.dev)
+# Copyright (c) 2022-2024, Julien Seguinot (juseg.dev)
 # GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 #
 # X11 profile (sourced by e.g. /etc/lightdm/Xsession)
@@ -26,8 +26,9 @@ export PATH=$HOME/git/code/sentinelflow:$PATH
 
 # local python modules
 export PYTHONPATH=""
-export PYTHONPATH=$HOME/git/arch/cartowik:$PYTHONPATH
+export PYTHONPATH=$HOME/git/code/absplots:$PYTHONPATH
 export PYTHONPATH=$HOME/git/code/hyoga:$PYTHONPATH
+export PYTHONPATH=$HOME/git/yard/cartowik:$PYTHONPATH
 
 # xdg base directories
 export XDG_CACHE_HOME="$HOME/.cache"
