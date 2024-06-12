@@ -80,8 +80,12 @@ abbr dups pylint --output-format=colorized --disable=all \
 # rsync -- backup chain home -> archive -> backup
 abbr bh rsync --archive --partial --progress --verbose --delete \
     --exclude={.cache,.googleearth,.local} ~/ /run/media/julien/archive/home
+abbr bw rsync --archive --partial --progress --verbose --delete \
+    --exclude={.cache,.googleearth,.local} ~/ /run/media/julien/archive/work
 abbr ba rsync --archive --partial --progress --verbose --delete \
     /run/media/julien/archive/ /run/media/julien/backup
+abbr bd rsync --archive --partial --progress --verbose --delete \
+    /run/media/julien/coldroom/ /run/media/julien/datastore
 
 # rsync -- sync PISM input and output files (to include a scratch step use
 # abbr pso ssh saga rsync [...] /scratch/... /project/...; \
