@@ -57,6 +57,7 @@ Xcursor.size:  0
 URxvt.font:                 xft:FiraCodeNerdFontMono-12,xft:Symbola
 URxvt.depth:                32
 URxvt.background:           [85]#222D31
+URxvt.internalBorder:       4
 URxvt*scrollBar:            false
 URxvt*mouseWheelScrollPage: false
 URxvt*cursorBlink:          true
