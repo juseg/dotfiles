@@ -1,5 +1,5 @@
 ! vim: set ft=xdefaults:
-! Copyright (c) 2022, Julien Seguinot (juseg.github.io)
+! Copyright (c) 2022-2024, Julien Seguinot (juseg.dev)
 ! GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
 !
 ! X server resources (has to be manually sourced from ~/.config/x11/xprofile)
@@ -53,8 +53,8 @@ Xft.lcdfilter: lcddefault
 Xcursor.theme: xcursor-breeze
 Xcursor.size:  0
 
-! Urxvt settings (Manjaro packages ttf-fira-code, ttf-terminus-nerd)
-URxvt.font:                 xft:FiraCode-11,xft:TerminessTTFNerdFontMono
+! Urxvt settings (Manjaro package ttf-firacode-nerd, AUR package ttf-symbola)
+URxvt.font:                 xft:FiraCodeNerdFontMono-12,xft:Symbola
 URxvt.depth:                32
 URxvt.background:           [85]#222D31
 URxvt*scrollBar:            false
