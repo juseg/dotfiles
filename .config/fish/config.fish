@@ -15,6 +15,12 @@ set -g fish_greeting
 # autocomplete with Ctrl-y
 bind \cy accept-autosuggestion
 
+# navigate history with Alt-ijkl
+bind \eh backward-word
+bind \ej down-or-search
+bind \ek up-or-search
+bind \el forward-word
+
 # -- Abbreviations -----------------------------------------------------------
 #
 # NOTE: I understand from fish docs the preferred way is to save abbreviations
