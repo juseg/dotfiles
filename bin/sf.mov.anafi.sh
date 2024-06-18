@@ -13,7 +13,7 @@ cd /run/media/julien/archive/geodat/sentinel2/
 # Anafi 30x15 km
 sentinelflow.sh ${*:---offline} \
     --intersect 36.4,25.8 --cloudcover 10 --tiles 35SLA \
-    --daterange 20200101..20210101 --maxrows 99 \
+    --daterange 20200101..20210331 --maxrows 99 \
     --extent 376000,4015000,406000,4035000 --name europe/anafi
 
 # select 30 cloud-free frames for animation
