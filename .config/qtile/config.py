@@ -60,7 +60,12 @@ keys = [
 
     # restart and quit qtile
     Key(modcontrol, 'r', lazy.reload_config(), desc='Reload the config'),
-    Key(modcontrol, 'q', lazy.shutdown(), desc='Shutdown Qtile')]
+    Key(modcontrol, 'q', lazy.shutdown(), desc='Shutdown Qtile'),
+
+    # function keys (FIXME add volume, see list of keys in
+    # /usr/lib/python3.10/site-packages/libqtile/backend/x11/xkeysyms.py)
+    Key([], 'XF86MonBrightnessUp', lazy.spawn('xbacklight -inc 10')),
+    Key([], 'XF86MonBrightnessDown', lazy.spawn('xbacklight -dec 10'))]
 
 # -- Groups (workspaces) -----------------------------------------------------
 
