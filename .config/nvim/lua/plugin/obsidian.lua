@@ -14,10 +14,23 @@ return {
     'hrsh7th/nvim-cmp',      -- optional, complete links and tags
   },
   keys = {
+    -- { '<leader>ot', '<cmd>ObsidianTemplate<cr>', desc = 'Insert template'},
+    { '<leader>ob', '<cmd>ObsidianBacklinks<cr>', desc = 'Open backlinks'},
+    { '<leader>oc', '<cmd>ObsidianToggleCheckbox<cr>', desc = 'Check box'},
     { '<leader>od', '<cmd>ObsidianDailies<cr>', desc = 'Open daily note' },
+    { '<leader>oe', '<cmd>ObsidianExtractNote<cr>', desc = 'Extract to note'},
+    { '<leader>og', '<cmd>ObsidianFollowLink<cr>', desc = 'Go to reference'},
+    { '<leader>oi', '<cmd>ObsidianPasteImg<cr>', desc = 'Paste image in note'},
+    { '<leader>ol', '<cmd>ObsidianLinks<cr>', desc = 'List links'},
     { '<leader>on', '<cmd>ObsidianNew<cr>', desc = 'Create new note' },
-    { '<leader>oo', '<cmd>ObsidianOpen<cr>', desc = 'Open in Obsidian' },
-      -- check README for more commands
+    { '<leader>oo', '<cmd>ObsidianQuickSwitch<cr>', desc = 'Open in neovim'},
+    { '<leader>or', '<cmd>ObsidianRename<cr>', desc = 'Rename and relink (!)'},
+    { '<leader>os', '<cmd>ObsidianSearch<cr>', desc = 'Search inside notes'},
+    { '<leader>ot', '<cmd>ObsidianTags<cr>', desc = 'List tag references'},
+    { '<leader>ok', '<cmd>ObsidianToday<cr>', desc = "Open today's note"},
+    { '<leader>ow', '<cmd>ObsidianWorkspace<cr>', desc = 'Change workspace'},
+    { '<leader>ox', '<cmd>ObsidianOpen<cr>', desc = 'Open in Obsidian' },
+    { '<leader>oy', '<cmd>ObsidianYesterday<cr>', desc = 'Open yesterday note'},
   },
   opts = {
     disable_frontmatter = true, -- don't manage frontmatter for now
