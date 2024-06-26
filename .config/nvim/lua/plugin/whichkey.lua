@@ -16,6 +16,7 @@ return {
       ['<leader>f'] = { name = 'find'},
       ['<leader>g'] = { name = 'goto'},
       ['<leader>h'] = { name = 'hunk', ['#'] = 'which_key_ignore' },
+      ['<leader>o'] = { name = 'note'},
     })
   end,
 
