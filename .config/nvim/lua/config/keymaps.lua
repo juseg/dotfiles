@@ -14,8 +14,9 @@ vim.keymap.set('i', 'jj', '<esc>', { desc = 'exit insert mode' })
 -- actions on file
 vim.keymap.set('n', '<leader>,', '<cmd>!%:p<cr>', { desc = 'Exec file' })
 vim.keymap.set('n', '<leader>.', '<cmd>so<cr>', { desc = 'Source file' })
-vim.keymap.set('n', '<leader>a', '<cmd>chmod +x %<cr>', {
-  desc = 'Allow execution', silent = true })
+vim.keymap.set(
+    'n', '<leader>/', '<cmd>![ -x % ] && chmod -x % || chmod +x %<cr>', {
+        desc = 'Toggle executable', silent = true })
 vim.keymap.set('n', '<leader>b', '<cmd>!%:p&<cr>', { desc = 'Background exec' })
 vim.keymap.set('n', '<leader>e', vim.cmd.Ex, { desc = 'Open explorer' })
 vim.keymap.set('n', '<leader>l', '<cmd>!flake8 % && pylint %<cr>', {
