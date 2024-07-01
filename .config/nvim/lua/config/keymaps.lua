@@ -12,8 +12,6 @@ vim.g.mapleader = ' '
 vim.keymap.set('i', 'jj', '<esc>', { desc = 'exit insert mode' })
 
 -- actions on file
-vim.keymap.set('n', '<leader><leader>', '<cmd>:w<cr><cmd>!%:p&<cr>', {
-  desc = 'Write and exec' })
 vim.keymap.set('n', '<leader>,', '<cmd>!%:p<cr>', { desc = 'Exec file' })
 vim.keymap.set('n', '<leader>.', '<cmd>so<cr>', { desc = 'Source file' })
 vim.keymap.set('n', '<leader>a', '<cmd>chmod +x %<cr>', {
