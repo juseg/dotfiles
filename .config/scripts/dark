@@ -1,0 +1,36 @@
+#!/bin/sh
+# Copyright (c) 2024, Julien Seguinot (juseg.dev)
+# GNU General Public License v3.0+ (https://www.gnu.org/licenses/gpl-3.0.txt)
+#
+# gruvbox-dark - switch to gruvbox-dark on the fly
+#
+# After:
+# - https://unix.stackexchange.com/questions/232881/
+# - https://github.com/morhetz/gruvbox-generalized
+
+# allow custom contrast
+case $* in
+    -h|--hard) bg=#1d2021 ; shift ;;
+    -s|--soft) bg=#32302f ; shift ;;
+    *) bg=#282828 ;;
+esac
+
+# change terminal colors
+echo -en "\033]11;[85]${bg}\007"
+echo -en '\033]10;#ebdbb2\007'
+echo -en '\033]4;0#282828\007'
+echo -en '\033]4;8#928374\007'
+echo -en '\033]4;1#cc241d\007'
+echo -en '\033]4;9#fb4934\007'
+echo -en '\033]4;2#98971a\007'
+echo -en '\033]4;10#b8bb26\007'
+echo -en '\033]4;3#d79921\007'
+echo -en '\033]4;11#fabd2f\007'
+echo -en '\033]4;4#458588\007'
+echo -en '\033]4;12#83a598\007'
+echo -en '\033]4;5#b16286\007'
+echo -en '\033]4;13#d3869b\007'
+echo -en '\033]4;6#689d6a\007'
+echo -en '\033]4;14#8ec07c\007'
+echo -en '\033]4;7#a89984\007'
+echo -en '\033]4;15#ebdbb2\007'
